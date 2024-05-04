@@ -13,6 +13,14 @@ class TaskListAddTaskEvent extends TaskListEvent {
   }
 }
 
+class TaskListUpdateTaskEvent extends TaskListEvent {
+  final Task task;
+
+  TaskListUpdateTaskEvent({required this.task}) {
+    assert(task.id != null && task.order != -1);
+  }
+}
+
 class TaskListDeleteTaskEvent extends TaskListEvent {
   final int taskId;
 

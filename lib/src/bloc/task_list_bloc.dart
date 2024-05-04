@@ -15,8 +15,34 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
   TaskListBloc({required this.dispatcher}) : super(TaskListInitialState()) {
     on<TaskListGetAllEvent>(_getAll);
     on<TaskListAddTaskEvent>(_add);
+    on<TaskListUpdateTaskEvent>(_update);
     on<TaskListDeleteTaskEvent>(_delete);
     on<TaskListReorderCompleteEvent>(_reorderComplete);
+  }
+
+  FutureOr<void> _update(
+    TaskListUpdateTaskEvent event,
+    Emitter<TaskListState> emit,
+  ) async {
+    final updatedTask = event.task;
+    final newTasks = [...state.tasks];
+    final index = state.tasks.indexWhere((t) => t.id == updatedTask.id!);
+
+    if (index == -1) {
+      return;
+    }
+
+    newTasks[index] = updatedTask;
+
+    updatedTask.updateModifyDate();
+
+    await repository.updateTask(updatedTask);
+
+    emit(TaskListLoadedState(tasks: newTasks));
+
+    dispatcher?.controller.notifyChangedRange(index, 1, (context, index, data) {
+      return itemBuilder(context, newTasks[index], data);
+    });
   }
 
   final AnimatedListDiffListDispatcher<Task>? dispatcher;
@@ -44,7 +70,6 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
 
     emit(TaskListLoadedState(tasks: newTasks));
 
-    dispatcher?.dispatchNewList([...newTasks]);
     dispatcher?.controller.notifyChangedRange(from, to - from,
         (context, index, data) {
       return itemBuilder(context, newTasks.sublist(from, to)[index], data);
