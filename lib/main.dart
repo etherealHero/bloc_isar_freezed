@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:great_list_view/great_list_view.dart';
 
-void main() {
-  runApp(const MainApp());
-}
+import 'src/app/app.dart';
+import 'src/app/bloc_observer.dart';
+import 'src/repository/repository.dart';
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+void main() async {
+  Executor().warmUp();
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final prefs = await SharedPreferences.getInstance();
+
+  await Repository().performMigrationIfNeeded(prefs);
+
+  Bloc.observer = const AppBlocObserver();
+
+  runApp(const App());
 }
