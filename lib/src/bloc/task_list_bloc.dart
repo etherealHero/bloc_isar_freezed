@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:great_list_view/great_list_view.dart';
+import 'package:sandbox/src/widgets/task_list.dart';
 
 import '../repository/repository.dart';
 import '../models/task.dart';
@@ -13,17 +16,52 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     on<TaskListGetAllEvent>(_getAll);
     on<TaskListAddTaskEvent>(_add);
     on<TaskListDeleteTaskEvent>(_delete);
+    on<TaskListReorderCompleteEvent>(_reorderComplete);
   }
 
-  final void Function(List<Task>)? dispatcher;
+  final AnimatedListDiffListDispatcher<Task>? dispatcher;
   final repository = Repository();
   int maxOrder = -1;
+
+  FutureOr<void> _reorderComplete(
+    TaskListReorderCompleteEvent event,
+    Emitter<TaskListState> emit,
+  ) async {
+    final index = event.index;
+    final dropIndex = event.dropIndex;
+    final newTasks = [...state.tasks];
+    final from = min(dropIndex, index);
+    final to = max(dropIndex, index) + 1;
+    final orders = state.tasks.sublist(from, to).map((e) => e.order).toList();
+
+    newTasks.insert(dropIndex, newTasks.removeAt(index));
+    newTasks.sublist(from, to).asMap().forEach((i, task) async {
+      task.order = orders.elementAt(i);
+      task.updateModifyDate();
+
+      await repository.updateTask(task);
+    });
+
+    emit(TaskListLoadedState(tasks: newTasks));
+
+    dispatcher?.dispatchNewList([...newTasks]);
+    dispatcher?.controller.notifyChangedRange(from, to - from,
+        (context, index, data) {
+      return itemBuilder(context, newTasks.sublist(from, to)[index], data);
+    });
+  }
 
   FutureOr<void> _delete(
     TaskListDeleteTaskEvent event,
     Emitter<TaskListState> emit,
   ) async {
-    var task = state.tasks.firstWhere((t) => t.id! == event.taskId);
+    Task task;
+
+    try {
+      task = state.tasks.firstWhere((t) => t.id! == event.taskId);
+    } on StateError {
+      return;
+    }
 
     var isDeleted = await repository.deleteTask(task.id!);
 
@@ -32,13 +70,11 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
 
       emit(TaskListLoadedState(tasks: tasks));
 
-      dispatcher?.call(tasks);
+      dispatcher?.dispatchNewList([...tasks]);
 
       if (task.order == maxOrder) {
         if (tasks.isNotEmpty) {
-          maxOrder = tasks
-              .reduce((curr, next) => curr.order > next.order ? curr : next)
-              .order;
+          maxOrder = tasks.first.order;
         } else {
           maxOrder = -1;
         }
@@ -65,7 +101,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
 
     emit(TaskListLoadedState(tasks: tasks));
 
-    dispatcher?.call(tasks);
+    dispatcher?.dispatchNewList([...tasks]);
   }
 
   FutureOr<void> _getAll(
@@ -74,7 +110,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
   ) async {
     var tasks = await repository.getTasks();
 
-    tasks = tasks.reversed.toList();
+    tasks.sort((a, b) => b.order.compareTo(a.order));
 
     if (tasks.isNotEmpty) {
       maxOrder = tasks
@@ -84,6 +120,6 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
 
     emit(TaskListLoadedState(tasks: tasks));
 
-    dispatcher?.call(tasks);
+    dispatcher?.dispatchNewList([...tasks]);
   }
 }

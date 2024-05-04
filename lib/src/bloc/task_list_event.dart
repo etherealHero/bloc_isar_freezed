@@ -18,3 +18,10 @@ class TaskListDeleteTaskEvent extends TaskListEvent {
 
   TaskListDeleteTaskEvent({required this.taskId});
 }
+
+class TaskListReorderCompleteEvent extends TaskListEvent {
+  final int index;
+  final int dropIndex;
+
+  TaskListReorderCompleteEvent({required this.index, required this.dropIndex});
+}

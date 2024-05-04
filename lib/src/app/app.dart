@@ -20,7 +20,7 @@ class _AppState extends State<App> {
         home: SafeArea(
             child: BlocProvider(
           create: (context) =>
-              TaskListBloc(dispatcher: taskListGkey.currentState?.dispatch),
+              TaskListBloc(dispatcher: taskListGkey.currentState?.dispatcher),
           child: Scaffold(
             body: TaskList(key: taskListGkey),
             floatingActionButton: const AppFloatingActionButton(),

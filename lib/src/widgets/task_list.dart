@@ -26,7 +26,7 @@ class _TaskListState extends State<TaskList> {
       currentList: <Task>[],
       comparator: AnimatedListDiffListComparator<Task>(
           sameItem: (a, b) => a.id == b.id,
-          sameContent: (a, b) => a.dateModify == b.dateModify),
+          sameContent: (a, b) => a.dateModify != b.dateModify),
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -36,9 +36,7 @@ class _TaskListState extends State<TaskList> {
 
   void dispatch(List<Task> list) {
     setState(() {
-      if (dispatcher.currentList != list) {
-        dispatcher.dispatchNewList(list, detectMoves: true);
-      }
+      dispatcher.dispatchNewList([...list], detectMoves: true);
     });
   }
 
@@ -52,6 +50,20 @@ class _TaskListState extends State<TaskList> {
             itemBuilder(context, dispatcher.currentList[index], data),
         listController: taskListController,
         scrollController: taskListScrollController,
+        addLongPressReorderable: true,
+        reorderModel: AnimatedListReorderModel(
+          onReorderStart: (index, dx, dy) => true,
+          onReorderMove: (index, dropIndex) => true,
+          onReorderComplete: (index, dropIndex, slot) {
+            var list = dispatcher.currentList;
+            list.insert(dropIndex, list.removeAt(index));
+
+            context.read<TaskListBloc>().add(TaskListReorderCompleteEvent(
+                index: index, dropIndex: dropIndex));
+
+            return true;
+          },
+        ),
       ),
     );
   }
@@ -62,7 +74,10 @@ Widget itemBuilder(
   if (data.measuring) {
     return Container(margin: const EdgeInsets.all(5), height: 60);
   }
-  return TaskItem(data: item);
+
+  var key = Key(item.id!.toString());
+
+  return TaskItem(data: item, key: key);
 }
 
 final taskListScrollController = ScrollController();
