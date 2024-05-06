@@ -48,7 +48,8 @@ class _TaskItemState extends State<TaskItem>
                           context
                               .read<TaskListBloc>()
                               .add(TaskListUpdateTaskEvent(
-                                task: widget.data..isDone = !widget.data.isDone,
+                                task: widget.data
+                                    .copyWith(isDone: !widget.data.isDone),
                               ));
                         },
                         icon: Icon(Icons.done,
@@ -78,7 +79,7 @@ class _TaskItemState extends State<TaskItem>
                           context
                               .read<TaskListBloc>()
                               .add(TaskListDeleteTaskEvent(
-                                taskId: widget.data.id!,
+                                taskId: widget.data.id,
                               ));
                         },
                         icon: Icon(Icons.delete_outline_rounded,
@@ -120,18 +121,18 @@ class _TaskCard extends StatelessWidget {
                     ? IconButton.filled(
                         onPressed: () => context.read<TaskListBloc>().add(
                             TaskListUpdateTaskEvent(
-                                task: data..isDone = !data.isDone)),
+                                task: data.copyWith(isDone: !data.isDone))),
                         icon: const Icon(Icons.done))
                     : IconButton.outlined(
                         onPressed: () => context.read<TaskListBloc>().add(
                             TaskListUpdateTaskEvent(
-                                task: data..isDone = !data.isDone)),
+                                task: data.copyWith(isDone: !data.isDone))),
                         icon: const Icon(Icons.done)),
                 const SizedBox(width: 5),
                 IconButton.outlined(
                     onPressed: () => context
                         .read<TaskListBloc>()
-                        .add(TaskListDeleteTaskEvent(taskId: data.id!)),
+                        .add(TaskListDeleteTaskEvent(taskId: data.id)),
                     icon: const Icon(Icons.close))
               ]),
             ],

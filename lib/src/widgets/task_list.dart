@@ -27,7 +27,8 @@ class _TaskListState extends State<TaskList> {
       currentList: <Task>[],
       comparator: AnimatedListDiffListComparator<Task>(
           sameItem: (a, b) => a.id == b.id,
-          sameContent: (a, b) => a.dateModify != b.dateModify),
+          sameContent: (a, b) =>
+              a.dateModifyUtc.compareTo(b.dateModifyUtc) != 0),
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -35,39 +36,46 @@ class _TaskListState extends State<TaskList> {
     });
   }
 
-  void dispatch(List<Task> list) {
-    setState(() {
-      dispatcher.dispatchNewList([...list], detectMoves: true);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return SlidableAutoCloseBehavior(
-      child: Scrollbar(
-        controller: _taskListScrollController,
-        child: AnimatedListView(
-          initialItemCount: dispatcher.currentList.length,
-          itemBuilder: (context, index, data) =>
-              itemBuilder(context, dispatcher.currentList[index], data),
-          listController: _taskListController,
-          scrollController: _taskListScrollController,
-          addLongPressReorderable: true,
-          reorderModel: AnimatedListReorderModel(
-            onReorderStart: (index, dx, dy) => true,
-            onReorderMove: (index, dropIndex) => true,
-            onReorderComplete: (index, dropIndex, slot) {
-              var list = dispatcher.currentList;
-              list.insert(dropIndex, list.removeAt(index));
+    return BlocBuilder<TaskListBloc, TaskListState>(
+      builder: (context, state) {
+        if (state is TaskListUpdateTaskState) {
+          print("state trigger ${state.from}, ${state.count}");
+          dispatcher.controller.notifyChangedRange(state.from, state.count,
+              (context, index, data) {
+            return itemBuilder(
+                context, state.tasks[state.from].copyWith(), data);
+          });
+        }
 
-              context.read<TaskListBloc>().add(TaskListReorderCompleteEvent(
-                  index: index, dropIndex: dropIndex));
+        return SlidableAutoCloseBehavior(
+          child: Scrollbar(
+            controller: _taskListScrollController,
+            child: AnimatedListView(
+              initialItemCount: dispatcher.currentList.length,
+              itemBuilder: (context, index, data) =>
+                  itemBuilder(context, dispatcher.currentList[index], data),
+              listController: _taskListController,
+              scrollController: _taskListScrollController,
+              addLongPressReorderable: true,
+              reorderModel: AnimatedListReorderModel(
+                onReorderStart: (index, dx, dy) => true,
+                onReorderMove: (index, dropIndex) => true,
+                onReorderComplete: (index, dropIndex, slot) {
+                  var list = dispatcher.currentList;
+                  list.insert(dropIndex, list.removeAt(index));
 
-              return true;
-            },
+                  context.read<TaskListBloc>().add(TaskListReorderCompleteEvent(
+                      index: index, dropIndex: dropIndex));
+
+                  return true;
+                },
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -78,7 +86,7 @@ Widget itemBuilder(
     return Container(margin: const EdgeInsets.all(5), height: 60);
   }
 
-  var key = Key(item.id!.toString());
+  var key = Key(item.id.toString());
 
   return TaskItem(data: item, key: key);
 }

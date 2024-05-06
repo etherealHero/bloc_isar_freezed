@@ -17,7 +17,7 @@ class TaskListUpdateTaskEvent extends TaskListEvent {
   final Task task;
 
   TaskListUpdateTaskEvent({required this.task}) {
-    assert(task.id != null && task.order != -1);
+    assert(task.order != -1);
   }
 }
 

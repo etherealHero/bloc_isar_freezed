@@ -14,3 +14,14 @@ final class TaskListInitialState extends TaskListState {
 final class TaskListLoadedState extends TaskListState {
   const TaskListLoadedState({required super.tasks});
 }
+
+final class TaskListUpdateTaskState extends TaskListState {
+  final int from;
+  final int count;
+
+  const TaskListUpdateTaskState({
+    required super.tasks,
+    required this.from,
+    required this.count,
+  });
+}

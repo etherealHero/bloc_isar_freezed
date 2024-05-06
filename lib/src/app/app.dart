@@ -39,7 +39,12 @@ class AppFloatingActionButton extends StatelessWidget {
     return FloatingActionButton(
       onPressed: () {
         context.read<TaskListBloc>().add(TaskListAddTaskEvent(
-            task: Task(title: "title", description: "description", order: -1)));
+            task: Task(
+                order: -1,
+                title: "title",
+                description: "description",
+                dateCreateUtc: DateTime.now().toUtc(),
+                dateModifyUtc: DateTime.now().toUtc())));
       },
       child: const Text('Add'),
     );

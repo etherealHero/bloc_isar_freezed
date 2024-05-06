@@ -1,31 +1,32 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
 
 part 'task.g.dart';
+part 'task.freezed.dart';
 
-@collection
-class Task {
-  Id? id;
-  int order;
-  String title;
-  String description;
-  bool isDone;
-  bool isArchived;
-  bool isTrash;
-  final DateTime _dateCreateUtc;
-  DateTime _dateModifyUtc;
+@freezed
+@Collection(ignore: {'copyWith'})
+class Task with _$Task {
+  const Task._();
 
-  Task({
-    required this.title,
-    required this.description,
-    required this.order,
-  })  : isDone = false,
-        isArchived = false,
-        isTrash = false,
-        _dateCreateUtc = DateTime.now().toUtc(),
-        _dateModifyUtc = DateTime.now().toUtc();
+  @JsonSerializable()
+  const factory Task({
+    @Default(-1) int id,
+    @Default(false) bool isDone,
+    @Default(false) bool isArchived,
+    @Default(false) bool isTrash,
+    required String title,
+    required String description,
+    required DateTime dateCreateUtc,
+    required DateTime dateModifyUtc,
+    required int order,
+  }) = _Task;
 
-  DateTime get dateModify => _dateModifyUtc.toLocal();
-  DateTime get dateCreate => _dateCreateUtc.toLocal();
+  @override
+  // ignore: recursive_getters
+  Id get id => id;
 
-  void updateModifyDate() => _dateModifyUtc = DateTime.now().toUtc();
+  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
+
+  updateModifyDate() => copyWith(dateModifyUtc: DateTime.now().toUtc());
 }

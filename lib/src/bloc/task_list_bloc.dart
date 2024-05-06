@@ -20,34 +20,28 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     on<TaskListReorderCompleteEvent>(_reorderComplete);
   }
 
+  final AnimatedListDiffListDispatcher<Task>? dispatcher;
+  final repository = Repository();
+  int maxOrder = -1;
+
   FutureOr<void> _update(
     TaskListUpdateTaskEvent event,
     Emitter<TaskListState> emit,
   ) async {
-    final updatedTask = event.task;
+    final updatedTask = event.task.updateModifyDate();
     final newTasks = [...state.tasks];
-    final index = state.tasks.indexWhere((t) => t.id == updatedTask.id!);
+    final index = state.tasks.indexWhere((t) => t.id == updatedTask.id);
 
     if (index == -1) {
       return;
     }
 
-    newTasks[index] = updatedTask;
-
-    updatedTask.updateModifyDate();
-
     await repository.updateTask(updatedTask);
 
-    emit(TaskListLoadedState(tasks: newTasks));
+    newTasks[index] = updatedTask;
 
-    dispatcher?.controller.notifyChangedRange(index, 1, (context, index, data) {
-      return itemBuilder(context, newTasks[index], data);
-    });
+    emit(TaskListUpdateTaskState(tasks: newTasks, from: index, count: 1));
   }
-
-  final AnimatedListDiffListDispatcher<Task>? dispatcher;
-  final repository = Repository();
-  int maxOrder = -1;
 
   FutureOr<void> _reorderComplete(
     TaskListReorderCompleteEvent event,
@@ -62,10 +56,10 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
 
     newTasks.insert(dropIndex, newTasks.removeAt(index));
     newTasks.sublist(from, to).asMap().forEach((i, task) async {
-      task.order = orders.elementAt(i);
-      task.updateModifyDate();
+      var updatedTask = task.copyWith(order: orders.elementAt(i));
+      updatedTask.updateModifyDate();
 
-      await repository.updateTask(task);
+      await repository.updateTask(updatedTask);
     });
 
     emit(TaskListLoadedState(tasks: newTasks));
@@ -83,19 +77,19 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     Task task;
 
     try {
-      task = state.tasks.firstWhere((t) => t.id! == event.taskId);
+      task = state.tasks.firstWhere((t) => t.id == event.taskId);
     } on StateError {
       return;
     }
 
-    var isDeleted = await repository.deleteTask(task.id!);
+    var isDeleted = await repository.deleteTask(task.id);
 
     if (isDeleted) {
-      var tasks = state.tasks.where((t) => t.id! != event.taskId).toList();
+      var tasks = state.tasks.where((t) => t.id != event.taskId).toList();
 
       emit(TaskListLoadedState(tasks: tasks));
 
-      dispatcher?.dispatchNewList([...tasks]);
+      dispatcher?.dispatchNewList([for (var task in tasks) task]);
 
       if (task.order == maxOrder) {
         if (tasks.isNotEmpty) {
@@ -111,22 +105,21 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     TaskListAddTaskEvent event,
     Emitter<TaskListState> emit,
   ) async {
-    var task = event.task;
-
     if (maxOrder == -1) {
       maxOrder = 1;
     } else {
       ++maxOrder;
     }
 
-    task.order = maxOrder;
+    var newTask = event.task.copyWith(order: maxOrder);
+    var id = await repository.createTask(newTask);
+    newTask = newTask.copyWith(id: id);
 
-    var id = await repository.createTask(task);
-    var tasks = [task..id = id, ...state.tasks];
+    var tasks = [newTask, ...state.tasks];
 
     emit(TaskListLoadedState(tasks: tasks));
 
-    dispatcher?.dispatchNewList([...tasks]);
+    dispatcher?.dispatchNewList([for (var task in tasks) task]);
   }
 
   FutureOr<void> _getAll(
@@ -145,6 +138,6 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
 
     emit(TaskListLoadedState(tasks: tasks));
 
-    dispatcher?.dispatchNewList([...tasks]);
+    dispatcher?.dispatchNewList([for (var task in tasks) task]);
   }
 }

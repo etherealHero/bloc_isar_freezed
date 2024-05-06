@@ -17,14 +17,14 @@ const TaskSchema = CollectionSchema(
   name: r'Task',
   id: 2998003626758701373,
   properties: {
-    r'dateCreate': PropertySchema(
+    r'dateCreateUtc': PropertySchema(
       id: 0,
-      name: r'dateCreate',
+      name: r'dateCreateUtc',
       type: IsarType.dateTime,
     ),
-    r'dateModify': PropertySchema(
+    r'dateModifyUtc': PropertySchema(
       id: 1,
-      name: r'dateModify',
+      name: r'dateModifyUtc',
       type: IsarType.dateTime,
     ),
     r'description': PropertySchema(
@@ -89,8 +89,8 @@ void _taskSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeDateTime(offsets[0], object.dateCreate);
-  writer.writeDateTime(offsets[1], object.dateModify);
+  writer.writeDateTime(offsets[0], object.dateCreateUtc);
+  writer.writeDateTime(offsets[1], object.dateModifyUtc);
   writer.writeString(offsets[2], object.description);
   writer.writeBool(offsets[3], object.isArchived);
   writer.writeBool(offsets[4], object.isDone);
@@ -106,14 +106,16 @@ Task _taskDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Task(
+    dateCreateUtc: reader.readDateTime(offsets[0]),
+    dateModifyUtc: reader.readDateTime(offsets[1]),
     description: reader.readString(offsets[2]),
+    id: id,
+    isArchived: reader.readBool(offsets[3]),
+    isDone: reader.readBool(offsets[4]),
+    isTrash: reader.readBool(offsets[5]),
     order: reader.readLong(offsets[6]),
     title: reader.readString(offsets[7]),
   );
-  object.id = id;
-  object.isArchived = reader.readBool(offsets[3]);
-  object.isDone = reader.readBool(offsets[4]);
-  object.isTrash = reader.readBool(offsets[5]);
   return object;
 }
 
@@ -146,16 +148,14 @@ P _taskDeserializeProp<P>(
 }
 
 Id _taskGetId(Task object) {
-  return object.id ?? Isar.autoIncrement;
+  return object.id;
 }
 
 List<IsarLinkBase<dynamic>> _taskGetLinks(Task object) {
   return [];
 }
 
-void _taskAttach(IsarCollection<dynamic> col, Id id, Task object) {
-  object.id = id;
-}
+void _taskAttach(IsarCollection<dynamic> col, Id id, Task object) {}
 
 extension TaskQueryWhereSort on QueryBuilder<Task, Task, QWhere> {
   QueryBuilder<Task, Task, QAfterWhere> anyId() {
@@ -233,43 +233,43 @@ extension TaskQueryWhere on QueryBuilder<Task, Task, QWhereClause> {
 }
 
 extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
-  QueryBuilder<Task, Task, QAfterFilterCondition> dateCreateEqualTo(
+  QueryBuilder<Task, Task, QAfterFilterCondition> dateCreateUtcEqualTo(
       DateTime value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'dateCreate',
+        property: r'dateCreateUtc',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> dateCreateGreaterThan(
+  QueryBuilder<Task, Task, QAfterFilterCondition> dateCreateUtcGreaterThan(
     DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'dateCreate',
+        property: r'dateCreateUtc',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> dateCreateLessThan(
+  QueryBuilder<Task, Task, QAfterFilterCondition> dateCreateUtcLessThan(
     DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'dateCreate',
+        property: r'dateCreateUtc',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> dateCreateBetween(
+  QueryBuilder<Task, Task, QAfterFilterCondition> dateCreateUtcBetween(
     DateTime lower,
     DateTime upper, {
     bool includeLower = true,
@@ -277,7 +277,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'dateCreate',
+        property: r'dateCreateUtc',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -286,43 +286,43 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> dateModifyEqualTo(
+  QueryBuilder<Task, Task, QAfterFilterCondition> dateModifyUtcEqualTo(
       DateTime value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'dateModify',
+        property: r'dateModifyUtc',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> dateModifyGreaterThan(
+  QueryBuilder<Task, Task, QAfterFilterCondition> dateModifyUtcGreaterThan(
     DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'dateModify',
+        property: r'dateModifyUtc',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> dateModifyLessThan(
+  QueryBuilder<Task, Task, QAfterFilterCondition> dateModifyUtcLessThan(
     DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'dateModify',
+        property: r'dateModifyUtc',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> dateModifyBetween(
+  QueryBuilder<Task, Task, QAfterFilterCondition> dateModifyUtcBetween(
     DateTime lower,
     DateTime upper, {
     bool includeLower = true,
@@ -330,7 +330,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'dateModify',
+        property: r'dateModifyUtc',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -469,23 +469,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Task, Task, QAfterFilterCondition> idIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<Task, Task, QAfterFilterCondition> idIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<Task, Task, QAfterFilterCondition> idEqualTo(Id? value) {
+  QueryBuilder<Task, Task, QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -495,7 +479,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
   }
 
   QueryBuilder<Task, Task, QAfterFilterCondition> idGreaterThan(
-    Id? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -508,7 +492,7 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
   }
 
   QueryBuilder<Task, Task, QAfterFilterCondition> idLessThan(
-    Id? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -521,8 +505,8 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
   }
 
   QueryBuilder<Task, Task, QAfterFilterCondition> idBetween(
-    Id? lower,
-    Id? upper, {
+    Id lower,
+    Id upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -751,27 +735,27 @@ extension TaskQueryObject on QueryBuilder<Task, Task, QFilterCondition> {}
 extension TaskQueryLinks on QueryBuilder<Task, Task, QFilterCondition> {}
 
 extension TaskQuerySortBy on QueryBuilder<Task, Task, QSortBy> {
-  QueryBuilder<Task, Task, QAfterSortBy> sortByDateCreate() {
+  QueryBuilder<Task, Task, QAfterSortBy> sortByDateCreateUtc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dateCreate', Sort.asc);
+      return query.addSortBy(r'dateCreateUtc', Sort.asc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> sortByDateCreateDesc() {
+  QueryBuilder<Task, Task, QAfterSortBy> sortByDateCreateUtcDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dateCreate', Sort.desc);
+      return query.addSortBy(r'dateCreateUtc', Sort.desc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> sortByDateModify() {
+  QueryBuilder<Task, Task, QAfterSortBy> sortByDateModifyUtc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dateModify', Sort.asc);
+      return query.addSortBy(r'dateModifyUtc', Sort.asc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> sortByDateModifyDesc() {
+  QueryBuilder<Task, Task, QAfterSortBy> sortByDateModifyUtcDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dateModify', Sort.desc);
+      return query.addSortBy(r'dateModifyUtc', Sort.desc);
     });
   }
 
@@ -849,27 +833,27 @@ extension TaskQuerySortBy on QueryBuilder<Task, Task, QSortBy> {
 }
 
 extension TaskQuerySortThenBy on QueryBuilder<Task, Task, QSortThenBy> {
-  QueryBuilder<Task, Task, QAfterSortBy> thenByDateCreate() {
+  QueryBuilder<Task, Task, QAfterSortBy> thenByDateCreateUtc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dateCreate', Sort.asc);
+      return query.addSortBy(r'dateCreateUtc', Sort.asc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> thenByDateCreateDesc() {
+  QueryBuilder<Task, Task, QAfterSortBy> thenByDateCreateUtcDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dateCreate', Sort.desc);
+      return query.addSortBy(r'dateCreateUtc', Sort.desc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> thenByDateModify() {
+  QueryBuilder<Task, Task, QAfterSortBy> thenByDateModifyUtc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dateModify', Sort.asc);
+      return query.addSortBy(r'dateModifyUtc', Sort.asc);
     });
   }
 
-  QueryBuilder<Task, Task, QAfterSortBy> thenByDateModifyDesc() {
+  QueryBuilder<Task, Task, QAfterSortBy> thenByDateModifyUtcDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dateModify', Sort.desc);
+      return query.addSortBy(r'dateModifyUtc', Sort.desc);
     });
   }
 
@@ -959,15 +943,15 @@ extension TaskQuerySortThenBy on QueryBuilder<Task, Task, QSortThenBy> {
 }
 
 extension TaskQueryWhereDistinct on QueryBuilder<Task, Task, QDistinct> {
-  QueryBuilder<Task, Task, QDistinct> distinctByDateCreate() {
+  QueryBuilder<Task, Task, QDistinct> distinctByDateCreateUtc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'dateCreate');
+      return query.addDistinctBy(r'dateCreateUtc');
     });
   }
 
-  QueryBuilder<Task, Task, QDistinct> distinctByDateModify() {
+  QueryBuilder<Task, Task, QDistinct> distinctByDateModifyUtc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'dateModify');
+      return query.addDistinctBy(r'dateModifyUtc');
     });
   }
 
@@ -1017,15 +1001,15 @@ extension TaskQueryProperty on QueryBuilder<Task, Task, QQueryProperty> {
     });
   }
 
-  QueryBuilder<Task, DateTime, QQueryOperations> dateCreateProperty() {
+  QueryBuilder<Task, DateTime, QQueryOperations> dateCreateUtcProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'dateCreate');
+      return query.addPropertyName(r'dateCreateUtc');
     });
   }
 
-  QueryBuilder<Task, DateTime, QQueryOperations> dateModifyProperty() {
+  QueryBuilder<Task, DateTime, QQueryOperations> dateModifyUtcProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'dateModify');
+      return query.addPropertyName(r'dateModifyUtc');
     });
   }
 
@@ -1065,3 +1049,32 @@ extension TaskQueryProperty on QueryBuilder<Task, Task, QQueryProperty> {
     });
   }
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$TaskImpl _$$TaskImplFromJson(Map<String, dynamic> json) => _$TaskImpl(
+      id: (json['id'] as num?)?.toInt() ?? Isar.autoIncrement,
+      order: (json['order'] as num).toInt(),
+      title: json['title'] as String,
+      description: json['description'] as String,
+      isDone: json['isDone'] as bool? ?? false,
+      isArchived: json['isArchived'] as bool? ?? false,
+      isTrash: json['isTrash'] as bool? ?? false,
+      dateCreateUtc: DateTime.parse(json['dateCreateUtc'] as String),
+      dateModifyUtc: DateTime.parse(json['dateModifyUtc'] as String),
+    );
+
+Map<String, dynamic> _$$TaskImplToJson(_$TaskImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'order': instance.order,
+      'title': instance.title,
+      'description': instance.description,
+      'isDone': instance.isDone,
+      'isArchived': instance.isArchived,
+      'isTrash': instance.isTrash,
+      'dateCreateUtc': instance.dateCreateUtc.toIso8601String(),
+      'dateModifyUtc': instance.dateModifyUtc.toIso8601String(),
+    };
