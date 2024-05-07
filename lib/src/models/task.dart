@@ -11,7 +11,7 @@ class Task with _$Task {
 
   @JsonSerializable()
   const factory Task({
-    @Default(-1) int id,
+    int? id,
     @Default(false) bool isDone,
     @Default(false) bool isArchived,
     @Default(false) bool isTrash,
@@ -24,7 +24,7 @@ class Task with _$Task {
 
   @override
   // ignore: recursive_getters
-  Id get id => id;
+  Id? get id => id;
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 

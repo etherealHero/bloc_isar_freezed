@@ -20,15 +20,15 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Task {
-  int get id => throw _privateConstructorUsedError;
-  int get order => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   bool get isDone => throw _privateConstructorUsedError;
   bool get isArchived => throw _privateConstructorUsedError;
   bool get isTrash => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
   DateTime get dateCreateUtc => throw _privateConstructorUsedError;
   DateTime get dateModifyUtc => throw _privateConstructorUsedError;
+  int get order => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,15 +41,15 @@ abstract class $TaskCopyWith<$Res> {
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
   $Res call(
-      {int id,
-      int order,
-      String title,
-      String description,
+      {int? id,
       bool isDone,
       bool isArchived,
       bool isTrash,
+      String title,
+      String description,
       DateTime dateCreateUtc,
-      DateTime dateModifyUtc});
+      DateTime dateModifyUtc,
+      int order});
 }
 
 /// @nodoc
@@ -65,33 +65,21 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? order = null,
-    Object? title = null,
-    Object? description = null,
+    Object? id = freezed,
     Object? isDone = null,
     Object? isArchived = null,
     Object? isTrash = null,
+    Object? title = null,
+    Object? description = null,
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
+    Object? order = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       isDone: null == isDone
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
@@ -104,6 +92,14 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.isTrash
           : isTrash // ignore: cast_nullable_to_non_nullable
               as bool,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
       dateCreateUtc: null == dateCreateUtc
           ? _value.dateCreateUtc
           : dateCreateUtc // ignore: cast_nullable_to_non_nullable
@@ -112,6 +108,10 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.dateModifyUtc
           : dateModifyUtc // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      order: null == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -124,15 +124,15 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
-      int order,
-      String title,
-      String description,
+      {int? id,
       bool isDone,
       bool isArchived,
       bool isTrash,
+      String title,
+      String description,
       DateTime dateCreateUtc,
-      DateTime dateModifyUtc});
+      DateTime dateModifyUtc,
+      int order});
 }
 
 /// @nodoc
@@ -145,33 +145,21 @@ class __$$TaskImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? order = null,
-    Object? title = null,
-    Object? description = null,
+    Object? id = freezed,
     Object? isDone = null,
     Object? isArchived = null,
     Object? isTrash = null,
+    Object? title = null,
+    Object? description = null,
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
+    Object? order = null,
   }) {
     return _then(_$TaskImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       isDone: null == isDone
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
@@ -184,6 +172,14 @@ class __$$TaskImplCopyWithImpl<$Res>
           ? _value.isTrash
           : isTrash // ignore: cast_nullable_to_non_nullable
               as bool,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
       dateCreateUtc: null == dateCreateUtc
           ? _value.dateCreateUtc
           : dateCreateUtc // ignore: cast_nullable_to_non_nullable
@@ -192,6 +188,10 @@ class __$$TaskImplCopyWithImpl<$Res>
           ? _value.dateModifyUtc
           : dateModifyUtc // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      order: null == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -201,29 +201,22 @@ class __$$TaskImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TaskImpl extends _Task {
   const _$TaskImpl(
-      {this.id = Isar.autoIncrement,
-      required this.order,
-      required this.title,
-      required this.description,
+      {this.id,
       this.isDone = false,
       this.isArchived = false,
       this.isTrash = false,
+      required this.title,
+      required this.description,
       required this.dateCreateUtc,
-      required this.dateModifyUtc})
+      required this.dateModifyUtc,
+      required this.order})
       : super._();
 
   factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskImplFromJson(json);
 
   @override
-  @JsonKey()
-  final int id;
-  @override
-  final int order;
-  @override
-  final String title;
-  @override
-  final String description;
+  final int? id;
   @override
   @JsonKey()
   final bool isDone;
@@ -234,13 +227,19 @@ class _$TaskImpl extends _Task {
   @JsonKey()
   final bool isTrash;
   @override
+  final String title;
+  @override
+  final String description;
+  @override
   final DateTime dateCreateUtc;
   @override
   final DateTime dateModifyUtc;
+  @override
+  final int order;
 
   @override
   String toString() {
-    return 'Task(id: $id, order: $order, title: $title, description: $description, isDone: $isDone, isArchived: $isArchived, isTrash: $isTrash, dateCreateUtc: $dateCreateUtc, dateModifyUtc: $dateModifyUtc)';
+    return 'Task(id: $id, isDone: $isDone, isArchived: $isArchived, isTrash: $isTrash, title: $title, description: $description, dateCreateUtc: $dateCreateUtc, dateModifyUtc: $dateModifyUtc, order: $order)';
   }
 
   @override
@@ -249,24 +248,24 @@ class _$TaskImpl extends _Task {
         (other.runtimeType == runtimeType &&
             other is _$TaskImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.order, order) || other.order == order) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
             (identical(other.isDone, isDone) || other.isDone == isDone) &&
             (identical(other.isArchived, isArchived) ||
                 other.isArchived == isArchived) &&
             (identical(other.isTrash, isTrash) || other.isTrash == isTrash) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.dateCreateUtc, dateCreateUtc) ||
                 other.dateCreateUtc == dateCreateUtc) &&
             (identical(other.dateModifyUtc, dateModifyUtc) ||
-                other.dateModifyUtc == dateModifyUtc));
+                other.dateModifyUtc == dateModifyUtc) &&
+            (identical(other.order, order) || other.order == order));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, order, title, description,
-      isDone, isArchived, isTrash, dateCreateUtc, dateModifyUtc);
+  int get hashCode => Object.hash(runtimeType, id, isDone, isArchived, isTrash,
+      title, description, dateCreateUtc, dateModifyUtc, order);
 
   @JsonKey(ignore: true)
   @override
@@ -284,27 +283,21 @@ class _$TaskImpl extends _Task {
 
 abstract class _Task extends Task {
   const factory _Task(
-      {final int id,
-      required final int order,
-      required final String title,
-      required final String description,
+      {final int? id,
       final bool isDone,
       final bool isArchived,
       final bool isTrash,
+      required final String title,
+      required final String description,
       required final DateTime dateCreateUtc,
-      required final DateTime dateModifyUtc}) = _$TaskImpl;
+      required final DateTime dateModifyUtc,
+      required final int order}) = _$TaskImpl;
   const _Task._() : super._();
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
 
   @override
-  int get id;
-  @override
-  int get order;
-  @override
-  String get title;
-  @override
-  String get description;
+  int? get id;
   @override
   bool get isDone;
   @override
@@ -312,9 +305,15 @@ abstract class _Task extends Task {
   @override
   bool get isTrash;
   @override
+  String get title;
+  @override
+  String get description;
+  @override
   DateTime get dateCreateUtc;
   @override
   DateTime get dateModifyUtc;
+  @override
+  int get order;
   @override
   @JsonKey(ignore: true)
   _$$TaskImplCopyWith<_$TaskImpl> get copyWith =>

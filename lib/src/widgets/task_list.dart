@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:great_list_view/great_list_view.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../bloc/task_list_bloc.dart';
+import '../bloc/tasks_bloc.dart';
 import '../models/task.dart';
 import '../widgets/task_item.dart';
 
@@ -15,66 +17,36 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
-  late AnimatedListDiffListDispatcher<Task> dispatcher;
-
-  @override
-  void initState() {
-    super.initState();
-
-    dispatcher = AnimatedListDiffListDispatcher<Task>(
-      controller: _taskListController,
-      itemBuilder: itemBuilder,
-      currentList: <Task>[],
-      comparator: AnimatedListDiffListComparator<Task>(
-          sameItem: (a, b) => a.id == b.id,
-          sameContent: (a, b) =>
-              a.dateModifyUtc.compareTo(b.dateModifyUtc) != 0),
-    );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<TaskListBloc>().add(TaskListGetAllEvent());
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TaskListBloc, TaskListState>(
+    return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
-        if (state is TaskListUpdateTaskState) {
-          print("state trigger ${state.from}, ${state.count}");
-          dispatcher.controller.notifyChangedRange(state.from, state.count,
-              (context, index, data) {
-            return itemBuilder(
-                context, state.tasks[state.from].copyWith(), data);
-          });
+        if (state is TasksInitial) {
+          return const CircularProgressIndicator();
         }
 
+        var list = [for (var task in state.tasks) task.copyWith()];
+
         return SlidableAutoCloseBehavior(
-          child: Scrollbar(
-            controller: _taskListScrollController,
-            child: AnimatedListView(
-              initialItemCount: dispatcher.currentList.length,
-              itemBuilder: (context, index, data) =>
-                  itemBuilder(context, dispatcher.currentList[index], data),
-              listController: _taskListController,
-              scrollController: _taskListScrollController,
-              addLongPressReorderable: true,
-              reorderModel: AnimatedListReorderModel(
-                onReorderStart: (index, dx, dy) => true,
-                onReorderMove: (index, dropIndex) => true,
-                onReorderComplete: (index, dropIndex, slot) {
-                  var list = dispatcher.currentList;
-                  list.insert(dropIndex, list.removeAt(index));
-
-                  context.read<TaskListBloc>().add(TaskListReorderCompleteEvent(
-                      index: index, dropIndex: dropIndex));
-
-                  return true;
-                },
-              ),
-            ),
+            child: Scrollbar(
+          controller: _taskListScrollController,
+          child: AutomaticAnimatedListView<Task>(
+            list: list,
+            comparator: AnimatedListDiffListComparator<Task>(
+                sameItem: (a, b) => a.id == b.id,
+                sameContent: (a, b) =>
+                    a.dateModifyUtc.compareTo(b.dateModifyUtc) == 0),
+            itemBuilder: itemBuilder,
+            listController: _taskListController,
+            scrollController: _taskListScrollController,
+            addLongPressReorderable: true,
+            reorderModel: TaskListReorderModel(list, (index, dropIndex, cb) {
+              context
+                  .read<TasksBloc>()
+                  .add(TasksEvent.reorderComplete(index, dropIndex, cb));
+            }),
           ),
-        );
+        ));
       },
     );
   }
@@ -89,6 +61,48 @@ Widget itemBuilder(
   var key = Key(item.id.toString());
 
   return TaskItem(data: item, key: key);
+}
+
+class TaskListReorderModel extends AutomaticAnimatedListReorderModel<Task> {
+  TaskListReorderModel(
+    super.list,
+    Function(int index, int dropIndex, void Function(List<Task> range) cb)
+        onCompleteEventCallback,
+  ) : _onCompleteEventCallback = onCompleteEventCallback;
+
+  final Function(int index, int dropIndex, void Function(List<Task> range) cb)?
+      _onCompleteEventCallback;
+
+  @override
+  bool onReorderComplete(int index, int dropIndex, Object? slot) {
+    // print(">>> index $index, dropIndex $dropIndex");
+
+    final from = min(dropIndex, index);
+    final to = max(dropIndex, index) + 1;
+    // final initialList = [for (var task in list) task.copyWith()];
+    // final orders = initialList.map((e) => e.order).toList();
+
+    list.insert(dropIndex, list.removeAt(index));
+
+    // final newList = [for (var task in list) task.copyWith()];
+
+    // print("orders $orders");
+
+    // for (var i = from; i < to; i++) {
+    //   list[i] = list[i].copyWith(order: orders[i])..updateModifyDate();
+    // }
+
+    // print(list.sublist(from, to).map((e) => "${e.id}(${e.order}), "));
+
+    _onCompleteEventCallback?.call(index, dropIndex, (List<Task> list12) {
+      _taskListController.notifyChangedRange(from, to - from,
+          (context, index, data) {
+        return itemBuilder(context, list12.sublist(from, to)[index], data);
+      });
+    });
+
+    return true;
+  }
 }
 
 final _taskListScrollController = ScrollController();

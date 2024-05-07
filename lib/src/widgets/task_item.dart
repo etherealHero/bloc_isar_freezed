@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../bloc/task_list_bloc.dart';
+import '../bloc/tasks_bloc.dart';
 import '../models/task.dart';
 
 class TaskItem extends StatefulWidget {
@@ -46,11 +46,10 @@ class _TaskItemState extends State<TaskItem>
                     return TextButton.icon(
                         onPressed: () {
                           context
-                              .read<TaskListBloc>()
-                              .add(TaskListUpdateTaskEvent(
-                                task: widget.data
-                                    .copyWith(isDone: !widget.data.isDone),
-                              ));
+                              .read<TasksBloc>()
+                              .add(TasksEvent.update(widget.data.copyWith(
+                                isDone: !widget.data.isDone,
+                              )));
                         },
                         icon: Icon(Icons.done,
                             color: Theme.of(context)
@@ -77,10 +76,8 @@ class _TaskItemState extends State<TaskItem>
                     return TextButton.icon(
                         onPressed: () {
                           context
-                              .read<TaskListBloc>()
-                              .add(TaskListDeleteTaskEvent(
-                                taskId: widget.data.id,
-                              ));
+                              .read<TasksBloc>()
+                              .add(TasksEvent.delete(widget.data.id!));
                         },
                         icon: Icon(Icons.delete_outline_rounded,
                             color: Theme.of(context)
@@ -119,20 +116,20 @@ class _TaskCard extends StatelessWidget {
               Row(children: [
                 data.isDone
                     ? IconButton.filled(
-                        onPressed: () => context.read<TaskListBloc>().add(
-                            TaskListUpdateTaskEvent(
-                                task: data.copyWith(isDone: !data.isDone))),
+                        onPressed: () => context.read<TasksBloc>().add(
+                            TasksEvent.update(
+                                data.copyWith(isDone: !data.isDone))),
                         icon: const Icon(Icons.done))
                     : IconButton.outlined(
-                        onPressed: () => context.read<TaskListBloc>().add(
-                            TaskListUpdateTaskEvent(
-                                task: data.copyWith(isDone: !data.isDone))),
+                        onPressed: () => context.read<TasksBloc>().add(
+                            TasksEvent.update(
+                                data.copyWith(isDone: !data.isDone))),
                         icon: const Icon(Icons.done)),
                 const SizedBox(width: 5),
                 IconButton.outlined(
                     onPressed: () => context
-                        .read<TaskListBloc>()
-                        .add(TaskListDeleteTaskEvent(taskId: data.id)),
+                        .read<TasksBloc>()
+                        .add(TasksEvent.delete(data.id!)),
                     icon: const Icon(Icons.close))
               ]),
             ],
