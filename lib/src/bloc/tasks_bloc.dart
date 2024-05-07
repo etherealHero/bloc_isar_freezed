@@ -105,20 +105,17 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
 
   void _onReorderComplete(
       _ReorderComplete event, Emitter<TasksState> emit) async {
-    final index = event.index;
-    final dropIndex = event.dropIndex;
     final newTasks = [...state.tasks];
-    final from = min(dropIndex, index);
-    final to = max(dropIndex, index) + 1;
-    final orders = state.tasks.sublist(from, to).map((e) => e.order).toList();
+    final orders = state.tasks.map((e) => e.order).toList();
 
-    newTasks.insert(dropIndex, newTasks.removeAt(index));
-    newTasks.sublist(from, to).asMap().forEach((i, task) async {
-      var updatedTask = task.copyWith(order: orders.elementAt(i));
-      updatedTask.updateModifyDate();
+    final from = min(event.dropIndex, event.index);
+    final to = max(event.dropIndex, event.index) + 1;
 
-      await repository.updateTask(updatedTask);
-    });
+    newTasks.insert(event.dropIndex, newTasks.removeAt(event.index));
+    for (var i = from; i < to; i++) {
+      newTasks[i] = newTasks[i].copyWith(order: orders[i])..updateModifyDate();
+      await repository.updateTask(newTasks[i]);
+    }
 
     event.cb.call(newTasks);
 

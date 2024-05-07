@@ -75,30 +75,18 @@ class TaskListReorderModel extends AutomaticAnimatedListReorderModel<Task> {
 
   @override
   bool onReorderComplete(int index, int dropIndex, Object? slot) {
-    // print(">>> index $index, dropIndex $dropIndex");
-
     final from = min(dropIndex, index);
     final to = max(dropIndex, index) + 1;
-    // final initialList = [for (var task in list) task.copyWith()];
-    // final orders = initialList.map((e) => e.order).toList();
 
     list.insert(dropIndex, list.removeAt(index));
 
-    // final newList = [for (var task in list) task.copyWith()];
-
-    // print("orders $orders");
-
-    // for (var i = from; i < to; i++) {
-    //   list[i] = list[i].copyWith(order: orders[i])..updateModifyDate();
-    // }
-
-    // print(list.sublist(from, to).map((e) => "${e.id}(${e.order}), "));
-
-    _onCompleteEventCallback?.call(index, dropIndex, (List<Task> list12) {
-      _taskListController.notifyChangedRange(from, to - from,
-          (context, index, data) {
-        return itemBuilder(context, list12.sublist(from, to)[index], data);
-      });
+    _onCompleteEventCallback?.call(index, dropIndex, (tasks) {
+      _taskListController.notifyChangedRange(
+        from,
+        to - from,
+        (context, index, data) =>
+            itemBuilder(context, tasks.sublist(from, to)[index], data),
+      );
     });
 
     return true;
