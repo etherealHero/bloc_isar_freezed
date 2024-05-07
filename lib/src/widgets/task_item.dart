@@ -1,104 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../bloc/tasks_bloc.dart';
 import '../models/task.dart';
 
-class TaskItem extends StatefulWidget {
+class TaskItem extends StatelessWidget {
   final Task data;
 
   const TaskItem({super.key, required this.data});
-
-  @override
-  State<TaskItem> createState() => _TaskItemState();
-}
-
-class _TaskItemState extends State<TaskItem>
-    with SingleTickerProviderStateMixin {
-  late final controller = SlidableController(this);
-
-  @override
-  Widget build(BuildContext context) {
-    return Slidable(
-        key: widget.key,
-        groupTag: "0",
-        startActionPane: ActionPane(
-            motion: const ScrollMotion(),
-            // dismissible: DismissiblePane(
-            //   onDismissed: () {
-            //     var dispatcher = taskListGkey.currentState!.dispatcher;
-            //     var list = dispatcher.currentList;
-            //     var index = list.indexOf(widget.data);
-            //     // TODO: не работает
-            //     dispatcher.controller.notifyRemovedRange(
-            //         index,
-            //         1,
-            //         (context, index, data) =>
-            //             itemBuilder(context, list[index], data));
-            //   },
-            // ),
-            children: [
-              CustomSlidableAction(
-                  backgroundColor: Colors.transparent,
-                  onPressed: (context) {},
-                  child: Builder(builder: (context) {
-                    return TextButton.icon(
-                        onPressed: () {
-                          context
-                              .read<TasksBloc>()
-                              .add(TasksEvent.update(widget.data.copyWith(
-                                isDone: !widget.data.isDone,
-                              )));
-                        },
-                        icon: Icon(Icons.done,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onBackground
-                                .withAlpha(160)),
-                        label: Text('Toggle',
-                            style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onBackground)));
-                  }))
-            ]),
-        endActionPane: ActionPane(
-            // dismissible: DismissiblePane(
-            //   onDismissed: () {},
-            // ),
-            motion: const ScrollMotion(),
-            children: [
-              CustomSlidableAction(
-                  backgroundColor: Colors.transparent,
-                  onPressed: (context) {},
-                  child: Builder(builder: (context) {
-                    return TextButton.icon(
-                        onPressed: () {
-                          context
-                              .read<TasksBloc>()
-                              .add(TasksEvent.delete(widget.data.id!));
-                        },
-                        icon: Icon(Icons.delete_outline_rounded,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onBackground
-                                .withAlpha(160)),
-                        label: Text('Delete',
-                            style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onBackground)));
-                  }))
-            ]),
-        child: _TaskCard(data: widget.data));
-  }
-}
-
-class _TaskCard extends StatelessWidget {
-  const _TaskCard({required this.data});
-
-  final Task data;
 
   @override
   Widget build(BuildContext context) {

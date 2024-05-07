@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:great_list_view/great_list_view.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../bloc/tasks_bloc.dart';
 import '../models/task.dart';
@@ -27,8 +26,7 @@ class _TaskListState extends State<TaskList> {
 
         var list = [for (var task in state.tasks) task.copyWith()];
 
-        return SlidableAutoCloseBehavior(
-            child: Scrollbar(
+        return Scrollbar(
           controller: _taskListScrollController,
           child: AutomaticAnimatedListView<Task>(
             list: list,
@@ -46,7 +44,7 @@ class _TaskListState extends State<TaskList> {
                   .add(TasksEvent.reorderComplete(index, dropIndex, cb));
             }),
           ),
-        ));
+        );
       },
     );
   }
