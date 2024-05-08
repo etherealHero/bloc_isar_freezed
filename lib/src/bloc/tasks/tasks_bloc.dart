@@ -117,8 +117,6 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       await repository.updateTask(newTasks[i]);
     }
 
-    event.cb.call(newTasks);
-
-    emit(TasksState.loaded(newTasks));
+    emit(TasksState.reordered(newTasks, from, to));
   }
 }

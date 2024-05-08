@@ -5,9 +5,9 @@ import '../bloc/tasks/tasks_bloc.dart';
 import '../models/tasks/task.dart';
 
 class TaskItem extends StatelessWidget {
-  final Task data;
+  const TaskItem(this.task, {super.key});
 
-  const TaskItem({super.key, required this.data});
+  final Task task;
 
   @override
   Widget build(BuildContext context) {
@@ -19,26 +19,26 @@ class TaskItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Item ${data.id}, order ${data.order}',
+                'Item ${task.id}, order ${task.order}',
                 style: const TextStyle(fontSize: 16),
               ),
               Row(children: [
-                data.isDone
+                task.isDone
                     ? IconButton.filled(
                         onPressed: () => context.read<TasksBloc>().add(
                             TasksEvent.update(
-                                data.copyWith(isDone: !data.isDone))),
+                                task.copyWith(isDone: !task.isDone))),
                         icon: const Icon(Icons.done))
                     : IconButton.outlined(
                         onPressed: () => context.read<TasksBloc>().add(
                             TasksEvent.update(
-                                data.copyWith(isDone: !data.isDone))),
+                                task.copyWith(isDone: !task.isDone))),
                         icon: const Icon(Icons.done)),
                 const SizedBox(width: 5),
                 IconButton.outlined(
                     onPressed: () => context
                         .read<TasksBloc>()
-                        .add(TasksEvent.delete(data.id!)),
+                        .add(TasksEvent.delete(task.id!)),
                     icon: const Icon(Icons.close))
               ]),
             ],

@@ -22,9 +22,7 @@ mixin _$TasksEvent {
     required TResult Function(String title, String description) add,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Task>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,8 +31,7 @@ mixin _$TasksEvent {
     TResult? Function(String title, String description)? add,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,8 +40,7 @@ mixin _$TasksEvent {
     TResult Function(String title, String description)? add,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,9 +134,7 @@ class _$GetAllImpl implements _GetAll {
     required TResult Function(String title, String description) add,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Task>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) {
     return getAll();
   }
@@ -152,8 +146,7 @@ class _$GetAllImpl implements _GetAll {
     TResult? Function(String title, String description)? add,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) {
     return getAll?.call();
   }
@@ -165,8 +158,7 @@ class _$GetAllImpl implements _GetAll {
     TResult Function(String title, String description)? add,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -295,9 +287,7 @@ class _$AddImpl implements _Add {
     required TResult Function(String title, String description) add,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Task>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) {
     return add(title, description);
   }
@@ -309,8 +299,7 @@ class _$AddImpl implements _Add {
     TResult? Function(String title, String description)? add,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) {
     return add?.call(title, description);
   }
@@ -322,8 +311,7 @@ class _$AddImpl implements _Add {
     TResult Function(String title, String description)? add,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -461,9 +449,7 @@ class _$UpdateImpl implements _Update {
     required TResult Function(String title, String description) add,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Task>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) {
     return update(task);
   }
@@ -475,8 +461,7 @@ class _$UpdateImpl implements _Update {
     TResult? Function(String title, String description)? add,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) {
     return update?.call(task);
   }
@@ -488,8 +473,7 @@ class _$UpdateImpl implements _Update {
     TResult Function(String title, String description)? add,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -616,9 +600,7 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(String title, String description) add,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Task>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) {
     return delete(taskId);
   }
@@ -630,8 +612,7 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(String title, String description)? add,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) {
     return delete?.call(taskId);
   }
@@ -643,8 +624,7 @@ class _$DeleteImpl implements _Delete {
     TResult Function(String title, String description)? add,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -709,7 +689,7 @@ abstract class _$$ReorderCompleteImplCopyWith<$Res> {
           $Res Function(_$ReorderCompleteImpl) then) =
       __$$ReorderCompleteImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int index, int dropIndex, void Function(List<Task>) cb});
+  $Res call({int index, int dropIndex});
 }
 
 /// @nodoc
@@ -725,7 +705,6 @@ class __$$ReorderCompleteImplCopyWithImpl<$Res>
   $Res call({
     Object? index = null,
     Object? dropIndex = null,
-    Object? cb = null,
   }) {
     return _then(_$ReorderCompleteImpl(
       null == index
@@ -736,10 +715,6 @@ class __$$ReorderCompleteImplCopyWithImpl<$Res>
           ? _value.dropIndex
           : dropIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      null == cb
-          ? _value.cb
-          : cb // ignore: cast_nullable_to_non_nullable
-              as void Function(List<Task>),
     ));
   }
 }
@@ -747,18 +722,16 @@ class __$$ReorderCompleteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ReorderCompleteImpl implements _ReorderComplete {
-  const _$ReorderCompleteImpl(this.index, this.dropIndex, this.cb);
+  const _$ReorderCompleteImpl(this.index, this.dropIndex);
 
   @override
   final int index;
   @override
   final int dropIndex;
-  @override
-  final void Function(List<Task>) cb;
 
   @override
   String toString() {
-    return 'TasksEvent.reorderComplete(index: $index, dropIndex: $dropIndex, cb: $cb)';
+    return 'TasksEvent.reorderComplete(index: $index, dropIndex: $dropIndex)';
   }
 
   @override
@@ -768,12 +741,11 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
             other is _$ReorderCompleteImpl &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.dropIndex, dropIndex) ||
-                other.dropIndex == dropIndex) &&
-            (identical(other.cb, cb) || other.cb == cb));
+                other.dropIndex == dropIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, index, dropIndex, cb);
+  int get hashCode => Object.hash(runtimeType, index, dropIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -789,11 +761,9 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     required TResult Function(String title, String description) add,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Task>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) {
-    return reorderComplete(index, dropIndex, cb);
+    return reorderComplete(index, dropIndex);
   }
 
   @override
@@ -803,10 +773,9 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult? Function(String title, String description)? add,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) {
-    return reorderComplete?.call(index, dropIndex, cb);
+    return reorderComplete?.call(index, dropIndex);
   }
 
   @override
@@ -816,12 +785,11 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult Function(String title, String description)? add,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Task>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) {
     if (reorderComplete != null) {
-      return reorderComplete(index, dropIndex, cb);
+      return reorderComplete(index, dropIndex);
     }
     return orElse();
   }
@@ -868,12 +836,11 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
 }
 
 abstract class _ReorderComplete implements TasksEvent {
-  const factory _ReorderComplete(final int index, final int dropIndex,
-      final void Function(List<Task>) cb) = _$ReorderCompleteImpl;
+  const factory _ReorderComplete(final int index, final int dropIndex) =
+      _$ReorderCompleteImpl;
 
   int get index;
   int get dropIndex;
-  void Function(List<Task>) get cb;
   @JsonKey(ignore: true)
   _$$ReorderCompleteImplCopyWith<_$ReorderCompleteImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -886,18 +853,21 @@ mixin _$TasksState {
   TResult when<TResult extends Object?>({
     required TResult Function(List<Task> tasks) initial,
     required TResult Function(List<Task> tasks) loaded,
+    required TResult Function(List<Task> tasks, int from, int to) reordered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<Task> tasks)? initial,
     TResult? Function(List<Task> tasks)? loaded,
+    TResult? Function(List<Task> tasks, int from, int to)? reordered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<Task> tasks)? initial,
     TResult Function(List<Task> tasks)? loaded,
+    TResult Function(List<Task> tasks, int from, int to)? reordered,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -905,18 +875,21 @@ mixin _$TasksState {
   TResult map<TResult extends Object?>({
     required TResult Function(TasksInitial value) initial,
     required TResult Function(TasksLoaded value) loaded,
+    required TResult Function(TasksReordered value) reordered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TasksInitial value)? initial,
     TResult? Function(TasksLoaded value)? loaded,
+    TResult? Function(TasksReordered value)? reordered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TasksInitial value)? initial,
     TResult Function(TasksLoaded value)? loaded,
+    TResult Function(TasksReordered value)? reordered,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1033,6 +1006,7 @@ class _$TasksInitialImpl implements TasksInitial {
   TResult when<TResult extends Object?>({
     required TResult Function(List<Task> tasks) initial,
     required TResult Function(List<Task> tasks) loaded,
+    required TResult Function(List<Task> tasks, int from, int to) reordered,
   }) {
     return initial(tasks);
   }
@@ -1042,6 +1016,7 @@ class _$TasksInitialImpl implements TasksInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<Task> tasks)? initial,
     TResult? Function(List<Task> tasks)? loaded,
+    TResult? Function(List<Task> tasks, int from, int to)? reordered,
   }) {
     return initial?.call(tasks);
   }
@@ -1051,6 +1026,7 @@ class _$TasksInitialImpl implements TasksInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<Task> tasks)? initial,
     TResult Function(List<Task> tasks)? loaded,
+    TResult Function(List<Task> tasks, int from, int to)? reordered,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1064,6 +1040,7 @@ class _$TasksInitialImpl implements TasksInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(TasksInitial value) initial,
     required TResult Function(TasksLoaded value) loaded,
+    required TResult Function(TasksReordered value) reordered,
   }) {
     return initial(this);
   }
@@ -1073,6 +1050,7 @@ class _$TasksInitialImpl implements TasksInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TasksInitial value)? initial,
     TResult? Function(TasksLoaded value)? loaded,
+    TResult? Function(TasksReordered value)? reordered,
   }) {
     return initial?.call(this);
   }
@@ -1082,6 +1060,7 @@ class _$TasksInitialImpl implements TasksInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TasksInitial value)? initial,
     TResult Function(TasksLoaded value)? loaded,
+    TResult Function(TasksReordered value)? reordered,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1176,6 +1155,7 @@ class _$TasksLoadedImpl implements TasksLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function(List<Task> tasks) initial,
     required TResult Function(List<Task> tasks) loaded,
+    required TResult Function(List<Task> tasks, int from, int to) reordered,
   }) {
     return loaded(tasks);
   }
@@ -1185,6 +1165,7 @@ class _$TasksLoadedImpl implements TasksLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<Task> tasks)? initial,
     TResult? Function(List<Task> tasks)? loaded,
+    TResult? Function(List<Task> tasks, int from, int to)? reordered,
   }) {
     return loaded?.call(tasks);
   }
@@ -1194,6 +1175,7 @@ class _$TasksLoadedImpl implements TasksLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<Task> tasks)? initial,
     TResult Function(List<Task> tasks)? loaded,
+    TResult Function(List<Task> tasks, int from, int to)? reordered,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1207,6 +1189,7 @@ class _$TasksLoadedImpl implements TasksLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(TasksInitial value) initial,
     required TResult Function(TasksLoaded value) loaded,
+    required TResult Function(TasksReordered value) reordered,
   }) {
     return loaded(this);
   }
@@ -1216,6 +1199,7 @@ class _$TasksLoadedImpl implements TasksLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TasksInitial value)? initial,
     TResult? Function(TasksLoaded value)? loaded,
+    TResult? Function(TasksReordered value)? reordered,
   }) {
     return loaded?.call(this);
   }
@@ -1225,6 +1209,7 @@ class _$TasksLoadedImpl implements TasksLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TasksInitial value)? initial,
     TResult Function(TasksLoaded value)? loaded,
+    TResult Function(TasksReordered value)? reordered,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1242,5 +1227,176 @@ abstract class TasksLoaded implements TasksState {
   @override
   @JsonKey(ignore: true)
   _$$TasksLoadedImplCopyWith<_$TasksLoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TasksReorderedImplCopyWith<$Res>
+    implements $TasksStateCopyWith<$Res> {
+  factory _$$TasksReorderedImplCopyWith(_$TasksReorderedImpl value,
+          $Res Function(_$TasksReorderedImpl) then) =
+      __$$TasksReorderedImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<Task> tasks, int from, int to});
+}
+
+/// @nodoc
+class __$$TasksReorderedImplCopyWithImpl<$Res>
+    extends _$TasksStateCopyWithImpl<$Res, _$TasksReorderedImpl>
+    implements _$$TasksReorderedImplCopyWith<$Res> {
+  __$$TasksReorderedImplCopyWithImpl(
+      _$TasksReorderedImpl _value, $Res Function(_$TasksReorderedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tasks = null,
+    Object? from = null,
+    Object? to = null,
+  }) {
+    return _then(_$TasksReorderedImpl(
+      null == tasks
+          ? _value._tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+      null == from
+          ? _value.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == to
+          ? _value.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TasksReorderedImpl implements TasksReordered {
+  _$TasksReorderedImpl(final List<Task> tasks, this.from, this.to)
+      : _tasks = tasks;
+
+  final List<Task> _tasks;
+  @override
+  List<Task> get tasks {
+    if (_tasks is EqualUnmodifiableListView) return _tasks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tasks);
+  }
+
+  @override
+  final int from;
+  @override
+  final int to;
+
+  @override
+  String toString() {
+    return 'TasksState.reordered(tasks: $tasks, from: $from, to: $to)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TasksReorderedImpl &&
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
+            (identical(other.from, from) || other.from == from) &&
+            (identical(other.to, to) || other.to == to));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_tasks), from, to);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TasksReorderedImplCopyWith<_$TasksReorderedImpl> get copyWith =>
+      __$$TasksReorderedImplCopyWithImpl<_$TasksReorderedImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<Task> tasks) initial,
+    required TResult Function(List<Task> tasks) loaded,
+    required TResult Function(List<Task> tasks, int from, int to) reordered,
+  }) {
+    return reordered(tasks, from, to);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Task> tasks)? initial,
+    TResult? Function(List<Task> tasks)? loaded,
+    TResult? Function(List<Task> tasks, int from, int to)? reordered,
+  }) {
+    return reordered?.call(tasks, from, to);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Task> tasks)? initial,
+    TResult Function(List<Task> tasks)? loaded,
+    TResult Function(List<Task> tasks, int from, int to)? reordered,
+    required TResult orElse(),
+  }) {
+    if (reordered != null) {
+      return reordered(tasks, from, to);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TasksInitial value) initial,
+    required TResult Function(TasksLoaded value) loaded,
+    required TResult Function(TasksReordered value) reordered,
+  }) {
+    return reordered(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TasksInitial value)? initial,
+    TResult? Function(TasksLoaded value)? loaded,
+    TResult? Function(TasksReordered value)? reordered,
+  }) {
+    return reordered?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TasksInitial value)? initial,
+    TResult Function(TasksLoaded value)? loaded,
+    TResult Function(TasksReordered value)? reordered,
+    required TResult orElse(),
+  }) {
+    if (reordered != null) {
+      return reordered(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TasksReordered implements TasksState {
+  factory TasksReordered(final List<Task> tasks, final int from, final int to) =
+      _$TasksReorderedImpl;
+
+  @override
+  List<Task> get tasks;
+  int get from;
+  int get to;
+  @override
+  @JsonKey(ignore: true)
+  _$$TasksReorderedImplCopyWith<_$TasksReorderedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

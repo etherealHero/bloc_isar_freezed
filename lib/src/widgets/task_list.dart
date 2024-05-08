@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:great_list_view/great_list_view.dart';
@@ -24,7 +22,24 @@ class _TaskListState extends State<TaskList> {
           return const CircularProgressIndicator();
         }
 
-        var list = [for (var task in state.tasks) task.copyWith()];
+        if (state is TasksReordered) {
+          _taskListController.notifyChangedRange(
+            state.from,
+            state.to - state.from,
+            (context, index, data) {
+              if (data.measuring) {
+                return Container(margin: const EdgeInsets.all(5), height: 60);
+              }
+
+              var task = state.tasks.sublist(state.from, state.to)[index];
+              var key = Key(task.id.toString());
+
+              return TaskItem(task, key: key);
+            },
+          );
+        }
+
+        final list = [for (var task in state.tasks) task.copyWith()];
 
         return Scrollbar(
           controller: _taskListScrollController,
@@ -34,60 +49,36 @@ class _TaskListState extends State<TaskList> {
                 sameItem: (a, b) => a.id == b.id,
                 sameContent: (a, b) =>
                     a.dateModifyUtc.compareTo(b.dateModifyUtc) == 0),
-            itemBuilder: itemBuilder,
+            itemBuilder: (BuildContext context, Task item,
+                AnimatedWidgetBuilderData data) {
+              if (data.measuring) {
+                return Container(margin: const EdgeInsets.all(5), height: 60);
+              }
+
+              var key = Key(item.id.toString());
+
+              return TaskItem(item, key: key);
+            },
             listController: _taskListController,
             scrollController: _taskListScrollController,
             addLongPressReorderable: true,
-            reorderModel: TaskListReorderModel(list, (index, dropIndex, cb) {
-              context
-                  .read<TasksBloc>()
-                  .add(TasksEvent.reorderComplete(index, dropIndex, cb));
-            }),
+            reorderModel: AnimatedListReorderModel(
+              onReorderMove: (index, dropIndex) => true,
+              onReorderStart: (index, dx, dy) => true,
+              onReorderComplete: (index, dropIndex, slot) {
+                list.insert(dropIndex, list.removeAt(index));
+
+                context
+                    .read<TasksBloc>()
+                    .add(TasksEvent.reorderComplete(index, dropIndex));
+
+                return true;
+              },
+            ),
           ),
         );
       },
     );
-  }
-}
-
-Widget itemBuilder(
-    BuildContext context, Task item, AnimatedWidgetBuilderData data) {
-  if (data.measuring) {
-    return Container(margin: const EdgeInsets.all(5), height: 60);
-  }
-
-  var key = Key(item.id.toString());
-
-  return TaskItem(data: item, key: key);
-}
-
-class TaskListReorderModel extends AutomaticAnimatedListReorderModel<Task> {
-  TaskListReorderModel(
-    super.list,
-    Function(int index, int dropIndex, void Function(List<Task> range) cb)
-        onCompleteEventCallback,
-  ) : _onCompleteEventCallback = onCompleteEventCallback;
-
-  final Function(int index, int dropIndex, void Function(List<Task> range) cb)?
-      _onCompleteEventCallback;
-
-  @override
-  bool onReorderComplete(int index, int dropIndex, Object? slot) {
-    final from = min(dropIndex, index);
-    final to = max(dropIndex, index) + 1;
-
-    list.insert(dropIndex, list.removeAt(index));
-
-    _onCompleteEventCallback?.call(index, dropIndex, (tasks) {
-      _taskListController.notifyChangedRange(
-        from,
-        to - from,
-        (context, index, data) =>
-            itemBuilder(context, tasks.sublist(from, to)[index], data),
-      );
-    });
-
-    return true;
   }
 }
 
