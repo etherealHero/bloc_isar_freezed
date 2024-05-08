@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:great_list_view/great_list_view.dart';
 
-import '../bloc/tasks_bloc.dart';
-import '../models/task.dart';
+import '../bloc/tasks/tasks_bloc.dart';
+import '../models/tasks/task.dart';
 import '../widgets/task_item.dart';
 
 class TaskList extends StatefulWidget {

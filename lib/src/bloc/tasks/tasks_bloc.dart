@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../repository/repository.dart';
-import '../models/task.dart';
+import '../../repository/repository.dart';
+import '../../models/tasks/task.dart';
 
 part 'tasks_event.dart';
 part 'tasks_state.dart';

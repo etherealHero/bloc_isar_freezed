@@ -2,7 +2,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:isar/isar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '/src/models/task.dart';
+import '../models/groups/group.dart';
+import '../models/tasks/task.dart';
 
 class Repository {
   late Future<Isar> db;
@@ -35,6 +36,34 @@ class Repository {
     var isar = await db;
 
     var isDeleted = isar.writeTxnSync(() => isar.tasks.deleteSync(id));
+
+    return isDeleted;
+  }
+
+  Future<List<Group>> getGroups() async {
+    var isar = await db;
+
+    var groups = isar.groups.where().findAllSync();
+
+    return groups;
+  }
+
+  Future<Id> createGroup(Group group) async => _saveGroup(group);
+
+  Future<Id> updateGroup(Group group) async => _saveGroup(group);
+
+  Future<Id> _saveGroup(Group group) async {
+    var isar = await db;
+
+    Id id = isar.writeTxnSync(() => isar.groups.putSync(group));
+
+    return id;
+  }
+
+  Future<bool> deleteGroup(int id) async {
+    var isar = await db;
+
+    var isDeleted = isar.writeTxnSync(() => isar.groups.deleteSync(id));
 
     return isDeleted;
   }

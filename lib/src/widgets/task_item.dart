@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/tasks_bloc.dart';
-import '../models/task.dart';
+import '../bloc/tasks/tasks_bloc.dart';
+import '../models/tasks/task.dart';
 
 class TaskItem extends StatelessWidget {
   final Task data;
