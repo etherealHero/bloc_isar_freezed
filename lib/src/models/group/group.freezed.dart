@@ -25,6 +25,8 @@ mixin _$Group {
   DateTime get dateCreateUtc => throw _privateConstructorUsedError;
   DateTime get dateModifyUtc => throw _privateConstructorUsedError;
   int get order => throw _privateConstructorUsedError;
+  @ignore
+  bool get isSelected => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +43,8 @@ abstract class $GroupCopyWith<$Res> {
       String title,
       DateTime dateCreateUtc,
       DateTime dateModifyUtc,
-      int order});
+      int order,
+      @ignore bool isSelected});
 }
 
 /// @nodoc
@@ -62,6 +65,7 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
     Object? order = null,
+    Object? isSelected = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -84,6 +88,10 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -100,7 +108,8 @@ abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
       String title,
       DateTime dateCreateUtc,
       DateTime dateModifyUtc,
-      int order});
+      int order,
+      @ignore bool isSelected});
 }
 
 /// @nodoc
@@ -119,6 +128,7 @@ class __$$GroupImplCopyWithImpl<$Res>
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
     Object? order = null,
+    Object? isSelected = null,
   }) {
     return _then(_$GroupImpl(
       id: freezed == id
@@ -141,6 +151,10 @@ class __$$GroupImplCopyWithImpl<$Res>
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -154,7 +168,8 @@ class _$GroupImpl extends _Group {
       required this.title,
       required this.dateCreateUtc,
       required this.dateModifyUtc,
-      required this.order})
+      required this.order,
+      @ignore this.isSelected = false})
       : super._();
 
   factory _$GroupImpl.fromJson(Map<String, dynamic> json) =>
@@ -170,10 +185,14 @@ class _$GroupImpl extends _Group {
   final DateTime dateModifyUtc;
   @override
   final int order;
+  @override
+  @JsonKey()
+  @ignore
+  final bool isSelected;
 
   @override
   String toString() {
-    return 'Group(id: $id, title: $title, dateCreateUtc: $dateCreateUtc, dateModifyUtc: $dateModifyUtc, order: $order)';
+    return 'Group(id: $id, title: $title, dateCreateUtc: $dateCreateUtc, dateModifyUtc: $dateModifyUtc, order: $order, isSelected: $isSelected)';
   }
 
   @override
@@ -187,13 +206,15 @@ class _$GroupImpl extends _Group {
                 other.dateCreateUtc == dateCreateUtc) &&
             (identical(other.dateModifyUtc, dateModifyUtc) ||
                 other.dateModifyUtc == dateModifyUtc) &&
-            (identical(other.order, order) || other.order == order));
+            (identical(other.order, order) || other.order == order) &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, dateCreateUtc, dateModifyUtc, order);
+  int get hashCode => Object.hash(
+      runtimeType, id, title, dateCreateUtc, dateModifyUtc, order, isSelected);
 
   @JsonKey(ignore: true)
   @override
@@ -215,7 +236,8 @@ abstract class _Group extends Group {
       required final String title,
       required final DateTime dateCreateUtc,
       required final DateTime dateModifyUtc,
-      required final int order}) = _$GroupImpl;
+      required final int order,
+      @ignore final bool isSelected}) = _$GroupImpl;
   _Group._() : super._();
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$GroupImpl.fromJson;
@@ -230,6 +252,9 @@ abstract class _Group extends Group {
   DateTime get dateModifyUtc;
   @override
   int get order;
+  @override
+  @ignore
+  bool get isSelected;
   @override
   @JsonKey(ignore: true)
   _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>

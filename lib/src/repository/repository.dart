@@ -1,71 +1,43 @@
 import 'package:path_provider/path_provider.dart';
 import 'package:isar/isar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/groups/group.dart';
-import '../models/tasks/task.dart';
+import '../models/group/group.dart';
+import '../models/task/task.dart';
 
-class Repository {
+const List<CollectionSchema<Object>> schemas = [TaskSchema, GroupSchema];
+const String name = "todo_list";
+
+class Repository<C> {
   late Future<Isar> db;
 
   Repository() {
+    if (!schemas.map((e) => e.name).contains(C.toString())) {
+      throw RepositoryError(
+        "Unsupported collection type '$C'. Try add existing collection "
+        "type on generic where creating instance of Repository: "
+        "${schemas.map((e) => e.name).join(', ')}",
+      );
+    }
+
     db = _openDB();
   }
 
-  Future<List<Task>> getTasks() async {
+  Future<Id> create(C instance) async => _save(instance);
+  Future<Id> update(C instance) async => _save(instance);
+
+  Future<bool> delete(int id) async {
     var isar = await db;
-
-    var tasks = isar.tasks.where().findAllSync();
-
-    return tasks;
+    return isar.writeTxnSync(() => isar.collection<C>().deleteSync(id));
   }
 
-  Future<Id> createTask(Task task) async => _saveTask(task);
-
-  Future<Id> updateTask(Task task) async => _saveTask(task);
-
-  Future<Id> _saveTask(Task task) async {
+  Future<List<C>> getAll() async {
     var isar = await db;
-
-    Id id = isar.writeTxnSync(() => isar.tasks.putSync(task));
-
-    return id;
+    return isar.collection<C>().where().findAllSync();
   }
 
-  Future<bool> deleteTask(int id) async {
+  Future<Id> _save(C instance) async {
     var isar = await db;
-
-    var isDeleted = isar.writeTxnSync(() => isar.tasks.deleteSync(id));
-
-    return isDeleted;
-  }
-
-  Future<List<Group>> getGroups() async {
-    var isar = await db;
-
-    var groups = isar.groups.where().findAllSync();
-
-    return groups;
-  }
-
-  Future<Id> createGroup(Group group) async => _saveGroup(group);
-
-  Future<Id> updateGroup(Group group) async => _saveGroup(group);
-
-  Future<Id> _saveGroup(Group group) async {
-    var isar = await db;
-
-    Id id = isar.writeTxnSync(() => isar.groups.putSync(group));
-
-    return id;
-  }
-
-  Future<bool> deleteGroup(int id) async {
-    var isar = await db;
-
-    var isDeleted = isar.writeTxnSync(() => isar.groups.deleteSync(id));
-
-    return isDeleted;
+    return isar.writeTxnSync(() => isar.collection<C>().putSync(instance));
   }
 
   Future<void> cleanDb() async {
@@ -74,45 +46,25 @@ class Repository {
   }
 
   Future<Isar> _openDB() async {
-    final dir = await getApplicationDocumentsDirectory();
-
     if (Isar.instanceNames.isEmpty) {
       return await Isar.open(
-        [TaskSchema],
-        directory: dir.path,
-        inspector: true,
+        schemas,
+        name: name,
+        directory: (await getApplicationDocumentsDirectory()).path,
       );
     }
 
     return Future.value(Isar.getInstance());
   }
+}
 
-  Future<void> performMigrationIfNeeded(SharedPreferences prefs) async {
-    const int lastVersion = 2;
-    final currentVersion = prefs.getInt('version') ?? lastVersion;
+class RepositoryError extends Error {
+  RepositoryError(this.message);
 
-    switch (currentVersion) {
-      case 1:
-        await _migrateV1ToV2();
-        break;
-      case 2:
-        return;
-      default:
-        throw Exception('Unknown version: $currentVersion');
-    }
+  final String message;
 
-    await prefs.setInt('version', lastVersion);
-  }
-
-  Future<void> _migrateV1ToV2() async {
-    var isar = await db;
-
-    var tasks = isar.tasks.where().findAllSync();
-
-    isar.writeTxnSync(() {
-      for (var task in tasks) {
-        isar.tasks.putSync(task);
-      }
-    });
+  @override
+  String toString() {
+    return 'RepositoryError: $message';
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/tasks/tasks_bloc.dart';
-import '../models/tasks/task.dart';
+import '../models/task/task.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem(this.task, {super.key});

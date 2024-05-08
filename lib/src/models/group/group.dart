@@ -16,6 +16,7 @@ class Group with _$Group {
     required DateTime dateCreateUtc,
     required DateTime dateModifyUtc,
     required int order,
+    @ignore @Default(false) bool isSelected,
   }) = _Group;
 
   @override

@@ -6,7 +6,6 @@ class GroupsEvent with _$GroupsEvent {
   const factory GroupsEvent.add(String title) = _Add;
   const factory GroupsEvent.update(Group group) = _Update;
   const factory GroupsEvent.delete(int groupId) = _Delete;
-  const factory GroupsEvent.reorderComplete(
-          int index, int dropIndex, void Function(List<Group>) cb) =
+  const factory GroupsEvent.reorderComplete(int index, int dropIndex) =
       _ReorderComplete;
 }

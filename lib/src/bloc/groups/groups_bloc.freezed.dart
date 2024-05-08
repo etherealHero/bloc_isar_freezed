@@ -22,9 +22,7 @@ mixin _$GroupsEvent {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Group>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,8 +31,7 @@ mixin _$GroupsEvent {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,8 +40,7 @@ mixin _$GroupsEvent {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,9 +134,7 @@ class _$GetAllImpl implements _GetAll {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Group>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) {
     return getAll();
   }
@@ -152,8 +146,7 @@ class _$GetAllImpl implements _GetAll {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) {
     return getAll?.call();
   }
@@ -165,8 +158,7 @@ class _$GetAllImpl implements _GetAll {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -286,9 +278,7 @@ class _$AddImpl implements _Add {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Group>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) {
     return add(title);
   }
@@ -300,8 +290,7 @@ class _$AddImpl implements _Add {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) {
     return add?.call(title);
   }
@@ -313,8 +302,7 @@ class _$AddImpl implements _Add {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -451,9 +439,7 @@ class _$UpdateImpl implements _Update {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Group>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) {
     return update(group);
   }
@@ -465,8 +451,7 @@ class _$UpdateImpl implements _Update {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) {
     return update?.call(group);
   }
@@ -478,8 +463,7 @@ class _$UpdateImpl implements _Update {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -606,9 +590,7 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Group>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) {
     return delete(groupId);
   }
@@ -620,8 +602,7 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) {
     return delete?.call(groupId);
   }
@@ -633,8 +614,7 @@ class _$DeleteImpl implements _Delete {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -699,7 +679,7 @@ abstract class _$$ReorderCompleteImplCopyWith<$Res> {
           $Res Function(_$ReorderCompleteImpl) then) =
       __$$ReorderCompleteImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int index, int dropIndex, void Function(List<Group>) cb});
+  $Res call({int index, int dropIndex});
 }
 
 /// @nodoc
@@ -715,7 +695,6 @@ class __$$ReorderCompleteImplCopyWithImpl<$Res>
   $Res call({
     Object? index = null,
     Object? dropIndex = null,
-    Object? cb = null,
   }) {
     return _then(_$ReorderCompleteImpl(
       null == index
@@ -726,10 +705,6 @@ class __$$ReorderCompleteImplCopyWithImpl<$Res>
           ? _value.dropIndex
           : dropIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      null == cb
-          ? _value.cb
-          : cb // ignore: cast_nullable_to_non_nullable
-              as void Function(List<Group>),
     ));
   }
 }
@@ -737,18 +712,16 @@ class __$$ReorderCompleteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ReorderCompleteImpl implements _ReorderComplete {
-  const _$ReorderCompleteImpl(this.index, this.dropIndex, this.cb);
+  const _$ReorderCompleteImpl(this.index, this.dropIndex);
 
   @override
   final int index;
   @override
   final int dropIndex;
-  @override
-  final void Function(List<Group>) cb;
 
   @override
   String toString() {
-    return 'GroupsEvent.reorderComplete(index: $index, dropIndex: $dropIndex, cb: $cb)';
+    return 'GroupsEvent.reorderComplete(index: $index, dropIndex: $dropIndex)';
   }
 
   @override
@@ -758,12 +731,11 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
             other is _$ReorderCompleteImpl &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.dropIndex, dropIndex) ||
-                other.dropIndex == dropIndex) &&
-            (identical(other.cb, cb) || other.cb == cb));
+                other.dropIndex == dropIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, index, dropIndex, cb);
+  int get hashCode => Object.hash(runtimeType, index, dropIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -779,11 +751,9 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(
-            int index, int dropIndex, void Function(List<Group>) cb)
-        reorderComplete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
   }) {
-    return reorderComplete(index, dropIndex, cb);
+    return reorderComplete(index, dropIndex);
   }
 
   @override
@@ -793,10 +763,9 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
   }) {
-    return reorderComplete?.call(index, dropIndex, cb);
+    return reorderComplete?.call(index, dropIndex);
   }
 
   @override
@@ -806,12 +775,11 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex, void Function(List<Group>) cb)?
-        reorderComplete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
     required TResult orElse(),
   }) {
     if (reorderComplete != null) {
-      return reorderComplete(index, dropIndex, cb);
+      return reorderComplete(index, dropIndex);
     }
     return orElse();
   }
@@ -858,12 +826,11 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
 }
 
 abstract class _ReorderComplete implements GroupsEvent {
-  const factory _ReorderComplete(final int index, final int dropIndex,
-      final void Function(List<Group>) cb) = _$ReorderCompleteImpl;
+  const factory _ReorderComplete(final int index, final int dropIndex) =
+      _$ReorderCompleteImpl;
 
   int get index;
   int get dropIndex;
-  void Function(List<Group>) get cb;
   @JsonKey(ignore: true)
   _$$ReorderCompleteImplCopyWith<_$ReorderCompleteImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -876,18 +843,21 @@ mixin _$GroupsState {
   TResult when<TResult extends Object?>({
     required TResult Function(List<Group> groups) initial,
     required TResult Function(List<Group> groups) loaded,
+    required TResult Function(List<Group> groups, int from, int to) reordered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<Group> groups)? initial,
     TResult? Function(List<Group> groups)? loaded,
+    TResult? Function(List<Group> groups, int from, int to)? reordered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<Group> groups)? initial,
     TResult Function(List<Group> groups)? loaded,
+    TResult Function(List<Group> groups, int from, int to)? reordered,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -895,18 +865,21 @@ mixin _$GroupsState {
   TResult map<TResult extends Object?>({
     required TResult Function(GroupsInitial value) initial,
     required TResult Function(GroupsLoaded value) loaded,
+    required TResult Function(GroupsReordered value) reordered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GroupsInitial value)? initial,
     TResult? Function(GroupsLoaded value)? loaded,
+    TResult? Function(GroupsReordered value)? reordered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GroupsInitial value)? initial,
     TResult Function(GroupsLoaded value)? loaded,
+    TResult Function(GroupsReordered value)? reordered,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1023,6 +996,7 @@ class _$GroupsInitialImpl implements GroupsInitial {
   TResult when<TResult extends Object?>({
     required TResult Function(List<Group> groups) initial,
     required TResult Function(List<Group> groups) loaded,
+    required TResult Function(List<Group> groups, int from, int to) reordered,
   }) {
     return initial(groups);
   }
@@ -1032,6 +1006,7 @@ class _$GroupsInitialImpl implements GroupsInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<Group> groups)? initial,
     TResult? Function(List<Group> groups)? loaded,
+    TResult? Function(List<Group> groups, int from, int to)? reordered,
   }) {
     return initial?.call(groups);
   }
@@ -1041,6 +1016,7 @@ class _$GroupsInitialImpl implements GroupsInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<Group> groups)? initial,
     TResult Function(List<Group> groups)? loaded,
+    TResult Function(List<Group> groups, int from, int to)? reordered,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1054,6 +1030,7 @@ class _$GroupsInitialImpl implements GroupsInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(GroupsInitial value) initial,
     required TResult Function(GroupsLoaded value) loaded,
+    required TResult Function(GroupsReordered value) reordered,
   }) {
     return initial(this);
   }
@@ -1063,6 +1040,7 @@ class _$GroupsInitialImpl implements GroupsInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GroupsInitial value)? initial,
     TResult? Function(GroupsLoaded value)? loaded,
+    TResult? Function(GroupsReordered value)? reordered,
   }) {
     return initial?.call(this);
   }
@@ -1072,6 +1050,7 @@ class _$GroupsInitialImpl implements GroupsInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GroupsInitial value)? initial,
     TResult Function(GroupsLoaded value)? loaded,
+    TResult Function(GroupsReordered value)? reordered,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1166,6 +1145,7 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function(List<Group> groups) initial,
     required TResult Function(List<Group> groups) loaded,
+    required TResult Function(List<Group> groups, int from, int to) reordered,
   }) {
     return loaded(groups);
   }
@@ -1175,6 +1155,7 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<Group> groups)? initial,
     TResult? Function(List<Group> groups)? loaded,
+    TResult? Function(List<Group> groups, int from, int to)? reordered,
   }) {
     return loaded?.call(groups);
   }
@@ -1184,6 +1165,7 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<Group> groups)? initial,
     TResult Function(List<Group> groups)? loaded,
+    TResult Function(List<Group> groups, int from, int to)? reordered,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1197,6 +1179,7 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(GroupsInitial value) initial,
     required TResult Function(GroupsLoaded value) loaded,
+    required TResult Function(GroupsReordered value) reordered,
   }) {
     return loaded(this);
   }
@@ -1206,6 +1189,7 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GroupsInitial value)? initial,
     TResult? Function(GroupsLoaded value)? loaded,
+    TResult? Function(GroupsReordered value)? reordered,
   }) {
     return loaded?.call(this);
   }
@@ -1215,6 +1199,7 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GroupsInitial value)? initial,
     TResult Function(GroupsLoaded value)? loaded,
+    TResult Function(GroupsReordered value)? reordered,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1232,5 +1217,177 @@ abstract class GroupsLoaded implements GroupsState {
   @override
   @JsonKey(ignore: true)
   _$$GroupsLoadedImplCopyWith<_$GroupsLoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GroupsReorderedImplCopyWith<$Res>
+    implements $GroupsStateCopyWith<$Res> {
+  factory _$$GroupsReorderedImplCopyWith(_$GroupsReorderedImpl value,
+          $Res Function(_$GroupsReorderedImpl) then) =
+      __$$GroupsReorderedImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<Group> groups, int from, int to});
+}
+
+/// @nodoc
+class __$$GroupsReorderedImplCopyWithImpl<$Res>
+    extends _$GroupsStateCopyWithImpl<$Res, _$GroupsReorderedImpl>
+    implements _$$GroupsReorderedImplCopyWith<$Res> {
+  __$$GroupsReorderedImplCopyWithImpl(
+      _$GroupsReorderedImpl _value, $Res Function(_$GroupsReorderedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? groups = null,
+    Object? from = null,
+    Object? to = null,
+  }) {
+    return _then(_$GroupsReorderedImpl(
+      null == groups
+          ? _value._groups
+          : groups // ignore: cast_nullable_to_non_nullable
+              as List<Group>,
+      null == from
+          ? _value.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == to
+          ? _value.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GroupsReorderedImpl implements GroupsReordered {
+  _$GroupsReorderedImpl(final List<Group> groups, this.from, this.to)
+      : _groups = groups;
+
+  final List<Group> _groups;
+  @override
+  List<Group> get groups {
+    if (_groups is EqualUnmodifiableListView) return _groups;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_groups);
+  }
+
+  @override
+  final int from;
+  @override
+  final int to;
+
+  @override
+  String toString() {
+    return 'GroupsState.reordered(groups: $groups, from: $from, to: $to)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GroupsReorderedImpl &&
+            const DeepCollectionEquality().equals(other._groups, _groups) &&
+            (identical(other.from, from) || other.from == from) &&
+            (identical(other.to, to) || other.to == to));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_groups), from, to);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GroupsReorderedImplCopyWith<_$GroupsReorderedImpl> get copyWith =>
+      __$$GroupsReorderedImplCopyWithImpl<_$GroupsReorderedImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<Group> groups) initial,
+    required TResult Function(List<Group> groups) loaded,
+    required TResult Function(List<Group> groups, int from, int to) reordered,
+  }) {
+    return reordered(groups, from, to);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Group> groups)? initial,
+    TResult? Function(List<Group> groups)? loaded,
+    TResult? Function(List<Group> groups, int from, int to)? reordered,
+  }) {
+    return reordered?.call(groups, from, to);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Group> groups)? initial,
+    TResult Function(List<Group> groups)? loaded,
+    TResult Function(List<Group> groups, int from, int to)? reordered,
+    required TResult orElse(),
+  }) {
+    if (reordered != null) {
+      return reordered(groups, from, to);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GroupsInitial value) initial,
+    required TResult Function(GroupsLoaded value) loaded,
+    required TResult Function(GroupsReordered value) reordered,
+  }) {
+    return reordered(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GroupsInitial value)? initial,
+    TResult? Function(GroupsLoaded value)? loaded,
+    TResult? Function(GroupsReordered value)? reordered,
+  }) {
+    return reordered?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GroupsInitial value)? initial,
+    TResult Function(GroupsLoaded value)? loaded,
+    TResult Function(GroupsReordered value)? reordered,
+    required TResult orElse(),
+  }) {
+    if (reordered != null) {
+      return reordered(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GroupsReordered implements GroupsState {
+  factory GroupsReordered(
+          final List<Group> groups, final int from, final int to) =
+      _$GroupsReorderedImpl;
+
+  @override
+  List<Group> get groups;
+  int get from;
+  int get to;
+  @override
+  @JsonKey(ignore: true)
+  _$$GroupsReorderedImplCopyWith<_$GroupsReorderedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

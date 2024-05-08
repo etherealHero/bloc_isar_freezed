@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sandbox/src/widgets/group_list.dart';
 
 import '../bloc/groups/groups_bloc.dart';
 import '../bloc/tasks/tasks_bloc.dart';
@@ -27,8 +28,9 @@ class HomePage extends StatelessWidget {
                     width: 250,
                     decoration: const BoxDecoration(
                         border: Border(right: BorderSide(width: 1))),
+                    child: const GroupList(),
                   ),
-                  Expanded(child: TaskList(key: taskListGkey)),
+                  const Expanded(child: TaskList()),
                 ],
               ),
               floatingActionButton: const HomePageFloatingActionButton(),
@@ -37,19 +39,23 @@ class HomePage extends StatelessWidget {
 }
 
 class HomePageFloatingActionButton extends StatelessWidget {
-  const HomePageFloatingActionButton({
-    super.key,
-  });
+  const HomePageFloatingActionButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        context
-            .read<TasksBloc>()
-            .add(const TasksEvent.add("title", "description"));
-      },
-      child: const Text('Add'),
-    );
+    return Row(children: [
+      const Spacer(),
+      ElevatedButton(
+          onPressed: () => context.read<GroupsBloc>().add(
+                const GroupsEvent.add("title"),
+              ),
+          child: const Text('Add group')),
+      const SizedBox(width: 10),
+      ElevatedButton(
+          onPressed: () => context.read<TasksBloc>().add(
+                const TasksEvent.add("title", "description"),
+              ),
+          child: const Text('Add task')),
+    ]);
   }
 }
