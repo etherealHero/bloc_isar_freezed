@@ -39,6 +39,23 @@ class _GroupListState extends State<GroupList> {
           );
         }
 
+        if (state is GroupsUpdatedSome) {
+          _listController.notifyChangedRange(
+            state.index,
+            1,
+            (context, index, data) {
+              if (data.measuring) {
+                return Container(margin: const EdgeInsets.all(5), height: 60);
+              }
+
+              var itemData = state.groups.sublist(state.index, 1)[index];
+              var key = Key(itemData.id.toString());
+
+              return GroupItem(itemData, key: key);
+            },
+          );
+        }
+
         final list = [for (var group in state.groups) group.copyWith()];
 
         return Scrollbar(

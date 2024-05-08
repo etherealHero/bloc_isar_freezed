@@ -68,25 +68,21 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
 
     await repository.update(updatedGroup);
 
-    // TODO: не работает
-    if (newGroups[index].isSelected != updatedGroup.isSelected &&
-        selectedGroup != null &&
-        selectedGroup!.id != updatedGroup.id) {
+    if (selectedGroup != null && selectedGroup!.id != updatedGroup.id) {
       final indexOfPrevSelectedGroup =
           state.groups.indexWhere((t) => t.id == selectedGroup!.id);
 
-      // newGroups[indexOfPrevSelectedGroup] = newGroups[indexOfPrevSelectedGroup]
-      //     .copyWith(isSelected: false)
-      // ..updateModifyDate();
-      add(GroupsEvent.update(
-          newGroups[indexOfPrevSelectedGroup].copyWith(isSelected: false)));
+      var modifiedPrevSelectedGroup = newGroups[indexOfPrevSelectedGroup]
+          .copyWith(isSelected: false)
+          .updateModifyDate();
+
+      newGroups[indexOfPrevSelectedGroup] = modifiedPrevSelectedGroup;
+
+      emit(GroupsState.updatedSome(newGroups, indexOfPrevSelectedGroup));
     }
 
     selectedGroup = updatedGroup.copyWith();
     newGroups[index] = updatedGroup;
-
-    print(newGroups
-        .map((e) => "${e.id}(${e.isSelected} : ${e.dateModifyUtc}), "));
 
     emit(GroupsState.loaded(newGroups));
   }
@@ -107,6 +103,10 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     var isDeleted = await repository.delete(group.id!);
 
     if (isDeleted) {
+      if (group.id == selectedGroup?.id) {
+        selectedGroup = null;
+      }
+
       var groups = state.groups.where((t) => t.id != event.groupId).toList();
 
       emit(GroupsState.loaded(groups));
