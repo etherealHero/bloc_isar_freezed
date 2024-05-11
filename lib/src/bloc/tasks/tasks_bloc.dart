@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sandbox/src/models/group/group.dart';
 
 import '../../repository/repository.dart';
 import '../../models/task/task.dart';
@@ -19,11 +20,12 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     on<_ReorderComplete>(_onReorderComplete);
   }
 
-  final repository = Repository<Task>();
+  final taskRepository = Repository<Task>();
+  final groupRepository = Repository<Group>();
   int maxOrder = -1;
 
   void _onGetAll(_GetAll event, Emitter<TasksState> emit) async {
-    var tasks = await repository.getAll();
+    var tasks = await taskRepository.getAll();
 
     tasks.sort((a, b) => b.order.compareTo(a.order));
 
@@ -49,8 +51,14 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
         dateCreateUtc: DateTime.now().toUtc(),
         dateModifyUtc: DateTime.now().toUtc(),
         order: maxOrder);
-    var id = await repository.create(newTask);
+    var id = await taskRepository.create(newTask);
+    // TODO: не работает
+    // var groups = await groupRepository.getAll();
+
     newTask = newTask.copyWith(id: id);
+    // newTask.group.value = groups[Random().nextInt(groups.length)];
+
+    // await newTask.group.save();
 
     var newState = state.copyWith(tasks: [newTask, ...state.tasks]);
 
@@ -66,7 +74,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       return;
     }
 
-    await repository.update(updatedTask);
+    await taskRepository.update(updatedTask);
 
     newTasks[index] = updatedTask;
 
@@ -86,7 +94,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       return;
     }
 
-    var isDeleted = await repository.delete(task.id!);
+    var isDeleted = await taskRepository.delete(task.id!);
 
     if (isDeleted) {
       var tasks = state.tasks.where((t) => t.id != event.taskId).toList();
@@ -114,7 +122,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     newTasks.insert(event.dropIndex, newTasks.removeAt(event.index));
     for (var i = from; i < to; i++) {
       newTasks[i] = newTasks[i].copyWith(order: orders[i])..updateModifyDate();
-      await repository.update(newTasks[i]);
+      await taskRepository.update(newTasks[i]);
     }
 
     emit(TasksState.reordered(newTasks, from, to));

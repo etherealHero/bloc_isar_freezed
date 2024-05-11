@@ -19,7 +19,7 @@ class TaskItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Item ${task.id}, order ${task.order}',
+                'id ${task.id}(${task.order}) gId ${task.group.value?.id}(${task.group.value?.order})',
                 style: const TextStyle(fontSize: 16),
               ),
               Row(children: [

@@ -1,16 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
 
+import '../group/group.dart';
+
 part 'task.g.dart';
 part 'task.freezed.dart';
 
 @freezed
 @Collection(ignore: {'copyWith'})
 class Task with _$Task {
-  const Task._();
+  Task._();
 
   @JsonSerializable()
-  const factory Task({
+  factory Task({
     int? id,
     @Default(false) bool isDone,
     @Default(false) bool isArchived,
@@ -25,6 +27,8 @@ class Task with _$Task {
   @override
   // ignore: recursive_getters
   Id? get id => id;
+
+  final group = IsarLink<Group>();
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 

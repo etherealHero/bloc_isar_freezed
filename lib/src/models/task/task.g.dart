@@ -64,7 +64,14 @@ const TaskSchema = CollectionSchema(
   deserializeProp: _taskDeserializeProp,
   idName: r'id',
   indexes: {},
-  links: {},
+  links: {
+    r'group': LinkSchema(
+      id: -4211853724793205032,
+      name: r'group',
+      target: r'Group',
+      single: true,
+    )
+  },
   embeddedSchemas: {},
   getId: _taskGetId,
   getLinks: _taskGetLinks,
@@ -152,10 +159,12 @@ Id _taskGetId(Task object) {
 }
 
 List<IsarLinkBase<dynamic>> _taskGetLinks(Task object) {
-  return [];
+  return [object.group];
 }
 
-void _taskAttach(IsarCollection<dynamic> col, Id id, Task object) {}
+void _taskAttach(IsarCollection<dynamic> col, Id id, Task object) {
+  object.group.attach(col, col.isar.collection<Group>(), r'group', id);
+}
 
 extension TaskQueryWhereSort on QueryBuilder<Task, Task, QWhere> {
   QueryBuilder<Task, Task, QAfterWhere> anyId() {
@@ -748,7 +757,19 @@ extension TaskQueryFilter on QueryBuilder<Task, Task, QFilterCondition> {
 
 extension TaskQueryObject on QueryBuilder<Task, Task, QFilterCondition> {}
 
-extension TaskQueryLinks on QueryBuilder<Task, Task, QFilterCondition> {}
+extension TaskQueryLinks on QueryBuilder<Task, Task, QFilterCondition> {
+  QueryBuilder<Task, Task, QAfterFilterCondition> group(FilterQuery<Group> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'group');
+    });
+  }
+
+  QueryBuilder<Task, Task, QAfterFilterCondition> groupIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'group', 0, true, 0, true);
+    });
+  }
+}
 
 extension TaskQuerySortBy on QueryBuilder<Task, Task, QSortBy> {
   QueryBuilder<Task, Task, QAfterSortBy> sortByDateCreateUtc() {

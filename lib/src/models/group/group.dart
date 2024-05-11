@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
 
+import '../task/task.dart';
+
 part 'group.g.dart';
 part 'group.freezed.dart';
 
@@ -22,6 +24,9 @@ class Group with _$Group {
   @override
   // ignore: recursive_getters
   Id? get id => id;
+
+  @Backlink(to: 'group')
+  final tasks = IsarLink<Task>();
 
   factory Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
 

@@ -200,7 +200,7 @@ class __$$TaskImplCopyWithImpl<$Res>
 
 @JsonSerializable()
 class _$TaskImpl extends _Task {
-  const _$TaskImpl(
+  _$TaskImpl(
       {this.id,
       this.isDone = false,
       this.isArchived = false,
@@ -282,7 +282,7 @@ class _$TaskImpl extends _Task {
 }
 
 abstract class _Task extends Task {
-  const factory _Task(
+  factory _Task(
       {final int? id,
       final bool isDone,
       final bool isArchived,
@@ -292,7 +292,7 @@ abstract class _Task extends Task {
       required final DateTime dateCreateUtc,
       required final DateTime dateModifyUtc,
       required final int order}) = _$TaskImpl;
-  const _Task._() : super._();
+  _Task._() : super._();
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
 
