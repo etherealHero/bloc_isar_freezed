@@ -20,7 +20,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Group {
-  int? get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   DateTime get dateCreateUtc => throw _privateConstructorUsedError;
   DateTime get dateModifyUtc => throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $GroupCopyWith<$Res> {
       _$GroupCopyWithImpl<$Res, Group>;
   @useResult
   $Res call(
-      {int? id,
+      {int id,
       String title,
       DateTime dateCreateUtc,
       DateTime dateModifyUtc,
@@ -57,17 +57,17 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? title = null,
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
     Object? order = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -96,7 +96,7 @@ abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id,
+      {int id,
       String title,
       DateTime dateCreateUtc,
       DateTime dateModifyUtc,
@@ -114,17 +114,17 @@ class __$$GroupImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? title = null,
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
     Object? order = null,
   }) {
     return _then(_$GroupImpl(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -150,7 +150,7 @@ class __$$GroupImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$GroupImpl extends _Group {
   _$GroupImpl(
-      {this.id,
+      {required this.id,
       required this.title,
       required this.dateCreateUtc,
       required this.dateModifyUtc,
@@ -161,7 +161,7 @@ class _$GroupImpl extends _Group {
       _$$GroupImplFromJson(json);
 
   @override
-  final int? id;
+  final int id;
   @override
   final String title;
   @override
@@ -211,7 +211,7 @@ class _$GroupImpl extends _Group {
 
 abstract class _Group extends Group {
   factory _Group(
-      {final int? id,
+      {required final int id,
       required final String title,
       required final DateTime dateCreateUtc,
       required final DateTime dateModifyUtc,
@@ -221,7 +221,7 @@ abstract class _Group extends Group {
   factory _Group.fromJson(Map<String, dynamic> json) = _$GroupImpl.fromJson;
 
   @override
-  int? get id;
+  int get id;
   @override
   String get title;
   @override

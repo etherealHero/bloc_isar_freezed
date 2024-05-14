@@ -6,65 +6,60 @@ import '../bloc/groups/groups_bloc.dart';
 import '../models/group/group.dart';
 import 'group_item.dart';
 
-class GroupList extends StatefulWidget {
-  const GroupList({super.key});
+class GroupsList extends StatefulWidget {
+  const GroupsList({super.key});
 
   @override
-  State<GroupList> createState() => _GroupListState();
+  State<GroupsList> createState() => _GroupsListState();
 }
 
-class _GroupListState extends State<GroupList> {
+class _GroupsListState extends State<GroupsList> {
+  late AnimatedListDiffListDispatcher<Group> _dispatcher;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _dispatcher = AnimatedListDiffListDispatcher<Group>(
+      controller: _listController,
+      itemBuilder: itemBuilder,
+      currentList: <Group>[],
+      comparator: AnimatedListDiffListComparator<Group>(
+          sameItem: (a, b) => a.id == b.id,
+          sameContent: (a, b) =>
+              a.dateModifyUtc.compareTo(b.dateModifyUtc) == 0),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GroupsBloc, GroupsState>(
       builder: (context, state) {
-        if (state is GroupsInitial) {
+        if (state.isFetching) {
           return const CircularProgressIndicator();
         }
 
-        if (state is GroupsReordered) {
-          _listController.notifyChangedRange(
-            state.from,
-            state.to - state.from,
-            (context, index, data) {
-              if (data.measuring) {
-                return Container(margin: const EdgeInsets.all(5), height: 60);
-              }
-
-              var itemData = state.groups.sublist(state.from, state.to)[index];
-              var key = Key(itemData.id.toString());
-
-              return GroupItem(itemData, key: key);
-            },
-          );
-        }
-
-        final list = [for (var group in state.groups) group.copyWith()];
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) => setState(() {
+            _dispatcher.dispatchNewList(
+                [for (var group in state.groups) group.copyWith()]);
+          }),
+        );
 
         return Scrollbar(
           controller: _scrollController,
-          child: AutomaticAnimatedListView<Group>(
-            list: list,
-            comparator: AnimatedListDiffListComparator(
-                sameItem: (a, b) => a.id == b.id,
-                sameContent: (a, b) =>
-                    a.dateModifyUtc.compareTo(b.dateModifyUtc) == 0),
-            itemBuilder: (context, item, data) {
-              if (data.measuring) {
-                return Container(margin: const EdgeInsets.all(5), height: 60);
-              }
-
-              var key = Key(item.id.toString());
-
-              return GroupItem(item, key: key);
-            },
+          child: AnimatedListView(
+            initialItemCount: _dispatcher.currentList.length,
+            itemBuilder: (context, index, data) =>
+                itemBuilder(context, _dispatcher.currentList[index], data),
             listController: _listController,
             scrollController: _scrollController,
             addLongPressReorderable: true,
             reorderModel: AnimatedListReorderModel(
-              onReorderMove: (index, dropIndex) => true,
-              onReorderStart: (index, dx, dy) => true,
-              onReorderComplete: (index, dropIndex, slot) {
+              onReorderMove: (_, __) => true,
+              onReorderStart: (_, __, ___) => true,
+              onReorderComplete: (index, dropIndex, _) {
+                var list = _dispatcher.currentList;
                 list.insert(dropIndex, list.removeAt(index));
 
                 context
@@ -83,3 +78,14 @@ class _GroupListState extends State<GroupList> {
 
 final _scrollController = ScrollController();
 final _listController = AnimatedListController();
+
+Widget itemBuilder(
+    BuildContext context, Group item, AnimatedWidgetBuilderData data) {
+  if (data.measuring) {
+    return Container(margin: const EdgeInsets.all(5), height: 60);
+  }
+
+  var key = Key(item.id.toString());
+
+  return GroupItem(item, key: key);
+}

@@ -2,29 +2,28 @@ import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sandbox/src/models/group/group.dart';
 
 import '../../repository/repository.dart';
-import '../../models/group/group.dart';
 
 part 'groups_event.dart';
 part 'groups_state.dart';
 part 'groups_bloc.freezed.dart';
 
 class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
-  GroupsBloc() : super(GroupsInitial(<Group>[])) {
+  GroupsBloc() : super(GroupsState.initial()) {
     on<_GetAll>(_onGetAll);
     on<_Add>(_onAdd);
     on<_Update>(_onUpdate);
     on<_Delete>(_onDelete);
     on<_ReorderComplete>(_onReorderComplete);
-    on<_Clean>(_onClean);
   }
 
-  final repository = Repository<Group>();
+  final repository = Repository<GroupDTO>();
   int maxOrder = -1;
 
   void _onGetAll(_GetAll event, Emitter<GroupsState> emit) async {
-    var groups = await repository.getAll();
+    var groups = (await repository.getAll()).map((e) => e.toEntity()).toList();
 
     groups.sort((a, b) => b.order.compareTo(a.order));
 
@@ -44,21 +43,27 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
       ++maxOrder;
     }
 
-    var newGroup = Group(
-        title: event.title,
-        dateCreateUtc: DateTime.now().toUtc(),
-        dateModifyUtc: DateTime.now().toUtc(),
-        order: maxOrder);
-    var id = await repository.create(newGroup);
-    newGroup = newGroup.copyWith(id: id);
+    var groupDTO = GroupDTO(
+      title: event.title,
+      dateCreateUtc: DateTime.now().toUtc(),
+      dateModifyUtc: DateTime.now().toUtc(),
+      order: maxOrder,
+    );
 
-    var newState = state.copyWith(groups: [newGroup, ...state.groups]);
+    await repository.create(groupDTO);
+
+    var newState = state.copyWith(
+      groups: [(groupDTO.toEntity()), ...state.groups],
+    );
 
     emit(GroupsState.loaded(newState.groups));
   }
 
   void _onUpdate(_Update event, Emitter<GroupsState> emit) async {
-    Group updatedGroup = event.group.updateModifyDate();
+    Group updatedGroup = event.group.copyWith(
+      dateModifyUtc: DateTime.now().toUtc(),
+    );
+
     final newGroups = [...state.groups];
     final index = state.groups.indexWhere((t) => t.id == updatedGroup.id);
 
@@ -66,7 +71,7 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
       return;
     }
 
-    await repository.update(updatedGroup);
+    await repository.update(updatedGroup.toDTO());
 
     newGroups[index] = updatedGroup;
 
@@ -86,7 +91,7 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
       return;
     }
 
-    var isDeleted = await repository.delete(group.id!);
+    var isDeleted = await repository.delete(group.id);
 
     if (isDeleted) {
       var groups = state.groups.where((t) => t.id != event.groupId).toList();
@@ -112,16 +117,13 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     final to = max(event.dropIndex, event.index) + 1;
 
     newGroups.insert(event.dropIndex, newGroups.removeAt(event.index));
+
     for (var i = from; i < to; i++) {
-      newGroups[i] = newGroups[i].copyWith(order: orders[i])
-        ..updateModifyDate();
-      await repository.update(newGroups[i]);
+      newGroups[i] = newGroups[i]
+          .copyWith(order: orders[i], dateModifyUtc: DateTime.now().toUtc());
+      await repository.update(newGroups[i].toDTO());
     }
 
-    emit(GroupsState.reordered(newGroups, from, to));
-  }
-
-  void _onClean(_Clean event, Emitter<GroupsState> emit) async {
-    await repository.cleanDb();
+    emit(GroupsState.loaded(newGroups));
   }
 }

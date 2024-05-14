@@ -68,7 +68,7 @@ const TaskDTOSchema = CollectionSchema(
     r'group': LinkSchema(
       id: -8147961241362179022,
       name: r'group',
-      target: r'Group',
+      target: r'GroupDTO',
       single: true,
     )
   },
@@ -164,7 +164,7 @@ List<IsarLinkBase<dynamic>> _taskDTOGetLinks(TaskDTO object) {
 
 void _taskDTOAttach(IsarCollection<dynamic> col, Id id, TaskDTO object) {
   object.id = id;
-  object.group.attach(col, col.isar.collection<Group>(), r'group', id);
+  object.group.attach(col, col.isar.collection<GroupDTO>(), r'group', id);
 }
 
 extension TaskDTOQueryWhereSort on QueryBuilder<TaskDTO, TaskDTO, QWhere> {
@@ -771,7 +771,7 @@ extension TaskDTOQueryObject
 extension TaskDTOQueryLinks
     on QueryBuilder<TaskDTO, TaskDTO, QFilterCondition> {
   QueryBuilder<TaskDTO, TaskDTO, QAfterFilterCondition> group(
-      FilterQuery<Group> q) {
+      FilterQuery<GroupDTO> q) {
     return QueryBuilder.apply(this, (query) {
       return query.link(q, r'group');
     });

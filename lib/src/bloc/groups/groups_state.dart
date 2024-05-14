@@ -2,8 +2,12 @@ part of 'groups_bloc.dart';
 
 @freezed
 class GroupsState with _$GroupsState {
-  factory GroupsState.initial(final List<Group> groups) = GroupsInitial;
-  factory GroupsState.loaded(final List<Group> groups) = GroupsLoaded;
-  factory GroupsState.reordered(final List<Group> groups, int from, int to) =
-      GroupsReordered;
+  const GroupsState._();
+  const factory GroupsState(
+    final List<Group> groups,
+    final bool isFetching,
+  ) = _GroupsState;
+
+  factory GroupsState.initial() => const GroupsState(<Group>[], true);
+  factory GroupsState.loaded(List<Group> groups) => GroupsState(groups, false);
 }

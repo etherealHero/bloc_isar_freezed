@@ -65,7 +65,7 @@ class TaskDTO {
     required this.order,
   });
 
-  final group = IsarLink<Group>();
+  final group = IsarLink<GroupDTO>();
 }
 
 extension TaskDTOExtension on TaskDTO {

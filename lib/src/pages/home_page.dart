@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
                     width: 250,
                     decoration: const BoxDecoration(
                         border: Border(right: BorderSide(width: 1))),
-                    child: const GroupList(),
+                    child: const GroupsList(),
                   ),
                   const Expanded(child: TaskList()),
                 ],
@@ -45,11 +45,6 @@ class HomePageFloatingActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       const Spacer(),
-      ElevatedButton(
-          onPressed: () =>
-              context.read<GroupsBloc>().add(const GroupsEvent.clean()),
-          child: const Text('Clean')),
-      const SizedBox(width: 10),
       ElevatedButton(
           onPressed: () =>
               context.read<GroupsBloc>().add(const GroupsEvent.add("title")),

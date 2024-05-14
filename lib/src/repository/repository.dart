@@ -6,7 +6,7 @@ import 'package:isar/isar.dart';
 import '../models/group/group.dart';
 import '../models/task/task.dart';
 
-const List<CollectionSchema<Object>> schemas = [TaskDTOSchema, GroupSchema];
+const List<CollectionSchema<Object>> schemas = [TaskDTOSchema, GroupDTOSchema];
 const String name = "todo_list";
 
 class Repository<C> {
@@ -32,7 +32,7 @@ class Repository<C> {
     var isar = await db;
 
     return isar.writeTxnSync(() {
-      var groups = isar.groups.where().findAllSync();
+      var groups = isar.groupDTOs.where().findAllSync();
 
       task.group.value = groups[Random().nextInt(groups.length)];
 

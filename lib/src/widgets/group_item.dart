@@ -47,7 +47,7 @@ class GroupItem extends StatelessWidget {
                 IconButton.outlined(
                     onPressed: () => context
                         .read<GroupsBloc>()
-                        .add(GroupsEvent.delete(group.id!)),
+                        .add(GroupsEvent.delete(group.id)),
                     icon: const Icon(Icons.close))
               ]),
             ],

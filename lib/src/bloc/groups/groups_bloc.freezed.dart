@@ -23,7 +23,6 @@ mixin _$GroupsEvent {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
-    required TResult Function() clean,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,7 +32,6 @@ mixin _$GroupsEvent {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
-    TResult? Function()? clean,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,7 +41,6 @@ mixin _$GroupsEvent {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
-    TResult Function()? clean,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,7 +51,6 @@ mixin _$GroupsEvent {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
-    required TResult Function(_Clean value) clean,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,7 +60,6 @@ mixin _$GroupsEvent {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
-    TResult? Function(_Clean value)? clean,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -74,7 +69,6 @@ mixin _$GroupsEvent {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
-    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -141,7 +135,6 @@ class _$GetAllImpl implements _GetAll {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
-    required TResult Function() clean,
   }) {
     return getAll();
   }
@@ -154,7 +147,6 @@ class _$GetAllImpl implements _GetAll {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
-    TResult? Function()? clean,
   }) {
     return getAll?.call();
   }
@@ -167,7 +159,6 @@ class _$GetAllImpl implements _GetAll {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
-    TResult Function()? clean,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -184,7 +175,6 @@ class _$GetAllImpl implements _GetAll {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
-    required TResult Function(_Clean value) clean,
   }) {
     return getAll(this);
   }
@@ -197,7 +187,6 @@ class _$GetAllImpl implements _GetAll {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
-    TResult? Function(_Clean value)? clean,
   }) {
     return getAll?.call(this);
   }
@@ -210,7 +199,6 @@ class _$GetAllImpl implements _GetAll {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
-    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -291,7 +279,6 @@ class _$AddImpl implements _Add {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
-    required TResult Function() clean,
   }) {
     return add(title);
   }
@@ -304,7 +291,6 @@ class _$AddImpl implements _Add {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
-    TResult? Function()? clean,
   }) {
     return add?.call(title);
   }
@@ -317,7 +303,6 @@ class _$AddImpl implements _Add {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
-    TResult Function()? clean,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -334,7 +319,6 @@ class _$AddImpl implements _Add {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
-    required TResult Function(_Clean value) clean,
   }) {
     return add(this);
   }
@@ -347,7 +331,6 @@ class _$AddImpl implements _Add {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
-    TResult? Function(_Clean value)? clean,
   }) {
     return add?.call(this);
   }
@@ -360,7 +343,6 @@ class _$AddImpl implements _Add {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
-    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -458,7 +440,6 @@ class _$UpdateImpl implements _Update {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
-    required TResult Function() clean,
   }) {
     return update(group);
   }
@@ -471,7 +452,6 @@ class _$UpdateImpl implements _Update {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
-    TResult? Function()? clean,
   }) {
     return update?.call(group);
   }
@@ -484,7 +464,6 @@ class _$UpdateImpl implements _Update {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
-    TResult Function()? clean,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -501,7 +480,6 @@ class _$UpdateImpl implements _Update {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
-    required TResult Function(_Clean value) clean,
   }) {
     return update(this);
   }
@@ -514,7 +492,6 @@ class _$UpdateImpl implements _Update {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
-    TResult? Function(_Clean value)? clean,
   }) {
     return update?.call(this);
   }
@@ -527,7 +504,6 @@ class _$UpdateImpl implements _Update {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
-    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -615,7 +591,6 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
-    required TResult Function() clean,
   }) {
     return delete(groupId);
   }
@@ -628,7 +603,6 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
-    TResult? Function()? clean,
   }) {
     return delete?.call(groupId);
   }
@@ -641,7 +615,6 @@ class _$DeleteImpl implements _Delete {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
-    TResult Function()? clean,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -658,7 +631,6 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
-    required TResult Function(_Clean value) clean,
   }) {
     return delete(this);
   }
@@ -671,7 +643,6 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
-    TResult? Function(_Clean value)? clean,
   }) {
     return delete?.call(this);
   }
@@ -684,7 +655,6 @@ class _$DeleteImpl implements _Delete {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
-    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -782,7 +752,6 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
-    required TResult Function() clean,
   }) {
     return reorderComplete(index, dropIndex);
   }
@@ -795,7 +764,6 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
-    TResult? Function()? clean,
   }) {
     return reorderComplete?.call(index, dropIndex);
   }
@@ -808,7 +776,6 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
-    TResult Function()? clean,
     required TResult orElse(),
   }) {
     if (reorderComplete != null) {
@@ -825,7 +792,6 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
-    required TResult Function(_Clean value) clean,
   }) {
     return reorderComplete(this);
   }
@@ -838,7 +804,6 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
-    TResult? Function(_Clean value)? clean,
   }) {
     return reorderComplete?.call(this);
   }
@@ -851,7 +816,6 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
-    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) {
     if (reorderComplete != null) {
@@ -873,178 +837,9 @@ abstract class _ReorderComplete implements GroupsEvent {
 }
 
 /// @nodoc
-abstract class _$$CleanImplCopyWith<$Res> {
-  factory _$$CleanImplCopyWith(
-          _$CleanImpl value, $Res Function(_$CleanImpl) then) =
-      __$$CleanImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CleanImplCopyWithImpl<$Res>
-    extends _$GroupsEventCopyWithImpl<$Res, _$CleanImpl>
-    implements _$$CleanImplCopyWith<$Res> {
-  __$$CleanImplCopyWithImpl(
-      _$CleanImpl _value, $Res Function(_$CleanImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$CleanImpl implements _Clean {
-  const _$CleanImpl();
-
-  @override
-  String toString() {
-    return 'GroupsEvent.clean()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CleanImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() getAll,
-    required TResult Function(String title) add,
-    required TResult Function(Group group) update,
-    required TResult Function(int groupId) delete,
-    required TResult Function(int index, int dropIndex) reorderComplete,
-    required TResult Function() clean,
-  }) {
-    return clean();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAll,
-    TResult? Function(String title)? add,
-    TResult? Function(Group group)? update,
-    TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
-    TResult? Function()? clean,
-  }) {
-    return clean?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getAll,
-    TResult Function(String title)? add,
-    TResult Function(Group group)? update,
-    TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex)? reorderComplete,
-    TResult Function()? clean,
-    required TResult orElse(),
-  }) {
-    if (clean != null) {
-      return clean();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetAll value) getAll,
-    required TResult Function(_Add value) add,
-    required TResult Function(_Update value) update,
-    required TResult Function(_Delete value) delete,
-    required TResult Function(_ReorderComplete value) reorderComplete,
-    required TResult Function(_Clean value) clean,
-  }) {
-    return clean(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAll value)? getAll,
-    TResult? Function(_Add value)? add,
-    TResult? Function(_Update value)? update,
-    TResult? Function(_Delete value)? delete,
-    TResult? Function(_ReorderComplete value)? reorderComplete,
-    TResult? Function(_Clean value)? clean,
-  }) {
-    return clean?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetAll value)? getAll,
-    TResult Function(_Add value)? add,
-    TResult Function(_Update value)? update,
-    TResult Function(_Delete value)? delete,
-    TResult Function(_ReorderComplete value)? reorderComplete,
-    TResult Function(_Clean value)? clean,
-    required TResult orElse(),
-  }) {
-    if (clean != null) {
-      return clean(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Clean implements GroupsEvent {
-  const factory _Clean() = _$CleanImpl;
-}
-
-/// @nodoc
 mixin _$GroupsState {
   List<Group> get groups => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(List<Group> groups) initial,
-    required TResult Function(List<Group> groups) loaded,
-    required TResult Function(List<Group> groups, int from, int to) reordered,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Group> groups)? initial,
-    TResult? Function(List<Group> groups)? loaded,
-    TResult? Function(List<Group> groups, int from, int to)? reordered,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Group> groups)? initial,
-    TResult Function(List<Group> groups)? loaded,
-    TResult Function(List<Group> groups, int from, int to)? reordered,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GroupsInitial value) initial,
-    required TResult Function(GroupsLoaded value) loaded,
-    required TResult Function(GroupsReordered value) reordered,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GroupsInitial value)? initial,
-    TResult? Function(GroupsLoaded value)? loaded,
-    TResult? Function(GroupsReordered value)? reordered,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GroupsInitial value)? initial,
-    TResult Function(GroupsLoaded value)? loaded,
-    TResult Function(GroupsReordered value)? reordered,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  bool get isFetching => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GroupsStateCopyWith<GroupsState> get copyWith =>
@@ -1057,7 +852,7 @@ abstract class $GroupsStateCopyWith<$Res> {
           GroupsState value, $Res Function(GroupsState) then) =
       _$GroupsStateCopyWithImpl<$Res, GroupsState>;
   @useResult
-  $Res call({List<Group> groups});
+  $Res call({List<Group> groups, bool isFetching});
 }
 
 /// @nodoc
@@ -1074,53 +869,65 @@ class _$GroupsStateCopyWithImpl<$Res, $Val extends GroupsState>
   @override
   $Res call({
     Object? groups = null,
+    Object? isFetching = null,
   }) {
     return _then(_value.copyWith(
       groups: null == groups
           ? _value.groups
           : groups // ignore: cast_nullable_to_non_nullable
               as List<Group>,
+      isFetching: null == isFetching
+          ? _value.isFetching
+          : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$GroupsInitialImplCopyWith<$Res>
+abstract class _$$GroupsStateImplCopyWith<$Res>
     implements $GroupsStateCopyWith<$Res> {
-  factory _$$GroupsInitialImplCopyWith(
-          _$GroupsInitialImpl value, $Res Function(_$GroupsInitialImpl) then) =
-      __$$GroupsInitialImplCopyWithImpl<$Res>;
+  factory _$$GroupsStateImplCopyWith(
+          _$GroupsStateImpl value, $Res Function(_$GroupsStateImpl) then) =
+      __$$GroupsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Group> groups});
+  $Res call({List<Group> groups, bool isFetching});
 }
 
 /// @nodoc
-class __$$GroupsInitialImplCopyWithImpl<$Res>
-    extends _$GroupsStateCopyWithImpl<$Res, _$GroupsInitialImpl>
-    implements _$$GroupsInitialImplCopyWith<$Res> {
-  __$$GroupsInitialImplCopyWithImpl(
-      _$GroupsInitialImpl _value, $Res Function(_$GroupsInitialImpl) _then)
+class __$$GroupsStateImplCopyWithImpl<$Res>
+    extends _$GroupsStateCopyWithImpl<$Res, _$GroupsStateImpl>
+    implements _$$GroupsStateImplCopyWith<$Res> {
+  __$$GroupsStateImplCopyWithImpl(
+      _$GroupsStateImpl _value, $Res Function(_$GroupsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? groups = null,
+    Object? isFetching = null,
   }) {
-    return _then(_$GroupsInitialImpl(
+    return _then(_$GroupsStateImpl(
       null == groups
           ? _value._groups
           : groups // ignore: cast_nullable_to_non_nullable
               as List<Group>,
+      null == isFetching
+          ? _value.isFetching
+          : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$GroupsInitialImpl implements GroupsInitial {
-  _$GroupsInitialImpl(final List<Group> groups) : _groups = groups;
+class _$GroupsStateImpl extends _GroupsState {
+  const _$GroupsStateImpl(final List<Group> groups, this.isFetching)
+      : _groups = groups,
+        super._();
 
   final List<Group> _groups;
   @override
@@ -1131,425 +938,45 @@ class _$GroupsInitialImpl implements GroupsInitial {
   }
 
   @override
+  final bool isFetching;
+
+  @override
   String toString() {
-    return 'GroupsState.initial(groups: $groups)';
+    return 'GroupsState(groups: $groups, isFetching: $isFetching)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GroupsInitialImpl &&
-            const DeepCollectionEquality().equals(other._groups, _groups));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_groups));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GroupsInitialImplCopyWith<_$GroupsInitialImpl> get copyWith =>
-      __$$GroupsInitialImplCopyWithImpl<_$GroupsInitialImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(List<Group> groups) initial,
-    required TResult Function(List<Group> groups) loaded,
-    required TResult Function(List<Group> groups, int from, int to) reordered,
-  }) {
-    return initial(groups);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Group> groups)? initial,
-    TResult? Function(List<Group> groups)? loaded,
-    TResult? Function(List<Group> groups, int from, int to)? reordered,
-  }) {
-    return initial?.call(groups);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Group> groups)? initial,
-    TResult Function(List<Group> groups)? loaded,
-    TResult Function(List<Group> groups, int from, int to)? reordered,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(groups);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GroupsInitial value) initial,
-    required TResult Function(GroupsLoaded value) loaded,
-    required TResult Function(GroupsReordered value) reordered,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GroupsInitial value)? initial,
-    TResult? Function(GroupsLoaded value)? loaded,
-    TResult? Function(GroupsReordered value)? reordered,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GroupsInitial value)? initial,
-    TResult Function(GroupsLoaded value)? loaded,
-    TResult Function(GroupsReordered value)? reordered,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GroupsInitial implements GroupsState {
-  factory GroupsInitial(final List<Group> groups) = _$GroupsInitialImpl;
-
-  @override
-  List<Group> get groups;
-  @override
-  @JsonKey(ignore: true)
-  _$$GroupsInitialImplCopyWith<_$GroupsInitialImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$GroupsLoadedImplCopyWith<$Res>
-    implements $GroupsStateCopyWith<$Res> {
-  factory _$$GroupsLoadedImplCopyWith(
-          _$GroupsLoadedImpl value, $Res Function(_$GroupsLoadedImpl) then) =
-      __$$GroupsLoadedImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<Group> groups});
-}
-
-/// @nodoc
-class __$$GroupsLoadedImplCopyWithImpl<$Res>
-    extends _$GroupsStateCopyWithImpl<$Res, _$GroupsLoadedImpl>
-    implements _$$GroupsLoadedImplCopyWith<$Res> {
-  __$$GroupsLoadedImplCopyWithImpl(
-      _$GroupsLoadedImpl _value, $Res Function(_$GroupsLoadedImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? groups = null,
-  }) {
-    return _then(_$GroupsLoadedImpl(
-      null == groups
-          ? _value._groups
-          : groups // ignore: cast_nullable_to_non_nullable
-              as List<Group>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GroupsLoadedImpl implements GroupsLoaded {
-  _$GroupsLoadedImpl(final List<Group> groups) : _groups = groups;
-
-  final List<Group> _groups;
-  @override
-  List<Group> get groups {
-    if (_groups is EqualUnmodifiableListView) return _groups;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_groups);
-  }
-
-  @override
-  String toString() {
-    return 'GroupsState.loaded(groups: $groups)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GroupsLoadedImpl &&
-            const DeepCollectionEquality().equals(other._groups, _groups));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_groups));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GroupsLoadedImplCopyWith<_$GroupsLoadedImpl> get copyWith =>
-      __$$GroupsLoadedImplCopyWithImpl<_$GroupsLoadedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(List<Group> groups) initial,
-    required TResult Function(List<Group> groups) loaded,
-    required TResult Function(List<Group> groups, int from, int to) reordered,
-  }) {
-    return loaded(groups);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Group> groups)? initial,
-    TResult? Function(List<Group> groups)? loaded,
-    TResult? Function(List<Group> groups, int from, int to)? reordered,
-  }) {
-    return loaded?.call(groups);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Group> groups)? initial,
-    TResult Function(List<Group> groups)? loaded,
-    TResult Function(List<Group> groups, int from, int to)? reordered,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(groups);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GroupsInitial value) initial,
-    required TResult Function(GroupsLoaded value) loaded,
-    required TResult Function(GroupsReordered value) reordered,
-  }) {
-    return loaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GroupsInitial value)? initial,
-    TResult? Function(GroupsLoaded value)? loaded,
-    TResult? Function(GroupsReordered value)? reordered,
-  }) {
-    return loaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GroupsInitial value)? initial,
-    TResult Function(GroupsLoaded value)? loaded,
-    TResult Function(GroupsReordered value)? reordered,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GroupsLoaded implements GroupsState {
-  factory GroupsLoaded(final List<Group> groups) = _$GroupsLoadedImpl;
-
-  @override
-  List<Group> get groups;
-  @override
-  @JsonKey(ignore: true)
-  _$$GroupsLoadedImplCopyWith<_$GroupsLoadedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$GroupsReorderedImplCopyWith<$Res>
-    implements $GroupsStateCopyWith<$Res> {
-  factory _$$GroupsReorderedImplCopyWith(_$GroupsReorderedImpl value,
-          $Res Function(_$GroupsReorderedImpl) then) =
-      __$$GroupsReorderedImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<Group> groups, int from, int to});
-}
-
-/// @nodoc
-class __$$GroupsReorderedImplCopyWithImpl<$Res>
-    extends _$GroupsStateCopyWithImpl<$Res, _$GroupsReorderedImpl>
-    implements _$$GroupsReorderedImplCopyWith<$Res> {
-  __$$GroupsReorderedImplCopyWithImpl(
-      _$GroupsReorderedImpl _value, $Res Function(_$GroupsReorderedImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? groups = null,
-    Object? from = null,
-    Object? to = null,
-  }) {
-    return _then(_$GroupsReorderedImpl(
-      null == groups
-          ? _value._groups
-          : groups // ignore: cast_nullable_to_non_nullable
-              as List<Group>,
-      null == from
-          ? _value.from
-          : from // ignore: cast_nullable_to_non_nullable
-              as int,
-      null == to
-          ? _value.to
-          : to // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GroupsReorderedImpl implements GroupsReordered {
-  _$GroupsReorderedImpl(final List<Group> groups, this.from, this.to)
-      : _groups = groups;
-
-  final List<Group> _groups;
-  @override
-  List<Group> get groups {
-    if (_groups is EqualUnmodifiableListView) return _groups;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_groups);
-  }
-
-  @override
-  final int from;
-  @override
-  final int to;
-
-  @override
-  String toString() {
-    return 'GroupsState.reordered(groups: $groups, from: $from, to: $to)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GroupsReorderedImpl &&
+            other is _$GroupsStateImpl &&
             const DeepCollectionEquality().equals(other._groups, _groups) &&
-            (identical(other.from, from) || other.from == from) &&
-            (identical(other.to, to) || other.to == to));
+            (identical(other.isFetching, isFetching) ||
+                other.isFetching == isFetching));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_groups), from, to);
+      runtimeType, const DeepCollectionEquality().hash(_groups), isFetching);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GroupsReorderedImplCopyWith<_$GroupsReorderedImpl> get copyWith =>
-      __$$GroupsReorderedImplCopyWithImpl<_$GroupsReorderedImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(List<Group> groups) initial,
-    required TResult Function(List<Group> groups) loaded,
-    required TResult Function(List<Group> groups, int from, int to) reordered,
-  }) {
-    return reordered(groups, from, to);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Group> groups)? initial,
-    TResult? Function(List<Group> groups)? loaded,
-    TResult? Function(List<Group> groups, int from, int to)? reordered,
-  }) {
-    return reordered?.call(groups, from, to);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Group> groups)? initial,
-    TResult Function(List<Group> groups)? loaded,
-    TResult Function(List<Group> groups, int from, int to)? reordered,
-    required TResult orElse(),
-  }) {
-    if (reordered != null) {
-      return reordered(groups, from, to);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GroupsInitial value) initial,
-    required TResult Function(GroupsLoaded value) loaded,
-    required TResult Function(GroupsReordered value) reordered,
-  }) {
-    return reordered(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GroupsInitial value)? initial,
-    TResult? Function(GroupsLoaded value)? loaded,
-    TResult? Function(GroupsReordered value)? reordered,
-  }) {
-    return reordered?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GroupsInitial value)? initial,
-    TResult Function(GroupsLoaded value)? loaded,
-    TResult Function(GroupsReordered value)? reordered,
-    required TResult orElse(),
-  }) {
-    if (reordered != null) {
-      return reordered(this);
-    }
-    return orElse();
-  }
+  _$$GroupsStateImplCopyWith<_$GroupsStateImpl> get copyWith =>
+      __$$GroupsStateImplCopyWithImpl<_$GroupsStateImpl>(this, _$identity);
 }
 
-abstract class GroupsReordered implements GroupsState {
-  factory GroupsReordered(
-          final List<Group> groups, final int from, final int to) =
-      _$GroupsReorderedImpl;
+abstract class _GroupsState extends GroupsState {
+  const factory _GroupsState(final List<Group> groups, final bool isFetching) =
+      _$GroupsStateImpl;
+  const _GroupsState._() : super._();
 
   @override
   List<Group> get groups;
-  int get from;
-  int get to;
+  @override
+  bool get isFetching;
   @override
   @JsonKey(ignore: true)
-  _$$GroupsReorderedImplCopyWith<_$GroupsReorderedImpl> get copyWith =>
+  _$$GroupsStateImplCopyWith<_$GroupsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
