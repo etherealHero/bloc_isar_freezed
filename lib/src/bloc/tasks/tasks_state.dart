@@ -2,8 +2,12 @@ part of 'tasks_bloc.dart';
 
 @freezed
 class TasksState with _$TasksState {
-  factory TasksState.initial(final List<Task> tasks) = TasksInitial;
-  factory TasksState.loaded(final List<Task> tasks) = TasksLoaded;
-  factory TasksState.reordered(final List<Task> tasks, int from, int to) =
-      TasksReordered;
+  const TasksState._();
+  const factory TasksState(
+    final List<Task> tasks,
+    final bool isFetching,
+  ) = _TasksState;
+
+  factory TasksState.initial() => const TasksState(<Task>[], true);
+  factory TasksState.loaded(List<Task> tasks) => TasksState(tasks, false);
 }

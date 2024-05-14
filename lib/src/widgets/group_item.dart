@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sandbox/src/app/app.dart';
+import 'package:sandbox/src/bloc/tasks/tasks_bloc.dart';
 
 import '../bloc/groups/groups_bloc.dart';
 import '../models/group/group.dart';
@@ -27,8 +28,16 @@ class GroupItem extends StatelessWidget {
                 ValueListenableBuilder(
                   valueListenable: App.selectedGroup(context),
                   builder: (context, groupdId, child) => IconButton.outlined(
-                    onPressed: () => App.selectedGroup(context).value =
-                        groupdId == group.id ? null : group.id,
+                    onPressed: () {
+                      var patchedSelectedGroup =
+                          groupdId == group.id ? null : group.id;
+
+                      App.selectedGroup(context).value = patchedSelectedGroup;
+
+                      context
+                          .read<TasksBloc>()
+                          .add(TasksEvent.filterByGroup(patchedSelectedGroup));
+                    },
                     icon: Icon(groupdId == group.id
                         ? Icons.pin_drop
                         : Icons.pin_drop_outlined),

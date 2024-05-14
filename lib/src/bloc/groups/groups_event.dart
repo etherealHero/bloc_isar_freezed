@@ -8,4 +8,5 @@ class GroupsEvent with _$GroupsEvent {
   const factory GroupsEvent.delete(int groupId) = _Delete;
   const factory GroupsEvent.reorderComplete(int index, int dropIndex) =
       _ReorderComplete;
+  const factory GroupsEvent.clean() = _Clean;
 }

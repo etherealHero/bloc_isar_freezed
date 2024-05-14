@@ -6,6 +6,7 @@ class TasksEvent with _$TasksEvent {
   const factory TasksEvent.add(String title, String description) = _Add;
   const factory TasksEvent.update(Task task) = _Update;
   const factory TasksEvent.delete(int taskId) = _Delete;
+  const factory TasksEvent.filterByGroup(int? groupId) = _FilterByGroup;
   const factory TasksEvent.reorderComplete(int index, int dropIndex) =
       _ReorderComplete;
 }

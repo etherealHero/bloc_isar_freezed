@@ -17,6 +17,7 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     on<_Update>(_onUpdate);
     on<_Delete>(_onDelete);
     on<_ReorderComplete>(_onReorderComplete);
+    on<_Clean>(_onClean);
   }
 
   final repository = Repository<Group>();
@@ -118,5 +119,9 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     }
 
     emit(GroupsState.reordered(newGroups, from, to));
+  }
+
+  void _onClean(_Clean event, Emitter<GroupsState> emit) async {
+    await repository.cleanDb();
   }
 }

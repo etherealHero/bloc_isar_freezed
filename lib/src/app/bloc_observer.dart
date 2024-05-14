@@ -18,6 +18,6 @@ class AppBlocObserver extends BlocObserver {
   ) {
     super.onTransition(bloc, transition);
     // ignore: avoid_print
-    // print(transition.event);
+    print(transition.event);
   }
 }

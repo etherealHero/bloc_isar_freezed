@@ -46,15 +46,19 @@ class HomePageFloatingActionButton extends StatelessWidget {
     return Row(children: [
       const Spacer(),
       ElevatedButton(
-          onPressed: () => context.read<GroupsBloc>().add(
-                const GroupsEvent.add("title"),
-              ),
+          onPressed: () =>
+              context.read<GroupsBloc>().add(const GroupsEvent.clean()),
+          child: const Text('Clean')),
+      const SizedBox(width: 10),
+      ElevatedButton(
+          onPressed: () =>
+              context.read<GroupsBloc>().add(const GroupsEvent.add("title")),
           child: const Text('Add group')),
       const SizedBox(width: 10),
       ElevatedButton(
-          onPressed: () => context.read<TasksBloc>().add(
-                const TasksEvent.add("title", "description"),
-              ),
+          onPressed: () => context
+              .read<TasksBloc>()
+              .add(const TasksEvent.add("title", "description")),
           child: const Text('Add task')),
     ]);
   }

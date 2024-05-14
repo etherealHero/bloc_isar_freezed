@@ -23,6 +23,7 @@ mixin _$GroupsEvent {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function() clean,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$GroupsEvent {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function()? clean,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$GroupsEvent {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function()? clean,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,7 @@ mixin _$GroupsEvent {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Clean value) clean,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +64,7 @@ mixin _$GroupsEvent {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Clean value)? clean,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$GroupsEvent {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -135,6 +141,7 @@ class _$GetAllImpl implements _GetAll {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function() clean,
   }) {
     return getAll();
   }
@@ -147,6 +154,7 @@ class _$GetAllImpl implements _GetAll {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function()? clean,
   }) {
     return getAll?.call();
   }
@@ -159,6 +167,7 @@ class _$GetAllImpl implements _GetAll {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function()? clean,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -175,6 +184,7 @@ class _$GetAllImpl implements _GetAll {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Clean value) clean,
   }) {
     return getAll(this);
   }
@@ -187,6 +197,7 @@ class _$GetAllImpl implements _GetAll {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Clean value)? clean,
   }) {
     return getAll?.call(this);
   }
@@ -199,6 +210,7 @@ class _$GetAllImpl implements _GetAll {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -279,6 +291,7 @@ class _$AddImpl implements _Add {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function() clean,
   }) {
     return add(title);
   }
@@ -291,6 +304,7 @@ class _$AddImpl implements _Add {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function()? clean,
   }) {
     return add?.call(title);
   }
@@ -303,6 +317,7 @@ class _$AddImpl implements _Add {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function()? clean,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -319,6 +334,7 @@ class _$AddImpl implements _Add {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Clean value) clean,
   }) {
     return add(this);
   }
@@ -331,6 +347,7 @@ class _$AddImpl implements _Add {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Clean value)? clean,
   }) {
     return add?.call(this);
   }
@@ -343,6 +360,7 @@ class _$AddImpl implements _Add {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -440,6 +458,7 @@ class _$UpdateImpl implements _Update {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function() clean,
   }) {
     return update(group);
   }
@@ -452,6 +471,7 @@ class _$UpdateImpl implements _Update {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function()? clean,
   }) {
     return update?.call(group);
   }
@@ -464,6 +484,7 @@ class _$UpdateImpl implements _Update {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function()? clean,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -480,6 +501,7 @@ class _$UpdateImpl implements _Update {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Clean value) clean,
   }) {
     return update(this);
   }
@@ -492,6 +514,7 @@ class _$UpdateImpl implements _Update {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Clean value)? clean,
   }) {
     return update?.call(this);
   }
@@ -504,6 +527,7 @@ class _$UpdateImpl implements _Update {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -591,6 +615,7 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function() clean,
   }) {
     return delete(groupId);
   }
@@ -603,6 +628,7 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function()? clean,
   }) {
     return delete?.call(groupId);
   }
@@ -615,6 +641,7 @@ class _$DeleteImpl implements _Delete {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function()? clean,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -631,6 +658,7 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Clean value) clean,
   }) {
     return delete(this);
   }
@@ -643,6 +671,7 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Clean value)? clean,
   }) {
     return delete?.call(this);
   }
@@ -655,6 +684,7 @@ class _$DeleteImpl implements _Delete {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -752,6 +782,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function() clean,
   }) {
     return reorderComplete(index, dropIndex);
   }
@@ -764,6 +795,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function()? clean,
   }) {
     return reorderComplete?.call(index, dropIndex);
   }
@@ -776,6 +808,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function()? clean,
     required TResult orElse(),
   }) {
     if (reorderComplete != null) {
@@ -792,6 +825,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Clean value) clean,
   }) {
     return reorderComplete(this);
   }
@@ -804,6 +838,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Clean value)? clean,
   }) {
     return reorderComplete?.call(this);
   }
@@ -816,6 +851,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Clean value)? clean,
     required TResult orElse(),
   }) {
     if (reorderComplete != null) {
@@ -834,6 +870,132 @@ abstract class _ReorderComplete implements GroupsEvent {
   @JsonKey(ignore: true)
   _$$ReorderCompleteImplCopyWith<_$ReorderCompleteImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CleanImplCopyWith<$Res> {
+  factory _$$CleanImplCopyWith(
+          _$CleanImpl value, $Res Function(_$CleanImpl) then) =
+      __$$CleanImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CleanImplCopyWithImpl<$Res>
+    extends _$GroupsEventCopyWithImpl<$Res, _$CleanImpl>
+    implements _$$CleanImplCopyWith<$Res> {
+  __$$CleanImplCopyWithImpl(
+      _$CleanImpl _value, $Res Function(_$CleanImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CleanImpl implements _Clean {
+  const _$CleanImpl();
+
+  @override
+  String toString() {
+    return 'GroupsEvent.clean()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$CleanImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAll,
+    required TResult Function(String title) add,
+    required TResult Function(Group group) update,
+    required TResult Function(int groupId) delete,
+    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function() clean,
+  }) {
+    return clean();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAll,
+    TResult? Function(String title)? add,
+    TResult? Function(Group group)? update,
+    TResult? Function(int groupId)? delete,
+    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function()? clean,
+  }) {
+    return clean?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAll,
+    TResult Function(String title)? add,
+    TResult Function(Group group)? update,
+    TResult Function(int groupId)? delete,
+    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function()? clean,
+    required TResult orElse(),
+  }) {
+    if (clean != null) {
+      return clean();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAll value) getAll,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Update value) update,
+    required TResult Function(_Delete value) delete,
+    required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Clean value) clean,
+  }) {
+    return clean(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAll value)? getAll,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_Delete value)? delete,
+    TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Clean value)? clean,
+  }) {
+    return clean?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAll value)? getAll,
+    TResult Function(_Add value)? add,
+    TResult Function(_Update value)? update,
+    TResult Function(_Delete value)? delete,
+    TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Clean value)? clean,
+    required TResult orElse(),
+  }) {
+    if (clean != null) {
+      return clean(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Clean implements GroupsEvent {
+  const factory _Clean() = _$CleanImpl;
 }
 
 /// @nodoc

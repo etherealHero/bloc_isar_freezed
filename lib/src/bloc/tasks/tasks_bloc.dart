@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sandbox/src/models/group/group.dart';
 
 import '../../repository/repository.dart';
 import '../../models/task/task.dart';
@@ -11,23 +10,21 @@ part 'tasks_event.dart';
 part 'tasks_state.dart';
 part 'tasks_bloc.freezed.dart';
 
-// TODO: после reorder event появляются новые сущности
 class TasksBloc extends Bloc<TasksEvent, TasksState> {
-  TasksBloc() : super(TasksInitial(<Task>[])) {
+  TasksBloc() : super(TasksState.initial()) {
     on<_GetAll>(_onGetAll);
     on<_Add>(_onAdd);
     on<_Update>(_onUpdate);
     on<_Delete>(_onDelete);
     on<_ReorderComplete>(_onReorderComplete);
+    on<_FilterByGroup>(_onFilterByGroup);
   }
 
-  final taskRepository = Repository<TaskDTO>();
-  final groupRepository = Repository<Group>();
+  final repository = Repository<TaskDTO>();
   int maxOrder = -1;
 
   void _onGetAll(_GetAll event, Emitter<TasksState> emit) async {
-    var tasks =
-        (await taskRepository.getAll()).map((e) => e.toEntity()).toList();
+    var tasks = (await repository.getAll()).map((e) => e.toEntity()).toList();
 
     tasks.sort((a, b) => b.order.compareTo(a.order));
 
@@ -58,7 +55,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       order: maxOrder,
     );
 
-    await taskRepository.createTask(taskDTO);
+    await repository.createTask(taskDTO);
 
     var newState = state.copyWith(
       tasks: [(taskDTO.toEntity()), ...state.tasks],
@@ -79,7 +76,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       return;
     }
 
-    await taskRepository.update(updatedTask.toDTO());
+    await repository.update(updatedTask.toDTO());
 
     newTasks[index] = updatedTask;
 
@@ -99,7 +96,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       return;
     }
 
-    var isDeleted = await taskRepository.delete(task.id);
+    var isDeleted = await repository.delete(task.id);
 
     if (isDeleted) {
       var tasks = state.tasks.where((t) => t.id != event.taskId).toList();
@@ -125,12 +122,35 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     final to = max(event.dropIndex, event.index) + 1;
 
     newTasks.insert(event.dropIndex, newTasks.removeAt(event.index));
+
     for (var i = from; i < to; i++) {
       newTasks[i] = newTasks[i]
           .copyWith(order: orders[i], dateModifyUtc: DateTime.now().toUtc());
-      await taskRepository.update(newTasks[i].toDTO());
+      await repository.update(newTasks[i].toDTO());
     }
 
-    emit(TasksState.reordered(newTasks, from, to));
+    emit(TasksState.loaded(newTasks));
+  }
+
+  void _onFilterByGroup(
+    _FilterByGroup event,
+    Emitter<TasksState> emit,
+  ) async {
+    var tasks = (await repository.getAll()).map((e) => e.toEntity()).toList();
+
+    tasks.sort((a, b) => b.order.compareTo(a.order));
+
+    if (tasks.isNotEmpty) {
+      maxOrder = tasks
+          .reduce((curr, next) => curr.order > next.order ? curr : next)
+          .order;
+    }
+
+    if (event.groupId != null) {
+      var newTasks = tasks.where((e) => e.groupId == event.groupId).toList();
+      emit(TasksState.loaded(newTasks));
+    } else {
+      emit(TasksState.loaded(tasks));
+    }
   }
 }

@@ -14,57 +14,52 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
+  late AnimatedListDiffListDispatcher<Task> _dispatcher;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _dispatcher = AnimatedListDiffListDispatcher<Task>(
+      controller: _listController,
+      itemBuilder: itemBuilder,
+      currentList: <Task>[],
+      comparator: AnimatedListDiffListComparator<Task>(
+          sameItem: (a, b) => a.id == b.id,
+          sameContent: (a, b) =>
+              a.dateModifyUtc.compareTo(b.dateModifyUtc) == 0),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
-        if (state is TasksInitial) {
+        if (state.isFetching) {
           return const CircularProgressIndicator();
         }
 
-        if (state is TasksReordered) {
-          _listController.notifyChangedRange(
-            state.from,
-            state.to - state.from,
-            (context, index, data) {
-              if (data.measuring) {
-                return Container(margin: const EdgeInsets.all(5), height: 60);
-              }
-
-              var itemData = state.tasks.sublist(state.from, state.to)[index];
-              var key = Key(itemData.id.toString());
-
-              return TaskItem(itemData, key: key);
-            },
-          );
-        }
-
-        final list = [for (var task in state.tasks) task.copyWith()];
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) => setState(() {
+            _dispatcher.dispatchNewList(
+                [for (var task in state.tasks) task.copyWith()]);
+          }),
+        );
 
         return Scrollbar(
           controller: _scrollController,
-          child: AutomaticAnimatedListView<Task>(
-            list: list,
-            comparator: AnimatedListDiffListComparator<Task>(
-                sameItem: (a, b) => a.id == b.id,
-                sameContent: (a, b) =>
-                    a.dateModifyUtc.compareTo(b.dateModifyUtc) == 0),
-            itemBuilder: (context, item, data) {
-              if (data.measuring) {
-                return Container(margin: const EdgeInsets.all(5), height: 60);
-              }
-
-              var key = Key(item.id.toString());
-
-              return TaskItem(item, key: key);
-            },
+          child: AnimatedListView(
+            initialItemCount: _dispatcher.currentList.length,
+            itemBuilder: (context, index, data) =>
+                itemBuilder(context, _dispatcher.currentList[index], data),
             listController: _listController,
             scrollController: _scrollController,
             addLongPressReorderable: true,
             reorderModel: AnimatedListReorderModel(
-              onReorderMove: (index, dropIndex) => true,
-              onReorderStart: (index, dx, dy) => true,
-              onReorderComplete: (index, dropIndex, slot) {
+              onReorderMove: (_, __) => true,
+              onReorderStart: (_, __, ___) => true,
+              onReorderComplete: (index, dropIndex, _) {
+                var list = _dispatcher.currentList;
                 list.insert(dropIndex, list.removeAt(index));
 
                 context
@@ -83,3 +78,14 @@ class _TaskListState extends State<TaskList> {
 
 final _scrollController = ScrollController();
 final _listController = AnimatedListController();
+
+Widget itemBuilder(
+    BuildContext context, Task item, AnimatedWidgetBuilderData data) {
+  if (data.measuring) {
+    return Container(margin: const EdgeInsets.all(5), height: 60);
+  }
+
+  var key = Key(item.id.toString());
+
+  return TaskItem(item, key: key);
+}
