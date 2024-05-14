@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:path_provider/path_provider.dart';
 import 'package:isar/isar.dart';
 
 import '../models/group/group.dart';
 import '../models/task/task.dart';
 
-const List<CollectionSchema<Object>> schemas = [TaskSchema, GroupSchema];
+const List<CollectionSchema<Object>> schemas = [TaskDTOSchema, GroupSchema];
 const String name = "todo_list";
 
 class Repository<C> {
@@ -24,6 +26,23 @@ class Repository<C> {
 
   Future<Id> create(C instance) async => _save(instance);
   Future<Id> update(C instance) async => _save(instance);
+
+  Future<Id> createTask(TaskDTO task) async => _saveTask(task);
+  Future<Id> _saveTask(TaskDTO task) async {
+    var isar = await db;
+
+    return isar.writeTxnSync(() {
+      var groups = isar.groups.where().findAllSync();
+
+      task.group.value = groups[Random().nextInt(groups.length)];
+
+      var id = isar.collection<TaskDTO>().putSync(task);
+
+      task.group.saveSync();
+
+      return id;
+    });
+  }
 
   Future<bool> delete(int id) async {
     var isar = await db;

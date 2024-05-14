@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sandbox/src/app/app.dart';
 
 import '../bloc/groups/groups_bloc.dart';
 import '../models/group/group.dart';
@@ -23,14 +24,15 @@ class GroupItem extends StatelessWidget {
                 style: const TextStyle(fontSize: 16),
               ),
               Row(children: [
-                IconButton.outlined(
-                  onPressed: () =>
-                      context.read<GroupsBloc>().add(GroupsEvent.update(
-                            group.copyWith(isSelected: !group.isSelected),
-                          )),
-                  icon: Icon(group.isSelected
-                      ? Icons.pin_drop
-                      : Icons.pin_drop_outlined),
+                ValueListenableBuilder(
+                  valueListenable: App.selectedGroup(context),
+                  builder: (context, groupdId, child) => IconButton.outlined(
+                    onPressed: () => App.selectedGroup(context).value =
+                        groupdId == group.id ? null : group.id,
+                    icon: Icon(groupdId == group.id
+                        ? Icons.pin_drop
+                        : Icons.pin_drop_outlined),
+                  ),
                 ),
                 const SizedBox(width: 5),
                 IconButton.outlined(

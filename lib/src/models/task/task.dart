@@ -7,30 +7,80 @@ part 'task.g.dart';
 part 'task.freezed.dart';
 
 @freezed
-@Collection(ignore: {'copyWith'})
 class Task with _$Task {
-  Task._();
-
   @JsonSerializable()
   factory Task({
-    int? id,
-    @Default(false) bool isDone,
-    @Default(false) bool isArchived,
-    @Default(false) bool isTrash,
+    required int id,
+    required bool isDone,
+    required bool isArchived,
+    required bool isTrash,
     required String title,
     required String description,
     required DateTime dateCreateUtc,
     required DateTime dateModifyUtc,
     required int order,
+    required int? groupId,
   }) = _Task;
-
-  @override
-  // ignore: recursive_getters
-  Id? get id => id;
-
-  final group = IsarLink<Group>();
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 
-  updateModifyDate() => copyWith(dateModifyUtc: DateTime.now().toUtc());
+  Task._();
+}
+
+extension TaskExtension on Task {
+  TaskDTO toDTO() => TaskDTO(
+        isDone: isDone,
+        isArchived: isArchived,
+        isTrash: isTrash,
+        title: title,
+        description: description,
+        dateCreateUtc: dateCreateUtc,
+        dateModifyUtc: dateModifyUtc,
+        order: order,
+      );
+}
+
+@collection
+class TaskDTO {
+  Id? id;
+  bool isDone;
+  bool isArchived;
+  bool isTrash;
+  String title;
+  String description;
+  DateTime dateCreateUtc;
+  DateTime dateModifyUtc;
+  int order;
+
+  TaskDTO({
+    required this.isDone,
+    required this.isArchived,
+    required this.isTrash,
+    required this.title,
+    required this.description,
+    required this.dateCreateUtc,
+    required this.dateModifyUtc,
+    required this.order,
+  });
+
+  final group = IsarLink<Group>();
+}
+
+extension TaskDTOExtension on TaskDTO {
+  Task toEntity() {
+    group.loadSync();
+
+    return Task(
+      id: id!,
+      isDone: isDone,
+      isArchived: isArchived,
+      isTrash: isTrash,
+      title: title,
+      description: description,
+      dateCreateUtc: dateCreateUtc,
+      dateModifyUtc: dateModifyUtc,
+      order: order,
+      groupId: group.value?.id,
+    );
+  }
 }

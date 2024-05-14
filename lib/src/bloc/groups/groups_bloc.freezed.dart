@@ -844,7 +844,6 @@ mixin _$GroupsState {
     required TResult Function(List<Group> groups) initial,
     required TResult Function(List<Group> groups) loaded,
     required TResult Function(List<Group> groups, int from, int to) reordered,
-    required TResult Function(List<Group> groups, int index) updatedSome,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -852,7 +851,6 @@ mixin _$GroupsState {
     TResult? Function(List<Group> groups)? initial,
     TResult? Function(List<Group> groups)? loaded,
     TResult? Function(List<Group> groups, int from, int to)? reordered,
-    TResult? Function(List<Group> groups, int index)? updatedSome,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -860,7 +858,6 @@ mixin _$GroupsState {
     TResult Function(List<Group> groups)? initial,
     TResult Function(List<Group> groups)? loaded,
     TResult Function(List<Group> groups, int from, int to)? reordered,
-    TResult Function(List<Group> groups, int index)? updatedSome,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -869,7 +866,6 @@ mixin _$GroupsState {
     required TResult Function(GroupsInitial value) initial,
     required TResult Function(GroupsLoaded value) loaded,
     required TResult Function(GroupsReordered value) reordered,
-    required TResult Function(GroupsUpdatedSome value) updatedSome,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -877,7 +873,6 @@ mixin _$GroupsState {
     TResult? Function(GroupsInitial value)? initial,
     TResult? Function(GroupsLoaded value)? loaded,
     TResult? Function(GroupsReordered value)? reordered,
-    TResult? Function(GroupsUpdatedSome value)? updatedSome,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -885,7 +880,6 @@ mixin _$GroupsState {
     TResult Function(GroupsInitial value)? initial,
     TResult Function(GroupsLoaded value)? loaded,
     TResult Function(GroupsReordered value)? reordered,
-    TResult Function(GroupsUpdatedSome value)? updatedSome,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1003,7 +997,6 @@ class _$GroupsInitialImpl implements GroupsInitial {
     required TResult Function(List<Group> groups) initial,
     required TResult Function(List<Group> groups) loaded,
     required TResult Function(List<Group> groups, int from, int to) reordered,
-    required TResult Function(List<Group> groups, int index) updatedSome,
   }) {
     return initial(groups);
   }
@@ -1014,7 +1007,6 @@ class _$GroupsInitialImpl implements GroupsInitial {
     TResult? Function(List<Group> groups)? initial,
     TResult? Function(List<Group> groups)? loaded,
     TResult? Function(List<Group> groups, int from, int to)? reordered,
-    TResult? Function(List<Group> groups, int index)? updatedSome,
   }) {
     return initial?.call(groups);
   }
@@ -1025,7 +1017,6 @@ class _$GroupsInitialImpl implements GroupsInitial {
     TResult Function(List<Group> groups)? initial,
     TResult Function(List<Group> groups)? loaded,
     TResult Function(List<Group> groups, int from, int to)? reordered,
-    TResult Function(List<Group> groups, int index)? updatedSome,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1040,7 +1031,6 @@ class _$GroupsInitialImpl implements GroupsInitial {
     required TResult Function(GroupsInitial value) initial,
     required TResult Function(GroupsLoaded value) loaded,
     required TResult Function(GroupsReordered value) reordered,
-    required TResult Function(GroupsUpdatedSome value) updatedSome,
   }) {
     return initial(this);
   }
@@ -1051,7 +1041,6 @@ class _$GroupsInitialImpl implements GroupsInitial {
     TResult? Function(GroupsInitial value)? initial,
     TResult? Function(GroupsLoaded value)? loaded,
     TResult? Function(GroupsReordered value)? reordered,
-    TResult? Function(GroupsUpdatedSome value)? updatedSome,
   }) {
     return initial?.call(this);
   }
@@ -1062,7 +1051,6 @@ class _$GroupsInitialImpl implements GroupsInitial {
     TResult Function(GroupsInitial value)? initial,
     TResult Function(GroupsLoaded value)? loaded,
     TResult Function(GroupsReordered value)? reordered,
-    TResult Function(GroupsUpdatedSome value)? updatedSome,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1158,7 +1146,6 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
     required TResult Function(List<Group> groups) initial,
     required TResult Function(List<Group> groups) loaded,
     required TResult Function(List<Group> groups, int from, int to) reordered,
-    required TResult Function(List<Group> groups, int index) updatedSome,
   }) {
     return loaded(groups);
   }
@@ -1169,7 +1156,6 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
     TResult? Function(List<Group> groups)? initial,
     TResult? Function(List<Group> groups)? loaded,
     TResult? Function(List<Group> groups, int from, int to)? reordered,
-    TResult? Function(List<Group> groups, int index)? updatedSome,
   }) {
     return loaded?.call(groups);
   }
@@ -1180,7 +1166,6 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
     TResult Function(List<Group> groups)? initial,
     TResult Function(List<Group> groups)? loaded,
     TResult Function(List<Group> groups, int from, int to)? reordered,
-    TResult Function(List<Group> groups, int index)? updatedSome,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1195,7 +1180,6 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
     required TResult Function(GroupsInitial value) initial,
     required TResult Function(GroupsLoaded value) loaded,
     required TResult Function(GroupsReordered value) reordered,
-    required TResult Function(GroupsUpdatedSome value) updatedSome,
   }) {
     return loaded(this);
   }
@@ -1206,7 +1190,6 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
     TResult? Function(GroupsInitial value)? initial,
     TResult? Function(GroupsLoaded value)? loaded,
     TResult? Function(GroupsReordered value)? reordered,
-    TResult? Function(GroupsUpdatedSome value)? updatedSome,
   }) {
     return loaded?.call(this);
   }
@@ -1217,7 +1200,6 @@ class _$GroupsLoadedImpl implements GroupsLoaded {
     TResult Function(GroupsInitial value)? initial,
     TResult Function(GroupsLoaded value)? loaded,
     TResult Function(GroupsReordered value)? reordered,
-    TResult Function(GroupsUpdatedSome value)? updatedSome,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1332,7 +1314,6 @@ class _$GroupsReorderedImpl implements GroupsReordered {
     required TResult Function(List<Group> groups) initial,
     required TResult Function(List<Group> groups) loaded,
     required TResult Function(List<Group> groups, int from, int to) reordered,
-    required TResult Function(List<Group> groups, int index) updatedSome,
   }) {
     return reordered(groups, from, to);
   }
@@ -1343,7 +1324,6 @@ class _$GroupsReorderedImpl implements GroupsReordered {
     TResult? Function(List<Group> groups)? initial,
     TResult? Function(List<Group> groups)? loaded,
     TResult? Function(List<Group> groups, int from, int to)? reordered,
-    TResult? Function(List<Group> groups, int index)? updatedSome,
   }) {
     return reordered?.call(groups, from, to);
   }
@@ -1354,7 +1334,6 @@ class _$GroupsReorderedImpl implements GroupsReordered {
     TResult Function(List<Group> groups)? initial,
     TResult Function(List<Group> groups)? loaded,
     TResult Function(List<Group> groups, int from, int to)? reordered,
-    TResult Function(List<Group> groups, int index)? updatedSome,
     required TResult orElse(),
   }) {
     if (reordered != null) {
@@ -1369,7 +1348,6 @@ class _$GroupsReorderedImpl implements GroupsReordered {
     required TResult Function(GroupsInitial value) initial,
     required TResult Function(GroupsLoaded value) loaded,
     required TResult Function(GroupsReordered value) reordered,
-    required TResult Function(GroupsUpdatedSome value) updatedSome,
   }) {
     return reordered(this);
   }
@@ -1380,7 +1358,6 @@ class _$GroupsReorderedImpl implements GroupsReordered {
     TResult? Function(GroupsInitial value)? initial,
     TResult? Function(GroupsLoaded value)? loaded,
     TResult? Function(GroupsReordered value)? reordered,
-    TResult? Function(GroupsUpdatedSome value)? updatedSome,
   }) {
     return reordered?.call(this);
   }
@@ -1391,7 +1368,6 @@ class _$GroupsReorderedImpl implements GroupsReordered {
     TResult Function(GroupsInitial value)? initial,
     TResult Function(GroupsLoaded value)? loaded,
     TResult Function(GroupsReordered value)? reordered,
-    TResult Function(GroupsUpdatedSome value)? updatedSome,
     required TResult orElse(),
   }) {
     if (reordered != null) {
@@ -1413,173 +1389,5 @@ abstract class GroupsReordered implements GroupsState {
   @override
   @JsonKey(ignore: true)
   _$$GroupsReorderedImplCopyWith<_$GroupsReorderedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$GroupsUpdatedSomeImplCopyWith<$Res>
-    implements $GroupsStateCopyWith<$Res> {
-  factory _$$GroupsUpdatedSomeImplCopyWith(_$GroupsUpdatedSomeImpl value,
-          $Res Function(_$GroupsUpdatedSomeImpl) then) =
-      __$$GroupsUpdatedSomeImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<Group> groups, int index});
-}
-
-/// @nodoc
-class __$$GroupsUpdatedSomeImplCopyWithImpl<$Res>
-    extends _$GroupsStateCopyWithImpl<$Res, _$GroupsUpdatedSomeImpl>
-    implements _$$GroupsUpdatedSomeImplCopyWith<$Res> {
-  __$$GroupsUpdatedSomeImplCopyWithImpl(_$GroupsUpdatedSomeImpl _value,
-      $Res Function(_$GroupsUpdatedSomeImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? groups = null,
-    Object? index = null,
-  }) {
-    return _then(_$GroupsUpdatedSomeImpl(
-      null == groups
-          ? _value._groups
-          : groups // ignore: cast_nullable_to_non_nullable
-              as List<Group>,
-      null == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GroupsUpdatedSomeImpl implements GroupsUpdatedSome {
-  _$GroupsUpdatedSomeImpl(final List<Group> groups, this.index)
-      : _groups = groups;
-
-  final List<Group> _groups;
-  @override
-  List<Group> get groups {
-    if (_groups is EqualUnmodifiableListView) return _groups;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_groups);
-  }
-
-  @override
-  final int index;
-
-  @override
-  String toString() {
-    return 'GroupsState.updatedSome(groups: $groups, index: $index)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GroupsUpdatedSomeImpl &&
-            const DeepCollectionEquality().equals(other._groups, _groups) &&
-            (identical(other.index, index) || other.index == index));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_groups), index);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GroupsUpdatedSomeImplCopyWith<_$GroupsUpdatedSomeImpl> get copyWith =>
-      __$$GroupsUpdatedSomeImplCopyWithImpl<_$GroupsUpdatedSomeImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(List<Group> groups) initial,
-    required TResult Function(List<Group> groups) loaded,
-    required TResult Function(List<Group> groups, int from, int to) reordered,
-    required TResult Function(List<Group> groups, int index) updatedSome,
-  }) {
-    return updatedSome(groups, index);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Group> groups)? initial,
-    TResult? Function(List<Group> groups)? loaded,
-    TResult? Function(List<Group> groups, int from, int to)? reordered,
-    TResult? Function(List<Group> groups, int index)? updatedSome,
-  }) {
-    return updatedSome?.call(groups, index);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Group> groups)? initial,
-    TResult Function(List<Group> groups)? loaded,
-    TResult Function(List<Group> groups, int from, int to)? reordered,
-    TResult Function(List<Group> groups, int index)? updatedSome,
-    required TResult orElse(),
-  }) {
-    if (updatedSome != null) {
-      return updatedSome(groups, index);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GroupsInitial value) initial,
-    required TResult Function(GroupsLoaded value) loaded,
-    required TResult Function(GroupsReordered value) reordered,
-    required TResult Function(GroupsUpdatedSome value) updatedSome,
-  }) {
-    return updatedSome(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GroupsInitial value)? initial,
-    TResult? Function(GroupsLoaded value)? loaded,
-    TResult? Function(GroupsReordered value)? reordered,
-    TResult? Function(GroupsUpdatedSome value)? updatedSome,
-  }) {
-    return updatedSome?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GroupsInitial value)? initial,
-    TResult Function(GroupsLoaded value)? loaded,
-    TResult Function(GroupsReordered value)? reordered,
-    TResult Function(GroupsUpdatedSome value)? updatedSome,
-    required TResult orElse(),
-  }) {
-    if (updatedSome != null) {
-      return updatedSome(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GroupsUpdatedSome implements GroupsState {
-  factory GroupsUpdatedSome(final List<Group> groups, final int index) =
-      _$GroupsUpdatedSomeImpl;
-
-  @override
-  List<Group> get groups;
-  int get index;
-  @override
-  @JsonKey(ignore: true)
-  _$$GroupsUpdatedSomeImplCopyWith<_$GroupsUpdatedSomeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

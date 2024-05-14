@@ -20,7 +20,6 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
   }
 
   final repository = Repository<Group>();
-  Group? selectedGroup;
   int maxOrder = -1;
 
   void _onGetAll(_GetAll event, Emitter<GroupsState> emit) async {
@@ -68,20 +67,6 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
 
     await repository.update(updatedGroup);
 
-    if (selectedGroup != null && selectedGroup!.id != updatedGroup.id) {
-      final indexOfPrevSelectedGroup =
-          state.groups.indexWhere((t) => t.id == selectedGroup!.id);
-
-      var modifiedPrevSelectedGroup = newGroups[indexOfPrevSelectedGroup]
-          .copyWith(isSelected: false)
-          .updateModifyDate();
-
-      newGroups[indexOfPrevSelectedGroup] = modifiedPrevSelectedGroup;
-
-      emit(GroupsState.updatedSome(newGroups, indexOfPrevSelectedGroup));
-    }
-
-    selectedGroup = updatedGroup.copyWith();
     newGroups[index] = updatedGroup;
 
     emit(GroupsState.loaded(newGroups));
@@ -103,10 +88,6 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     var isDeleted = await repository.delete(group.id!);
 
     if (isDeleted) {
-      if (group.id == selectedGroup?.id) {
-        selectedGroup = null;
-      }
-
       var groups = state.groups.where((t) => t.id != event.groupId).toList();
 
       emit(GroupsState.loaded(groups));

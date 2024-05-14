@@ -44,15 +44,7 @@ const GroupSchema = CollectionSchema(
   deserializeProp: _groupDeserializeProp,
   idName: r'id',
   indexes: {},
-  links: {
-    r'tasks': LinkSchema(
-      id: -2949517893465912729,
-      name: r'tasks',
-      target: r'Task',
-      single: true,
-      linkName: r'group',
-    )
-  },
+  links: {},
   embeddedSchemas: {},
   getId: _groupGetId,
   getLinks: _groupGetLinks,
@@ -123,12 +115,10 @@ Id _groupGetId(Group object) {
 }
 
 List<IsarLinkBase<dynamic>> _groupGetLinks(Group object) {
-  return [object.tasks];
+  return [];
 }
 
-void _groupAttach(IsarCollection<dynamic> col, Id id, Group object) {
-  object.tasks.attach(col, col.isar.collection<Task>(), r'tasks', id);
-}
+void _groupAttach(IsarCollection<dynamic> col, Id id, Group object) {}
 
 extension GroupQueryWhereSort on QueryBuilder<Group, Group, QWhere> {
   QueryBuilder<Group, Group, QAfterWhere> anyId() {
@@ -563,19 +553,7 @@ extension GroupQueryFilter on QueryBuilder<Group, Group, QFilterCondition> {
 
 extension GroupQueryObject on QueryBuilder<Group, Group, QFilterCondition> {}
 
-extension GroupQueryLinks on QueryBuilder<Group, Group, QFilterCondition> {
-  QueryBuilder<Group, Group, QAfterFilterCondition> tasks(FilterQuery<Task> q) {
-    return QueryBuilder.apply(this, (query) {
-      return query.link(q, r'tasks');
-    });
-  }
-
-  QueryBuilder<Group, Group, QAfterFilterCondition> tasksIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'tasks', 0, true, 0, true);
-    });
-  }
-}
+extension GroupQueryLinks on QueryBuilder<Group, Group, QFilterCondition> {}
 
 extension GroupQuerySortBy on QueryBuilder<Group, Group, QSortBy> {
   QueryBuilder<Group, Group, QAfterSortBy> sortByDateCreateUtc() {
@@ -758,7 +736,6 @@ _$GroupImpl _$$GroupImplFromJson(Map<String, dynamic> json) => _$GroupImpl(
       dateCreateUtc: DateTime.parse(json['dateCreateUtc'] as String),
       dateModifyUtc: DateTime.parse(json['dateModifyUtc'] as String),
       order: (json['order'] as num).toInt(),
-      isSelected: json['isSelected'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$GroupImplToJson(_$GroupImpl instance) =>
@@ -768,5 +745,4 @@ Map<String, dynamic> _$$GroupImplToJson(_$GroupImpl instance) =>
       'dateCreateUtc': instance.dateCreateUtc.toIso8601String(),
       'dateModifyUtc': instance.dateModifyUtc.toIso8601String(),
       'order': instance.order,
-      'isSelected': instance.isSelected,
     };

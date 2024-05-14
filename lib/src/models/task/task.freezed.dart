@@ -20,7 +20,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Task {
-  int? get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   bool get isDone => throw _privateConstructorUsedError;
   bool get isArchived => throw _privateConstructorUsedError;
   bool get isTrash => throw _privateConstructorUsedError;
@@ -29,6 +29,7 @@ mixin _$Task {
   DateTime get dateCreateUtc => throw _privateConstructorUsedError;
   DateTime get dateModifyUtc => throw _privateConstructorUsedError;
   int get order => throw _privateConstructorUsedError;
+  int? get groupId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +42,7 @@ abstract class $TaskCopyWith<$Res> {
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
   $Res call(
-      {int? id,
+      {int id,
       bool isDone,
       bool isArchived,
       bool isTrash,
@@ -49,7 +50,8 @@ abstract class $TaskCopyWith<$Res> {
       String description,
       DateTime dateCreateUtc,
       DateTime dateModifyUtc,
-      int order});
+      int order,
+      int? groupId});
 }
 
 /// @nodoc
@@ -65,7 +67,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? isDone = null,
     Object? isArchived = null,
     Object? isTrash = null,
@@ -74,12 +76,13 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
     Object? order = null,
+    Object? groupId = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       isDone: null == isDone
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
@@ -112,6 +115,10 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
+      groupId: freezed == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -124,7 +131,7 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id,
+      {int id,
       bool isDone,
       bool isArchived,
       bool isTrash,
@@ -132,7 +139,8 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       String description,
       DateTime dateCreateUtc,
       DateTime dateModifyUtc,
-      int order});
+      int order,
+      int? groupId});
 }
 
 /// @nodoc
@@ -145,7 +153,7 @@ class __$$TaskImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? isDone = null,
     Object? isArchived = null,
     Object? isTrash = null,
@@ -154,12 +162,13 @@ class __$$TaskImplCopyWithImpl<$Res>
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
     Object? order = null,
+    Object? groupId = freezed,
   }) {
     return _then(_$TaskImpl(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       isDone: null == isDone
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
@@ -192,6 +201,10 @@ class __$$TaskImplCopyWithImpl<$Res>
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
+      groupId: freezed == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -201,30 +214,28 @@ class __$$TaskImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TaskImpl extends _Task {
   _$TaskImpl(
-      {this.id,
-      this.isDone = false,
-      this.isArchived = false,
-      this.isTrash = false,
+      {required this.id,
+      required this.isDone,
+      required this.isArchived,
+      required this.isTrash,
       required this.title,
       required this.description,
       required this.dateCreateUtc,
       required this.dateModifyUtc,
-      required this.order})
+      required this.order,
+      required this.groupId})
       : super._();
 
   factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskImplFromJson(json);
 
   @override
-  final int? id;
+  final int id;
   @override
-  @JsonKey()
   final bool isDone;
   @override
-  @JsonKey()
   final bool isArchived;
   @override
-  @JsonKey()
   final bool isTrash;
   @override
   final String title;
@@ -236,10 +247,12 @@ class _$TaskImpl extends _Task {
   final DateTime dateModifyUtc;
   @override
   final int order;
+  @override
+  final int? groupId;
 
   @override
   String toString() {
-    return 'Task(id: $id, isDone: $isDone, isArchived: $isArchived, isTrash: $isTrash, title: $title, description: $description, dateCreateUtc: $dateCreateUtc, dateModifyUtc: $dateModifyUtc, order: $order)';
+    return 'Task(id: $id, isDone: $isDone, isArchived: $isArchived, isTrash: $isTrash, title: $title, description: $description, dateCreateUtc: $dateCreateUtc, dateModifyUtc: $dateModifyUtc, order: $order, groupId: $groupId)';
   }
 
   @override
@@ -259,13 +272,14 @@ class _$TaskImpl extends _Task {
                 other.dateCreateUtc == dateCreateUtc) &&
             (identical(other.dateModifyUtc, dateModifyUtc) ||
                 other.dateModifyUtc == dateModifyUtc) &&
-            (identical(other.order, order) || other.order == order));
+            (identical(other.order, order) || other.order == order) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, isDone, isArchived, isTrash,
-      title, description, dateCreateUtc, dateModifyUtc, order);
+      title, description, dateCreateUtc, dateModifyUtc, order, groupId);
 
   @JsonKey(ignore: true)
   @override
@@ -283,21 +297,22 @@ class _$TaskImpl extends _Task {
 
 abstract class _Task extends Task {
   factory _Task(
-      {final int? id,
-      final bool isDone,
-      final bool isArchived,
-      final bool isTrash,
+      {required final int id,
+      required final bool isDone,
+      required final bool isArchived,
+      required final bool isTrash,
       required final String title,
       required final String description,
       required final DateTime dateCreateUtc,
       required final DateTime dateModifyUtc,
-      required final int order}) = _$TaskImpl;
+      required final int order,
+      required final int? groupId}) = _$TaskImpl;
   _Task._() : super._();
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
 
   @override
-  int? get id;
+  int get id;
   @override
   bool get isDone;
   @override
@@ -314,6 +329,8 @@ abstract class _Task extends Task {
   DateTime get dateModifyUtc;
   @override
   int get order;
+  @override
+  int? get groupId;
   @override
   @JsonKey(ignore: true)
   _$$TaskImplCopyWith<_$TaskImpl> get copyWith =>

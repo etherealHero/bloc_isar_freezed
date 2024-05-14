@@ -11,6 +11,7 @@ part 'tasks_event.dart';
 part 'tasks_state.dart';
 part 'tasks_bloc.freezed.dart';
 
+// TODO: после reorder event появляются новые сущности
 class TasksBloc extends Bloc<TasksEvent, TasksState> {
   TasksBloc() : super(TasksInitial(<Task>[])) {
     on<_GetAll>(_onGetAll);
@@ -20,12 +21,13 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     on<_ReorderComplete>(_onReorderComplete);
   }
 
-  final taskRepository = Repository<Task>();
+  final taskRepository = Repository<TaskDTO>();
   final groupRepository = Repository<Group>();
   int maxOrder = -1;
 
   void _onGetAll(_GetAll event, Emitter<TasksState> emit) async {
-    var tasks = await taskRepository.getAll();
+    var tasks =
+        (await taskRepository.getAll()).map((e) => e.toEntity()).toList();
 
     tasks.sort((a, b) => b.order.compareTo(a.order));
 
@@ -45,28 +47,31 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       ++maxOrder;
     }
 
-    var newTask = Task(
-        title: event.title,
-        description: event.description,
-        dateCreateUtc: DateTime.now().toUtc(),
-        dateModifyUtc: DateTime.now().toUtc(),
-        order: maxOrder);
-    var id = await taskRepository.create(newTask);
-    // TODO: не работает
-    // var groups = await groupRepository.getAll();
+    var taskDTO = TaskDTO(
+      isDone: false,
+      isArchived: false,
+      isTrash: false,
+      title: event.title,
+      description: event.description,
+      dateCreateUtc: DateTime.now().toUtc(),
+      dateModifyUtc: DateTime.now().toUtc(),
+      order: maxOrder,
+    );
 
-    newTask = newTask.copyWith(id: id);
-    // newTask.group.value = groups[Random().nextInt(groups.length)];
+    await taskRepository.createTask(taskDTO);
 
-    // await newTask.group.save();
-
-    var newState = state.copyWith(tasks: [newTask, ...state.tasks]);
+    var newState = state.copyWith(
+      tasks: [(taskDTO.toEntity()), ...state.tasks],
+    );
 
     emit(TasksState.loaded(newState.tasks));
   }
 
   void _onUpdate(_Update event, Emitter<TasksState> emit) async {
-    Task updatedTask = event.task.updateModifyDate();
+    Task updatedTask = event.task.copyWith(
+      dateModifyUtc: DateTime.now().toUtc(),
+    );
+
     final newTasks = [...state.tasks];
     final index = state.tasks.indexWhere((t) => t.id == updatedTask.id);
 
@@ -74,7 +79,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       return;
     }
 
-    await taskRepository.update(updatedTask);
+    await taskRepository.update(updatedTask.toDTO());
 
     newTasks[index] = updatedTask;
 
@@ -94,7 +99,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       return;
     }
 
-    var isDeleted = await taskRepository.delete(task.id!);
+    var isDeleted = await taskRepository.delete(task.id);
 
     if (isDeleted) {
       var tasks = state.tasks.where((t) => t.id != event.taskId).toList();
@@ -121,8 +126,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
 
     newTasks.insert(event.dropIndex, newTasks.removeAt(event.index));
     for (var i = from; i < to; i++) {
-      newTasks[i] = newTasks[i].copyWith(order: orders[i])..updateModifyDate();
-      await taskRepository.update(newTasks[i]);
+      newTasks[i] = newTasks[i]
+          .copyWith(order: orders[i], dateModifyUtc: DateTime.now().toUtc());
+      await taskRepository.update(newTasks[i].toDTO());
     }
 
     emit(TasksState.reordered(newTasks, from, to));
