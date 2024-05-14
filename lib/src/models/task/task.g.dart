@@ -116,13 +116,13 @@ TaskDTO _taskDTODeserialize(
     dateCreateUtc: reader.readDateTime(offsets[0]),
     dateModifyUtc: reader.readDateTime(offsets[1]),
     description: reader.readString(offsets[2]),
+    id: id,
     isArchived: reader.readBool(offsets[3]),
     isDone: reader.readBool(offsets[4]),
     isTrash: reader.readBool(offsets[5]),
     order: reader.readLong(offsets[6]),
     title: reader.readString(offsets[7]),
   );
-  object.id = id;
   return object;
 }
 

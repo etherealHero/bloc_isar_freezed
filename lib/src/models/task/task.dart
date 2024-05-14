@@ -29,6 +29,7 @@ class Task with _$Task {
 
 extension TaskExtension on Task {
   TaskDTO toDTO() => TaskDTO(
+        id: id,
         isDone: isDone,
         isArchived: isArchived,
         isTrash: isTrash,
@@ -53,6 +54,7 @@ class TaskDTO {
   int order;
 
   TaskDTO({
+    this.id,
     required this.isDone,
     required this.isArchived,
     required this.isTrash,
