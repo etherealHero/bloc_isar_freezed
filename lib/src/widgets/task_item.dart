@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/tasks/tasks_bloc.dart';
 import '../models/task/task.dart';
 
+// TODO: add swipeable
 class TaskItem extends StatelessWidget {
   const TaskItem(this.task, {super.key});
 

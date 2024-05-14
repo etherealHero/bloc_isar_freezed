@@ -27,6 +27,7 @@ class Repository<C> {
   Future<Id> create(C instance) async => _save(instance);
   Future<Id> update(C instance) async => _save(instance);
 
+  // TODO: up to events
   Future<Id> createTask(TaskDTO task) async => _saveTask(task);
   Future<Id> _saveTask(TaskDTO task) async {
     var isar = await db;
