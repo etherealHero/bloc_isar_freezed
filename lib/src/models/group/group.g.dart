@@ -44,7 +44,15 @@ const GroupDTOSchema = CollectionSchema(
   deserializeProp: _groupDTODeserializeProp,
   idName: r'id',
   indexes: {},
-  links: {},
+  links: {
+    r'tasks': LinkSchema(
+      id: -3826584304484999619,
+      name: r'tasks',
+      target: r'TaskDTO',
+      single: false,
+      linkName: r'group',
+    )
+  },
   embeddedSchemas: {},
   getId: _groupDTOGetId,
   getLinks: _groupDTOGetLinks,
@@ -115,11 +123,12 @@ Id _groupDTOGetId(GroupDTO object) {
 }
 
 List<IsarLinkBase<dynamic>> _groupDTOGetLinks(GroupDTO object) {
-  return [];
+  return [object.tasks];
 }
 
 void _groupDTOAttach(IsarCollection<dynamic> col, Id id, GroupDTO object) {
   object.id = id;
+  object.tasks.attach(col, col.isar.collection<TaskDTO>(), r'tasks', id);
 }
 
 extension GroupDTOQueryWhereSort on QueryBuilder<GroupDTO, GroupDTO, QWhere> {
@@ -563,7 +572,64 @@ extension GroupDTOQueryObject
     on QueryBuilder<GroupDTO, GroupDTO, QFilterCondition> {}
 
 extension GroupDTOQueryLinks
-    on QueryBuilder<GroupDTO, GroupDTO, QFilterCondition> {}
+    on QueryBuilder<GroupDTO, GroupDTO, QFilterCondition> {
+  QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition> tasks(
+      FilterQuery<TaskDTO> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'tasks');
+    });
+  }
+
+  QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition> tasksLengthEqualTo(
+      int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'tasks', length, true, length, true);
+    });
+  }
+
+  QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition> tasksIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'tasks', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition> tasksIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'tasks', 0, false, 999999, true);
+    });
+  }
+
+  QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition> tasksLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'tasks', 0, true, length, include);
+    });
+  }
+
+  QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition>
+      tasksLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'tasks', length, include, 999999, true);
+    });
+  }
+
+  QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition> tasksLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(
+          r'tasks', lower, includeLower, upper, includeUpper);
+    });
+  }
+}
 
 extension GroupDTOQuerySortBy on QueryBuilder<GroupDTO, GroupDTO, QSortBy> {
   QueryBuilder<GroupDTO, GroupDTO, QAfterSortBy> sortByDateCreateUtc() {
@@ -749,6 +815,9 @@ _$GroupImpl _$$GroupImplFromJson(Map<String, dynamic> json) => _$GroupImpl(
       dateCreateUtc: DateTime.parse(json['dateCreateUtc'] as String),
       dateModifyUtc: DateTime.parse(json['dateModifyUtc'] as String),
       order: (json['order'] as num).toInt(),
+      tasks: (json['tasks'] as List<dynamic>)
+          .map((e) => Task.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$GroupImplToJson(_$GroupImpl instance) =>
@@ -758,4 +827,5 @@ Map<String, dynamic> _$$GroupImplToJson(_$GroupImpl instance) =>
       'dateCreateUtc': instance.dateCreateUtc.toIso8601String(),
       'dateModifyUtc': instance.dateModifyUtc.toIso8601String(),
       'order': instance.order,
+      'tasks': instance.tasks,
     };

@@ -55,7 +55,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       order: maxOrder,
     );
 
-    await repository.createTask(taskDTO);
+    await repository.createTask(taskDTO, event.groupId);
 
     var newState = state.copyWith(
       tasks: [(taskDTO.toEntity()), ...state.tasks],

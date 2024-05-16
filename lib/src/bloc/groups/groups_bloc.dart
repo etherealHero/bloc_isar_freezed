@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sandbox/src/models/group/group.dart';
 
 import '../../repository/repository.dart';
+import '../../models/group/group.dart';
 
 part 'groups_event.dart';
 part 'groups_state.dart';

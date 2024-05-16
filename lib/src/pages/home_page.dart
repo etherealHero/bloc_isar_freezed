@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sandbox/src/widgets/group_list.dart';
 
+import '../app/app.dart';
 import '../bloc/groups/groups_bloc.dart';
 import '../bloc/tasks/tasks_bloc.dart';
+import '../widgets/group_list.dart';
 import '../widgets/task_list.dart';
 
 class HomePage extends StatelessWidget {
@@ -51,9 +52,8 @@ class HomePageFloatingActionButton extends StatelessWidget {
           child: const Text('Add group')),
       const SizedBox(width: 10),
       ElevatedButton(
-          onPressed: () => context
-              .read<TasksBloc>()
-              .add(const TasksEvent.add("title", "description")),
+          onPressed: () => context.read<TasksBloc>().add(TasksEvent.add(
+              "title", "description", App.selectedGroup(context).value)),
           child: const Text('Add task')),
     ]);
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sandbox/src/app/app.dart';
-import 'package:sandbox/src/bloc/tasks/tasks_bloc.dart';
 
+import '../app/app.dart';
+import '../bloc/tasks/tasks_bloc.dart';
 import '../bloc/groups/groups_bloc.dart';
 import '../models/group/group.dart';
 
@@ -21,7 +21,8 @@ class GroupItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Item ${group.id}, order ${group.order}',
+                // TODO: create bloc observer(tasks & groups) когда добавляются задачи в существующую группу, в группе не актуализируются ссылки и поэтому не удаляются задачи при удалении группы
+                'id ${group.id}(${group.order}), ${group.tasks.length} items',
                 style: const TextStyle(fontSize: 16),
               ),
               Row(children: [
@@ -45,9 +46,17 @@ class GroupItem extends StatelessWidget {
                 ),
                 const SizedBox(width: 5),
                 IconButton.outlined(
-                    onPressed: () => context
-                        .read<GroupsBloc>()
-                        .add(GroupsEvent.delete(group.id)),
+                    onPressed: () {
+                      for (var task in group.tasks) {
+                        context
+                            .read<TasksBloc>()
+                            .add(TasksEvent.delete(task.id));
+                      }
+
+                      context
+                          .read<GroupsBloc>()
+                          .add(GroupsEvent.delete(group.id));
+                    },
                     icon: const Icon(Icons.close))
               ]),
             ],

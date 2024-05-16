@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:path_provider/path_provider.dart';
 import 'package:isar/isar.dart';
 
@@ -27,15 +25,14 @@ class Repository<C> {
   Future<Id> create(C instance) async => _save(instance);
   Future<Id> update(C instance) async => _save(instance);
 
-  // TODO: up to events
-  Future<Id> createTask(TaskDTO task) async => _saveTask(task);
-  Future<Id> _saveTask(TaskDTO task) async {
+  Future<Id> createTask(TaskDTO task, int? groupId) async {
     var isar = await db;
 
     return isar.writeTxnSync(() {
-      var groups = isar.groupDTOs.where().findAllSync();
-
-      task.group.value = groups[Random().nextInt(groups.length)];
+      if (groupId != null) {
+        var targetGroup = isar.collection<GroupDTO>().getSync(groupId);
+        task.group.value = targetGroup;
+      }
 
       var id = isar.collection<TaskDTO>().putSync(task);
 
