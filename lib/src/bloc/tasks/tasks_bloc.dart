@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../repository/repository.dart';
 import '../../models/task/task.dart';
+import '../../models/group/group.dart';
 
 part 'tasks_event.dart';
 part 'tasks_state.dart';

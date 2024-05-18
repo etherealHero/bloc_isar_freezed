@@ -14,5 +14,6 @@ class TasksEvent with _$TasksEvent {
     String title,
     String description,
     int? groupId,
+    Group group,
   ) = _Add;
 }

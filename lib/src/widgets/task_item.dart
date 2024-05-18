@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sandbox/src/bloc/groups/groups_bloc.dart';
 
 import '../models/task/task.dart';
 import '../app/app.dart';
@@ -37,6 +41,15 @@ class TaskItem extends StatelessWidget {
                         onPressed: () => AppController(context)
                             .updateTask(task.copyWith(isDone: !task.isDone)),
                         icon: const Icon(Icons.done)),
+                const SizedBox(width: 5),
+                IconButton.outlined(
+                    onPressed: () {
+                      var groups = context.read<GroupsBloc>().state.groups;
+                      var group = groups[Random().nextInt(groups.length)];
+                      AppController(context)
+                          .updateTask(task.copyWith(group: group));
+                    },
+                    icon: const Icon(Icons.close)),
                 const SizedBox(width: 5),
                 IconButton.outlined(
                     onPressed: () => AppController(context).removeTask(task),
