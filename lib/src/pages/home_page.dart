@@ -1,10 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../app/app.dart';
-import '../bloc/groups/groups_bloc.dart';
 import '../widgets/group_list.dart';
 import '../widgets/task_list.dart';
+import '../shared/colors.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -36,8 +37,10 @@ class HomePageFloatingActionButton extends StatelessWidget {
     return Row(children: [
       const Spacer(),
       ElevatedButton(
-          onPressed: () =>
-              context.read<GroupsBloc>().add(const GroupsEvent.add("title")),
+          onPressed: () {
+            final color = colorPallete[Random().nextInt(colorPallete.length)];
+            AppController(context).addGroup("title", color.value);
+          },
           child: const Text('Add group')),
       const SizedBox(width: 10),
       ElevatedButton(

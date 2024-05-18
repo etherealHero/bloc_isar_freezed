@@ -1117,7 +1117,9 @@ _$TaskImpl _$$TaskImplFromJson(Map<String, dynamic> json) => _$TaskImpl(
       dateCreateUtc: DateTime.parse(json['dateCreateUtc'] as String),
       dateModifyUtc: DateTime.parse(json['dateModifyUtc'] as String),
       order: (json['order'] as num).toInt(),
-      groupId: (json['groupId'] as num?)?.toInt(),
+      group: json['group'] == null
+          ? null
+          : Group.fromJson(json['group'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$TaskImplToJson(_$TaskImpl instance) =>
@@ -1131,5 +1133,5 @@ Map<String, dynamic> _$$TaskImplToJson(_$TaskImpl instance) =>
       'dateCreateUtc': instance.dateCreateUtc.toIso8601String(),
       'dateModifyUtc': instance.dateModifyUtc.toIso8601String(),
       'order': instance.order,
-      'groupId': instance.groupId,
+      'group': instance.group,
     };

@@ -17,23 +17,28 @@ const GroupDTOSchema = CollectionSchema(
   name: r'GroupDTO',
   id: 4110607273268151599,
   properties: {
-    r'dateCreateUtc': PropertySchema(
+    r'color': PropertySchema(
       id: 0,
+      name: r'color',
+      type: IsarType.long,
+    ),
+    r'dateCreateUtc': PropertySchema(
+      id: 1,
       name: r'dateCreateUtc',
       type: IsarType.dateTime,
     ),
     r'dateModifyUtc': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'dateModifyUtc',
       type: IsarType.dateTime,
     ),
     r'order': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'order',
       type: IsarType.long,
     ),
     r'title': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'title',
       type: IsarType.string,
     )
@@ -76,10 +81,11 @@ void _groupDTOSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeDateTime(offsets[0], object.dateCreateUtc);
-  writer.writeDateTime(offsets[1], object.dateModifyUtc);
-  writer.writeLong(offsets[2], object.order);
-  writer.writeString(offsets[3], object.title);
+  writer.writeLong(offsets[0], object.color);
+  writer.writeDateTime(offsets[1], object.dateCreateUtc);
+  writer.writeDateTime(offsets[2], object.dateModifyUtc);
+  writer.writeLong(offsets[3], object.order);
+  writer.writeString(offsets[4], object.title);
 }
 
 GroupDTO _groupDTODeserialize(
@@ -89,11 +95,12 @@ GroupDTO _groupDTODeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = GroupDTO(
-    dateCreateUtc: reader.readDateTime(offsets[0]),
-    dateModifyUtc: reader.readDateTime(offsets[1]),
+    color: reader.readLong(offsets[0]),
+    dateCreateUtc: reader.readDateTime(offsets[1]),
+    dateModifyUtc: reader.readDateTime(offsets[2]),
     id: id,
-    order: reader.readLong(offsets[2]),
-    title: reader.readString(offsets[3]),
+    order: reader.readLong(offsets[3]),
+    title: reader.readString(offsets[4]),
   );
   return object;
 }
@@ -106,12 +113,14 @@ P _groupDTODeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 1:
       return (reader.readDateTime(offset)) as P;
     case 2:
-      return (reader.readLong(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 3:
+      return (reader.readLong(offset)) as P;
+    case 4:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -208,6 +217,59 @@ extension GroupDTOQueryWhere on QueryBuilder<GroupDTO, GroupDTO, QWhereClause> {
 
 extension GroupDTOQueryFilter
     on QueryBuilder<GroupDTO, GroupDTO, QFilterCondition> {
+  QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition> colorEqualTo(
+      int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'color',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition> colorGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'color',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition> colorLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'color',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition> colorBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'color',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
   QueryBuilder<GroupDTO, GroupDTO, QAfterFilterCondition> dateCreateUtcEqualTo(
       DateTime value) {
     return QueryBuilder.apply(this, (query) {
@@ -632,6 +694,18 @@ extension GroupDTOQueryLinks
 }
 
 extension GroupDTOQuerySortBy on QueryBuilder<GroupDTO, GroupDTO, QSortBy> {
+  QueryBuilder<GroupDTO, GroupDTO, QAfterSortBy> sortByColor() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'color', Sort.asc);
+    });
+  }
+
+  QueryBuilder<GroupDTO, GroupDTO, QAfterSortBy> sortByColorDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'color', Sort.desc);
+    });
+  }
+
   QueryBuilder<GroupDTO, GroupDTO, QAfterSortBy> sortByDateCreateUtc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'dateCreateUtc', Sort.asc);
@@ -683,6 +757,18 @@ extension GroupDTOQuerySortBy on QueryBuilder<GroupDTO, GroupDTO, QSortBy> {
 
 extension GroupDTOQuerySortThenBy
     on QueryBuilder<GroupDTO, GroupDTO, QSortThenBy> {
+  QueryBuilder<GroupDTO, GroupDTO, QAfterSortBy> thenByColor() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'color', Sort.asc);
+    });
+  }
+
+  QueryBuilder<GroupDTO, GroupDTO, QAfterSortBy> thenByColorDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'color', Sort.desc);
+    });
+  }
+
   QueryBuilder<GroupDTO, GroupDTO, QAfterSortBy> thenByDateCreateUtc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'dateCreateUtc', Sort.asc);
@@ -746,6 +832,12 @@ extension GroupDTOQuerySortThenBy
 
 extension GroupDTOQueryWhereDistinct
     on QueryBuilder<GroupDTO, GroupDTO, QDistinct> {
+  QueryBuilder<GroupDTO, GroupDTO, QDistinct> distinctByColor() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'color');
+    });
+  }
+
   QueryBuilder<GroupDTO, GroupDTO, QDistinct> distinctByDateCreateUtc() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'dateCreateUtc');
@@ -777,6 +869,12 @@ extension GroupDTOQueryProperty
   QueryBuilder<GroupDTO, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<GroupDTO, int, QQueryOperations> colorProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'color');
     });
   }
 
@@ -812,6 +910,7 @@ extension GroupDTOQueryProperty
 _$GroupImpl _$$GroupImplFromJson(Map<String, dynamic> json) => _$GroupImpl(
       id: (json['id'] as num).toInt(),
       title: json['title'] as String,
+      color: (json['color'] as num).toInt(),
       dateCreateUtc: DateTime.parse(json['dateCreateUtc'] as String),
       dateModifyUtc: DateTime.parse(json['dateModifyUtc'] as String),
       order: (json['order'] as num).toInt(),
@@ -824,6 +923,7 @@ Map<String, dynamic> _$$GroupImplToJson(_$GroupImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
+      'color': instance.color,
       'dateCreateUtc': instance.dateCreateUtc.toIso8601String(),
       'dateModifyUtc': instance.dateModifyUtc.toIso8601String(),
       'order': instance.order,

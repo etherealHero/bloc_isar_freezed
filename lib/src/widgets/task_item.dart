@@ -11,15 +11,20 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var color = int.tryParse('0X${task.group?.color.toRadixString(16)}');
+
     return Card.filled(
         margin: const EdgeInsets.all(5),
+        color: color == null
+            ? null
+            : Color(int.parse('0X${color.toRadixString(16)}')),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'id ${task.id}(${task.order}) gId ${task.groupId}',
+                'id ${task.id}(${task.order}) gId ${task.group?.id}',
                 style: const TextStyle(fontSize: 16),
               ),
               Row(children: [

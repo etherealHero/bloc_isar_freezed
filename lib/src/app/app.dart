@@ -27,11 +27,11 @@ class AppState extends State<App> {
         home: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => TasksBloc()..add(const TasksEvent.getAll()),
-            ),
-            BlocProvider(
               create: (context) =>
                   GroupsBloc()..add(const GroupsEvent.getAll()),
+            ),
+            BlocProvider(
+              create: (context) => TasksBloc()..add(const TasksEvent.getAll()),
             ),
           ],
           child: const SafeArea(child: HomePage()),

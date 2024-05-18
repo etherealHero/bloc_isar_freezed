@@ -12,6 +12,7 @@ class Group with _$Group {
   factory Group({
     required int id,
     required String title,
+    required int color,
     required DateTime dateCreateUtc,
     required DateTime dateModifyUtc,
     required int order,
@@ -27,6 +28,7 @@ extension GroupExtension on Group {
   GroupDTO toDTO() => GroupDTO(
         id: id,
         title: title,
+        color: color,
         dateCreateUtc: dateCreateUtc,
         dateModifyUtc: dateModifyUtc,
         order: order,
@@ -37,6 +39,7 @@ extension GroupExtension on Group {
 class GroupDTO {
   Id? id;
   String title;
+  int color;
   DateTime dateCreateUtc;
   DateTime dateModifyUtc;
   int order;
@@ -44,6 +47,7 @@ class GroupDTO {
   GroupDTO({
     this.id,
     required this.title,
+    required this.color,
     required this.dateCreateUtc,
     required this.dateModifyUtc,
     required this.order,
@@ -60,10 +64,23 @@ extension GroupDTOExtension on GroupDTO {
     return Group(
       id: id!,
       title: title,
+      color: color,
       dateCreateUtc: dateCreateUtc,
       dateModifyUtc: dateModifyUtc,
       order: order,
       tasks: tasks.map((dto) => dto.toEntity()).toList(),
+    );
+  }
+
+  Group toEntityWithoutLinks() {
+    return Group(
+      id: id!,
+      title: title,
+      color: color,
+      dateCreateUtc: dateCreateUtc,
+      dateModifyUtc: dateModifyUtc,
+      order: order,
+      tasks: <Task>[],
     );
   }
 }

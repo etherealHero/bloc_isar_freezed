@@ -77,6 +77,8 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
 
     await repository.update(updatedTask.toDTO());
 
+    updatedTask = (await repository.get(updatedTask.id))!.toEntity();
+
     newTasks[index] = updatedTask;
 
     emit(TasksState.loaded(newTasks));

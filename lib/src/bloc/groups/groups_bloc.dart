@@ -45,6 +45,7 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
 
     var groupDTO = GroupDTO(
       title: event.title,
+      color: event.color,
       dateCreateUtc: DateTime.now().toUtc(),
       dateModifyUtc: DateTime.now().toUtc(),
       order: maxOrder,
@@ -78,6 +79,8 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     newGroups[index] = updatedGroup;
 
     emit(GroupsState.loaded(newGroups));
+
+    event.cb?.call();
   }
 
   void _onDelete(_Delete event, Emitter<GroupsState> emit) async {

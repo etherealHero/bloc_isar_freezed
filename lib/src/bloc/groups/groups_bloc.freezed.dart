@@ -19,8 +19,8 @@ mixin _$GroupsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
-    required TResult Function(String title) add,
-    required TResult Function(Group group) update,
+    required TResult Function(String title, int color) add,
+    required TResult Function(Group group, void Function()? cb) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) =>
@@ -28,8 +28,8 @@ mixin _$GroupsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
-    TResult? Function(String title)? add,
-    TResult? Function(Group group)? update,
+    TResult? Function(String title, int color)? add,
+    TResult? Function(Group group, void Function()? cb)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) =>
@@ -37,8 +37,8 @@ mixin _$GroupsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
-    TResult Function(String title)? add,
-    TResult Function(Group group)? update,
+    TResult Function(String title, int color)? add,
+    TResult Function(Group group, void Function()? cb)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
@@ -131,8 +131,8 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
-    required TResult Function(String title) add,
-    required TResult Function(Group group) update,
+    required TResult Function(String title, int color) add,
+    required TResult Function(Group group, void Function()? cb) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) {
@@ -143,8 +143,8 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
-    TResult? Function(String title)? add,
-    TResult? Function(Group group)? update,
+    TResult? Function(String title, int color)? add,
+    TResult? Function(Group group, void Function()? cb)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) {
@@ -155,8 +155,8 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
-    TResult Function(String title)? add,
-    TResult Function(Group group)? update,
+    TResult Function(String title, int color)? add,
+    TResult Function(Group group, void Function()? cb)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
@@ -217,7 +217,7 @@ abstract class _$$AddImplCopyWith<$Res> {
   factory _$$AddImplCopyWith(_$AddImpl value, $Res Function(_$AddImpl) then) =
       __$$AddImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String title});
+  $Res call({String title, int color});
 }
 
 /// @nodoc
@@ -231,12 +231,17 @@ class __$$AddImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? title = null,
+    Object? color = null,
   }) {
     return _then(_$AddImpl(
       null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -244,14 +249,16 @@ class __$$AddImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddImpl implements _Add {
-  const _$AddImpl(this.title);
+  const _$AddImpl(this.title, this.color);
 
   @override
   final String title;
+  @override
+  final int color;
 
   @override
   String toString() {
-    return 'GroupsEvent.add(title: $title)';
+    return 'GroupsEvent.add(title: $title, color: $color)';
   }
 
   @override
@@ -259,11 +266,12 @@ class _$AddImpl implements _Add {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddImpl &&
-            (identical(other.title, title) || other.title == title));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.color, color) || other.color == color));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title);
+  int get hashCode => Object.hash(runtimeType, title, color);
 
   @JsonKey(ignore: true)
   @override
@@ -275,38 +283,38 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
-    required TResult Function(String title) add,
-    required TResult Function(Group group) update,
+    required TResult Function(String title, int color) add,
+    required TResult Function(Group group, void Function()? cb) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) {
-    return add(title);
+    return add(title, color);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
-    TResult? Function(String title)? add,
-    TResult? Function(Group group)? update,
+    TResult? Function(String title, int color)? add,
+    TResult? Function(Group group, void Function()? cb)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) {
-    return add?.call(title);
+    return add?.call(title, color);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
-    TResult Function(String title)? add,
-    TResult Function(Group group)? update,
+    TResult Function(String title, int color)? add,
+    TResult Function(Group group, void Function()? cb)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
   }) {
     if (add != null) {
-      return add(title);
+      return add(title, color);
     }
     return orElse();
   }
@@ -353,9 +361,10 @@ class _$AddImpl implements _Add {
 }
 
 abstract class _Add implements GroupsEvent {
-  const factory _Add(final String title) = _$AddImpl;
+  const factory _Add(final String title, final int color) = _$AddImpl;
 
   String get title;
+  int get color;
   @JsonKey(ignore: true)
   _$$AddImplCopyWith<_$AddImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -367,7 +376,7 @@ abstract class _$$UpdateImplCopyWith<$Res> {
           _$UpdateImpl value, $Res Function(_$UpdateImpl) then) =
       __$$UpdateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Group group});
+  $Res call({Group group, void Function()? cb});
 
   $GroupCopyWith<$Res> get group;
 }
@@ -384,12 +393,17 @@ class __$$UpdateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? group = null,
+    Object? cb = freezed,
   }) {
     return _then(_$UpdateImpl(
       null == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
               as Group,
+      freezed == cb
+          ? _value.cb
+          : cb // ignore: cast_nullable_to_non_nullable
+              as void Function()?,
     ));
   }
 
@@ -405,14 +419,16 @@ class __$$UpdateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UpdateImpl implements _Update {
-  const _$UpdateImpl(this.group);
+  const _$UpdateImpl(this.group, this.cb);
 
   @override
   final Group group;
+  @override
+  final void Function()? cb;
 
   @override
   String toString() {
-    return 'GroupsEvent.update(group: $group)';
+    return 'GroupsEvent.update(group: $group, cb: $cb)';
   }
 
   @override
@@ -420,11 +436,12 @@ class _$UpdateImpl implements _Update {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdateImpl &&
-            (identical(other.group, group) || other.group == group));
+            (identical(other.group, group) || other.group == group) &&
+            (identical(other.cb, cb) || other.cb == cb));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, group);
+  int get hashCode => Object.hash(runtimeType, group, cb);
 
   @JsonKey(ignore: true)
   @override
@@ -436,38 +453,38 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
-    required TResult Function(String title) add,
-    required TResult Function(Group group) update,
+    required TResult Function(String title, int color) add,
+    required TResult Function(Group group, void Function()? cb) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) {
-    return update(group);
+    return update(group, cb);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
-    TResult? Function(String title)? add,
-    TResult? Function(Group group)? update,
+    TResult? Function(String title, int color)? add,
+    TResult? Function(Group group, void Function()? cb)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) {
-    return update?.call(group);
+    return update?.call(group, cb);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
-    TResult Function(String title)? add,
-    TResult Function(Group group)? update,
+    TResult Function(String title, int color)? add,
+    TResult Function(Group group, void Function()? cb)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
   }) {
     if (update != null) {
-      return update(group);
+      return update(group, cb);
     }
     return orElse();
   }
@@ -514,9 +531,11 @@ class _$UpdateImpl implements _Update {
 }
 
 abstract class _Update implements GroupsEvent {
-  const factory _Update(final Group group) = _$UpdateImpl;
+  const factory _Update(final Group group, final void Function()? cb) =
+      _$UpdateImpl;
 
   Group get group;
+  void Function()? get cb;
   @JsonKey(ignore: true)
   _$$UpdateImplCopyWith<_$UpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -587,8 +606,8 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
-    required TResult Function(String title) add,
-    required TResult Function(Group group) update,
+    required TResult Function(String title, int color) add,
+    required TResult Function(Group group, void Function()? cb) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) {
@@ -599,8 +618,8 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
-    TResult? Function(String title)? add,
-    TResult? Function(Group group)? update,
+    TResult? Function(String title, int color)? add,
+    TResult? Function(Group group, void Function()? cb)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) {
@@ -611,8 +630,8 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
-    TResult Function(String title)? add,
-    TResult Function(Group group)? update,
+    TResult Function(String title, int color)? add,
+    TResult Function(Group group, void Function()? cb)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
@@ -747,8 +766,8 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
-    required TResult Function(String title) add,
-    required TResult Function(Group group) update,
+    required TResult Function(String title, int color) add,
+    required TResult Function(Group group, void Function()? cb) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) {
@@ -759,8 +778,8 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
-    TResult? Function(String title)? add,
-    TResult? Function(Group group)? update,
+    TResult? Function(String title, int color)? add,
+    TResult? Function(Group group, void Function()? cb)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) {
@@ -771,8 +790,8 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
-    TResult Function(String title)? add,
-    TResult Function(Group group)? update,
+    TResult Function(String title, int color)? add,
+    TResult Function(Group group, void Function()? cb)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),

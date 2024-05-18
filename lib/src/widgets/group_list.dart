@@ -36,7 +36,7 @@ class _GroupsListState extends State<GroupsList> {
     return BlocBuilder<GroupsBloc, GroupsState>(
       builder: (context, state) {
         if (state.isFetching) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         }
 
         WidgetsBinding.instance.addPostFrameCallback(

@@ -19,7 +19,7 @@ class Task with _$Task {
     required DateTime dateCreateUtc,
     required DateTime dateModifyUtc,
     required int order,
-    required int? groupId,
+    required Group? group,
   }) = _Task;
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
@@ -82,7 +82,7 @@ extension TaskDTOExtension on TaskDTO {
       dateCreateUtc: dateCreateUtc,
       dateModifyUtc: dateModifyUtc,
       order: order,
-      groupId: group.value?.id,
+      group: group.value?.toEntityWithoutLinks(),
     );
   }
 }

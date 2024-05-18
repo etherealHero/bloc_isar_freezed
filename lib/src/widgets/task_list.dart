@@ -37,7 +37,7 @@ class _TaskListState extends State<TaskList> {
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
         if (state.isFetching) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         }
 
         WidgetsBinding.instance.addPostFrameCallback(
@@ -46,7 +46,7 @@ class _TaskListState extends State<TaskList> {
             var tasks = [for (var task in state.tasks) task.copyWith()];
 
             if (selectedGroup != null) {
-              tasks = tasks.where((t) => t.groupId == selectedGroup).toList();
+              tasks = tasks.where((t) => t.group?.id == selectedGroup).toList();
             }
 
             _dispatcher.dispatchNewList(tasks);

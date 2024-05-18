@@ -22,6 +22,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
 mixin _$Group {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  int get color => throw _privateConstructorUsedError;
   DateTime get dateCreateUtc => throw _privateConstructorUsedError;
   DateTime get dateModifyUtc => throw _privateConstructorUsedError;
   int get order => throw _privateConstructorUsedError;
@@ -40,6 +41,7 @@ abstract class $GroupCopyWith<$Res> {
   $Res call(
       {int id,
       String title,
+      int color,
       DateTime dateCreateUtc,
       DateTime dateModifyUtc,
       int order,
@@ -61,6 +63,7 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
   $Res call({
     Object? id = null,
     Object? title = null,
+    Object? color = null,
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
     Object? order = null,
@@ -75,6 +78,10 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as int,
       dateCreateUtc: null == dateCreateUtc
           ? _value.dateCreateUtc
           : dateCreateUtc // ignore: cast_nullable_to_non_nullable
@@ -105,6 +112,7 @@ abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
   $Res call(
       {int id,
       String title,
+      int color,
       DateTime dateCreateUtc,
       DateTime dateModifyUtc,
       int order,
@@ -124,6 +132,7 @@ class __$$GroupImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
+    Object? color = null,
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
     Object? order = null,
@@ -138,6 +147,10 @@ class __$$GroupImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as int,
       dateCreateUtc: null == dateCreateUtc
           ? _value.dateCreateUtc
           : dateCreateUtc // ignore: cast_nullable_to_non_nullable
@@ -165,6 +178,7 @@ class _$GroupImpl extends _Group {
   _$GroupImpl(
       {required this.id,
       required this.title,
+      required this.color,
       required this.dateCreateUtc,
       required this.dateModifyUtc,
       required this.order,
@@ -179,6 +193,8 @@ class _$GroupImpl extends _Group {
   final int id;
   @override
   final String title;
+  @override
+  final int color;
   @override
   final DateTime dateCreateUtc;
   @override
@@ -195,7 +211,7 @@ class _$GroupImpl extends _Group {
 
   @override
   String toString() {
-    return 'Group(id: $id, title: $title, dateCreateUtc: $dateCreateUtc, dateModifyUtc: $dateModifyUtc, order: $order, tasks: $tasks)';
+    return 'Group(id: $id, title: $title, color: $color, dateCreateUtc: $dateCreateUtc, dateModifyUtc: $dateModifyUtc, order: $order, tasks: $tasks)';
   }
 
   @override
@@ -205,6 +221,7 @@ class _$GroupImpl extends _Group {
             other is _$GroupImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.color, color) || other.color == color) &&
             (identical(other.dateCreateUtc, dateCreateUtc) ||
                 other.dateCreateUtc == dateCreateUtc) &&
             (identical(other.dateModifyUtc, dateModifyUtc) ||
@@ -215,7 +232,7 @@ class _$GroupImpl extends _Group {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, dateCreateUtc,
+  int get hashCode => Object.hash(runtimeType, id, title, color, dateCreateUtc,
       dateModifyUtc, order, const DeepCollectionEquality().hash(_tasks));
 
   @JsonKey(ignore: true)
@@ -236,6 +253,7 @@ abstract class _Group extends Group {
   factory _Group(
       {required final int id,
       required final String title,
+      required final int color,
       required final DateTime dateCreateUtc,
       required final DateTime dateModifyUtc,
       required final int order,
@@ -248,6 +266,8 @@ abstract class _Group extends Group {
   int get id;
   @override
   String get title;
+  @override
+  int get color;
   @override
   DateTime get dateCreateUtc;
   @override
