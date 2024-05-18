@@ -44,12 +44,17 @@ class TaskItem extends StatelessWidget {
                 const SizedBox(width: 5),
                 IconButton.outlined(
                     onPressed: () {
-                      var groups = context.read<GroupsBloc>().state.groups;
+                      var groups = context
+                          .read<GroupsBloc>()
+                          .state
+                          .groups
+                          .where((g) => g.id != task.group?.id)
+                          .toList();
                       var group = groups[Random().nextInt(groups.length)];
                       AppController(context)
                           .updateTask(task.copyWith(group: group));
                     },
-                    icon: const Icon(Icons.close)),
+                    icon: const Icon(Icons.list_alt_rounded)),
                 const SizedBox(width: 5),
                 IconButton.outlined(
                     onPressed: () => AppController(context).removeTask(task),

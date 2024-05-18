@@ -25,23 +25,6 @@ class Repository<C> {
   Future<Id> create(C instance) async => _save(instance);
   Future<Id> update(C instance) async => _save(instance);
 
-  Future<Id> createTask(TaskDTO task, int? groupId) async {
-    var isar = await db;
-
-    return isar.writeTxnSync(() {
-      if (groupId != null) {
-        var targetGroup = isar.collection<GroupDTO>().getSync(groupId);
-        task.group.value = targetGroup;
-      }
-
-      var id = isar.collection<TaskDTO>().putSync(task);
-
-      task.group.saveSync();
-
-      return id;
-    });
-  }
-
   Future<bool> delete(int id) async {
     var isar = await db;
     return isar.writeTxnSync(() => isar.collection<C>().deleteSync(id));
@@ -59,12 +42,31 @@ class Repository<C> {
 
   Future<C?> get(id) async {
     var isar = await db;
-    return isar.collection<C>().getSync(id);
+    var instance = isar.collection<C>().getSync(id);
+
+    if (instance != null) {
+      final links = isar.collection<C>().schema.getLinks(instance);
+      links.map((l) => l.resetSync());
+    }
+
+    return instance;
   }
 
   Future<Id> _save(C instance) async {
     var isar = await db;
-    return isar.writeTxnSync(() => isar.collection<C>().putSync(instance));
+    return isar.writeTxnSync(() {
+      final id = isar.collection<C>().putSync(instance);
+      final links = isar.collection<C>().schema.getLinks(instance);
+
+      links.map((l) {
+        l.saveSync();
+        print(l.toString());
+      });
+
+      print("Repository.Save ${isar.collection<C>().schema.name}}");
+
+      return id;
+    });
   }
 
   Future<void> cleanDb() async {

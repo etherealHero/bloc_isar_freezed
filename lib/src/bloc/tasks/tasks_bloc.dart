@@ -73,7 +73,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       order: maxOrder,
     );
 
-    await repository.createTask(taskDTO, event.groupId);
+    taskDTO.group.value = event.group?.toDTO();
+
+    await repository.create(taskDTO);
 
     var newState = state.copyWith(
       tasks: [(taskDTO.toEntity()), ...state.tasks],
@@ -94,13 +96,29 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       return;
     }
 
-    await repository.update(updatedTask.toDTO());
+    var taskDTO = updatedTask.toDTO();
 
-    updatedTask = (await repository.get(updatedTask.id))!.toEntity();
+    // TODO: не могу сбросить группу
+    // taskDTO.group.value = null; // updatedTask.group?.toDTO()
+
+    taskDTO.group.value = updatedTask.group?.toDTO();
+    print("---AAA ${taskDTO.group.value?.id}");
+
+    await repository.update(taskDTO);
+    print("AAA ${taskDTO.group.value?.id}");
+
+    taskDTO = (await repository.get(updatedTask.id))!;
+    print("BBB ${taskDTO.group.value?.id}");
+
+    updatedTask = taskDTO.toEntity();
+    print("CCC ${updatedTask.group?.id}");
 
     newTasks[index] = updatedTask;
 
     emit(TasksState.loaded(newTasks));
+    print("task emitted ${taskDTO.group.value} || ${updatedTask.group?.id}");
+
+    event.cb?.call();
   }
 
   void _onDelete(_Delete event, Emitter<TasksState> emit) async {

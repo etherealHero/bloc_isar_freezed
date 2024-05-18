@@ -8,15 +8,19 @@ class AppController {
   }
 
   void updateGroup(Group group) async {
+    int emittedTaskCount = 0;
     for (var task in group.tasks) {
-      _tasksBloc.add(TasksEvent.update(task.copyWith()));
+      _tasksBloc.add(TasksEvent.update(task.copyWith(), () {
+        emittedTaskCount += 1;
+        if (emittedTaskCount == group.tasks.length) {
+          _tasksBloc.add(
+            TasksEvent.getSublist(group.tasks.map((t) => t.id).toList()),
+          );
+        }
+      }));
     }
 
-    _groupsBloc.add(GroupsEvent.update(group, () {
-      _tasksBloc.add(
-        TasksEvent.getSublist(group.tasks.map((t) => t.id).toList()),
-      );
-    }));
+    _groupsBloc.add(GroupsEvent.update(group, () {}));
   }
 
   void removeGroup(Group group) {
@@ -30,13 +34,43 @@ class AppController {
   }
 
   void addTask(String title, String description) {
-    _tasksBloc.add(TasksEvent.add("title", "description", selectedGroup));
-    _notifyGroup(selectedGroup);
+    _tasksBloc.add(TasksEvent.add(
+      "title",
+      "description",
+      _notifyGroup(selectedGroup),
+    ));
   }
 
   void updateTask(Task task) {
-    _tasksBloc.add(TasksEvent.update(task));
-    _notifyGroup(task.group?.id);
+    var prevTask = _tasksBloc.state.tasks.firstWhere((t) => t.id == task.id);
+
+    Group? prevGroup;
+    try {
+      prevGroup = _groupsBloc.state.groups
+          .firstWhere((g) => g.id == prevTask.group?.id)
+          .copyWith();
+    } on StateError {
+      prevGroup = null;
+    }
+
+    Group? newGroup;
+    try {
+      newGroup = _groupsBloc.state.groups
+          .firstWhere((g) => g.id == task.group?.id)
+          .copyWith();
+    } on StateError {
+      newGroup = null;
+    }
+
+    _tasksBloc.add(TasksEvent.update(task, () {
+      if (newGroup != null) {
+        _groupsBloc.add(GroupsEvent.update(newGroup, () {
+          if (prevGroup != null) {
+            _groupsBloc.add(GroupsEvent.update(prevGroup, null));
+          }
+        }));
+      }
+    }));
   }
 
   void removeTask(Task task) {
@@ -59,12 +93,13 @@ class AppController {
     appState._selectedGroupNotifier.value = patchedGroupId;
   }
 
-  void _notifyGroup(int? groupId) {
+  Group? _notifyGroup(int? groupId) {
     try {
       var group = _groupsBloc.state.groups.firstWhere((g) => g.id == groupId);
       _groupsBloc.add(GroupsEvent.update(group, null));
+      return group;
     } on StateError {
-      return;
+      return null;
     }
   }
 

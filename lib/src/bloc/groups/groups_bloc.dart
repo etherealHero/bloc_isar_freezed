@@ -79,6 +79,7 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     newGroups[index] = updatedGroup;
 
     emit(GroupsState.loaded(newGroups));
+    print("group emitted");
 
     event.cb?.call();
   }
