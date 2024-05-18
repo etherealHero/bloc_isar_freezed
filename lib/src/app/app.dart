@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sandbox/src/models/task/task.dart';
 
 import '../bloc/groups/groups_bloc.dart';
 import '../bloc/tasks/tasks_bloc.dart';
+import '../models/task/task.dart';
 import '../models/group/group.dart';
 import '../pages/home_page.dart';
 

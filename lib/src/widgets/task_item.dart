@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sandbox/src/app/app.dart';
 
 import '../models/task/task.dart';
+import '../app/app.dart';
 
 // TODO: add swipeable feature
 class TaskItem extends StatelessWidget {
@@ -30,12 +30,12 @@ class TaskItem extends StatelessWidget {
               Row(children: [
                 task.isDone
                     ? IconButton.filled(
-                        onPressed: () =>
-                            AppController(context).toggleTaskIsDone(task),
+                        onPressed: () => AppController(context)
+                            .updateTask(task.copyWith(isDone: !task.isDone)),
                         icon: const Icon(Icons.done))
                     : IconButton.outlined(
-                        onPressed: () =>
-                            AppController(context).toggleTaskIsDone(task),
+                        onPressed: () => AppController(context)
+                            .updateTask(task.copyWith(isDone: !task.isDone)),
                         icon: const Icon(Icons.done)),
                 const SizedBox(width: 5),
                 IconButton.outlined(

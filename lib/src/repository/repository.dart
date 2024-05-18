@@ -52,6 +52,11 @@ class Repository<C> {
     return isar.collection<C>().where().findAllSync();
   }
 
+  Future<List<C?>> getSublist(List<int> ids) async {
+    var isar = await db;
+    return isar.collection<C>().getAllSync(ids);
+  }
+
   Future<C?> get(id) async {
     var isar = await db;
     return isar.collection<C>().getSync(id);

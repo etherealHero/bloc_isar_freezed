@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:sandbox/src/shared/colors.dart';
 
 import '../app/app.dart';
 import '../models/group/group.dart';
+import '../shared/colors.dart';
 
 class GroupItem extends StatelessWidget {
   const GroupItem(this.group, {super.key});
@@ -33,8 +33,8 @@ class GroupItem extends StatelessWidget {
                   valueListenable: AppController(context).selectedGroupNotifier,
                   builder: (context, currentSelectedGroup, child) =>
                       IconButton.outlined(
-                    onPressed: () => AppController(context)
-                        .toggleGroupIsSelected(group, currentSelectedGroup),
+                    onPressed: () => AppController(context).selectedGroup =
+                        currentSelectedGroup == group.id ? null : group.id,
                     icon: Icon(currentSelectedGroup == group.id
                         ? Icons.pin_drop
                         : Icons.pin_drop_outlined),
@@ -46,7 +46,7 @@ class GroupItem extends StatelessWidget {
                       final color =
                           colorPallete[Random().nextInt(colorPallete.length)];
                       AppController(context)
-                          .changeGroupColor(group, color.value);
+                          .updateGroup(group.copyWith(color: color.value));
                     },
                     icon: const Icon(Icons.color_lens_outlined)),
                 const SizedBox(width: 5),

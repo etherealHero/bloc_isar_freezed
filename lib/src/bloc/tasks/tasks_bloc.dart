@@ -13,6 +13,7 @@ part 'tasks_bloc.freezed.dart';
 class TasksBloc extends Bloc<TasksEvent, TasksState> {
   TasksBloc() : super(TasksState.initial()) {
     on<_GetAll>(_onGetAll);
+    on<_GetSublist>(_onGetSublist);
     on<_Add>(_onAdd);
     on<_Update>(_onUpdate);
     on<_Delete>(_onDelete);
@@ -21,6 +22,23 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
 
   final repository = Repository<TaskDTO>();
   int maxOrder = -1;
+
+  void _onGetSublist(_GetSublist event, Emitter<TasksState> emit) async {
+    var tasksSublist = (await repository.getSublist(event.ids))
+        .map((e) => e!.toEntity())
+        .toList();
+
+    tasksSublist.sort((a, b) => b.order.compareTo(a.order));
+
+    var newTasks = [for (var task in state.tasks) task.copyWith()];
+
+    for (var t in tasksSublist) {
+      var i = newTasks.indexWhere((nt) => nt.id == t.id);
+      newTasks[i] = t;
+    }
+
+    emit(TasksState.loaded(newTasks));
+  }
 
   void _onGetAll(_GetAll event, Emitter<TasksState> emit) async {
     var tasks = (await repository.getAll()).map((e) => e.toEntity()).toList();

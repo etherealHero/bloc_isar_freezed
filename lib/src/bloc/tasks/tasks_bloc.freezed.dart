@@ -19,6 +19,7 @@ mixin _$TasksEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
+    required TResult Function(List<int> ids) getSublist,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
@@ -29,6 +30,7 @@ mixin _$TasksEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
+    TResult? Function(List<int> ids)? getSublist,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
@@ -38,6 +40,7 @@ mixin _$TasksEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
+    TResult Function(List<int> ids)? getSublist,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
@@ -48,6 +51,7 @@ mixin _$TasksEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAll value) getAll,
+    required TResult Function(_GetSublist value) getSublist,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
@@ -57,6 +61,7 @@ mixin _$TasksEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAll value)? getAll,
+    TResult? Function(_GetSublist value)? getSublist,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
@@ -66,6 +71,7 @@ mixin _$TasksEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAll value)? getAll,
+    TResult Function(_GetSublist value)? getSublist,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
@@ -132,6 +138,7 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
+    required TResult Function(List<int> ids) getSublist,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
@@ -145,6 +152,7 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
+    TResult? Function(List<int> ids)? getSublist,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
@@ -157,6 +165,7 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
+    TResult Function(List<int> ids)? getSublist,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
@@ -173,6 +182,7 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAll value) getAll,
+    required TResult Function(_GetSublist value) getSublist,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
@@ -185,6 +195,7 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAll value)? getAll,
+    TResult? Function(_GetSublist value)? getSublist,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
@@ -197,6 +208,7 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAll value)? getAll,
+    TResult Function(_GetSublist value)? getSublist,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
@@ -212,6 +224,170 @@ class _$GetAllImpl implements _GetAll {
 
 abstract class _GetAll implements TasksEvent {
   const factory _GetAll() = _$GetAllImpl;
+}
+
+/// @nodoc
+abstract class _$$GetSublistImplCopyWith<$Res> {
+  factory _$$GetSublistImplCopyWith(
+          _$GetSublistImpl value, $Res Function(_$GetSublistImpl) then) =
+      __$$GetSublistImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<int> ids});
+}
+
+/// @nodoc
+class __$$GetSublistImplCopyWithImpl<$Res>
+    extends _$TasksEventCopyWithImpl<$Res, _$GetSublistImpl>
+    implements _$$GetSublistImplCopyWith<$Res> {
+  __$$GetSublistImplCopyWithImpl(
+      _$GetSublistImpl _value, $Res Function(_$GetSublistImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ids = null,
+  }) {
+    return _then(_$GetSublistImpl(
+      null == ids
+          ? _value._ids
+          : ids // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetSublistImpl implements _GetSublist {
+  const _$GetSublistImpl(final List<int> ids) : _ids = ids;
+
+  final List<int> _ids;
+  @override
+  List<int> get ids {
+    if (_ids is EqualUnmodifiableListView) return _ids;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_ids);
+  }
+
+  @override
+  String toString() {
+    return 'TasksEvent.getSublist(ids: $ids)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetSublistImpl &&
+            const DeepCollectionEquality().equals(other._ids, _ids));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_ids));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetSublistImplCopyWith<_$GetSublistImpl> get copyWith =>
+      __$$GetSublistImplCopyWithImpl<_$GetSublistImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAll,
+    required TResult Function(List<int> ids) getSublist,
+    required TResult Function(Task task) update,
+    required TResult Function(int taskId) delete,
+    required TResult Function(int id, int dropId) reorderComplete,
+    required TResult Function(String title, String description, int? groupId)
+        add,
+  }) {
+    return getSublist(ids);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAll,
+    TResult? Function(List<int> ids)? getSublist,
+    TResult? Function(Task task)? update,
+    TResult? Function(int taskId)? delete,
+    TResult? Function(int id, int dropId)? reorderComplete,
+    TResult? Function(String title, String description, int? groupId)? add,
+  }) {
+    return getSublist?.call(ids);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAll,
+    TResult Function(List<int> ids)? getSublist,
+    TResult Function(Task task)? update,
+    TResult Function(int taskId)? delete,
+    TResult Function(int id, int dropId)? reorderComplete,
+    TResult Function(String title, String description, int? groupId)? add,
+    required TResult orElse(),
+  }) {
+    if (getSublist != null) {
+      return getSublist(ids);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAll value) getAll,
+    required TResult Function(_GetSublist value) getSublist,
+    required TResult Function(_Update value) update,
+    required TResult Function(_Delete value) delete,
+    required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Add value) add,
+  }) {
+    return getSublist(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAll value)? getAll,
+    TResult? Function(_GetSublist value)? getSublist,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_Delete value)? delete,
+    TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Add value)? add,
+  }) {
+    return getSublist?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAll value)? getAll,
+    TResult Function(_GetSublist value)? getSublist,
+    TResult Function(_Update value)? update,
+    TResult Function(_Delete value)? delete,
+    TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Add value)? add,
+    required TResult orElse(),
+  }) {
+    if (getSublist != null) {
+      return getSublist(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetSublist implements TasksEvent {
+  const factory _GetSublist(final List<int> ids) = _$GetSublistImpl;
+
+  List<int> get ids;
+  @JsonKey(ignore: true)
+  _$$GetSublistImplCopyWith<_$GetSublistImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -289,6 +465,7 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
+    required TResult Function(List<int> ids) getSublist,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
@@ -302,6 +479,7 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
+    TResult? Function(List<int> ids)? getSublist,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
@@ -314,6 +492,7 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
+    TResult Function(List<int> ids)? getSublist,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
@@ -330,6 +509,7 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAll value) getAll,
+    required TResult Function(_GetSublist value) getSublist,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
@@ -342,6 +522,7 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAll value)? getAll,
+    TResult? Function(_GetSublist value)? getSublist,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
@@ -354,6 +535,7 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAll value)? getAll,
+    TResult Function(_GetSublist value)? getSublist,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
@@ -441,6 +623,7 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
+    required TResult Function(List<int> ids) getSublist,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
@@ -454,6 +637,7 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
+    TResult? Function(List<int> ids)? getSublist,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
@@ -466,6 +650,7 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
+    TResult Function(List<int> ids)? getSublist,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
@@ -482,6 +667,7 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAll value) getAll,
+    required TResult Function(_GetSublist value) getSublist,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
@@ -494,6 +680,7 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAll value)? getAll,
+    TResult? Function(_GetSublist value)? getSublist,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
@@ -506,6 +693,7 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAll value)? getAll,
+    TResult Function(_GetSublist value)? getSublist,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
@@ -602,6 +790,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
+    required TResult Function(List<int> ids) getSublist,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
@@ -615,6 +804,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
+    TResult? Function(List<int> ids)? getSublist,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
@@ -627,6 +817,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
+    TResult Function(List<int> ids)? getSublist,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
@@ -643,6 +834,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAll value) getAll,
+    required TResult Function(_GetSublist value) getSublist,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
@@ -655,6 +847,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAll value)? getAll,
+    TResult? Function(_GetSublist value)? getSublist,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
@@ -667,6 +860,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAll value)? getAll,
+    TResult Function(_GetSublist value)? getSublist,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
@@ -771,6 +965,7 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
+    required TResult Function(List<int> ids) getSublist,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
@@ -784,6 +979,7 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
+    TResult? Function(List<int> ids)? getSublist,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
@@ -796,6 +992,7 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
+    TResult Function(List<int> ids)? getSublist,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
@@ -812,6 +1009,7 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAll value) getAll,
+    required TResult Function(_GetSublist value) getSublist,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
     required TResult Function(_ReorderComplete value) reorderComplete,
@@ -824,6 +1022,7 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAll value)? getAll,
+    TResult? Function(_GetSublist value)? getSublist,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
     TResult? Function(_ReorderComplete value)? reorderComplete,
@@ -836,6 +1035,7 @@ class _$AddImpl implements _Add {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAll value)? getAll,
+    TResult Function(_GetSublist value)? getSublist,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
     TResult Function(_ReorderComplete value)? reorderComplete,
