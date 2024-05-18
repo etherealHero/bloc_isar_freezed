@@ -52,6 +52,11 @@ class Repository<C> {
     return isar.collection<C>().where().findAllSync();
   }
 
+  Future<C?> get(id) async {
+    var isar = await db;
+    return isar.collection<C>().getSync(id);
+  }
+
   Future<Id> _save(C instance) async {
     var isar = await db;
     return isar.writeTxnSync(() => isar.collection<C>().putSync(instance));

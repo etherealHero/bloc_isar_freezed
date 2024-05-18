@@ -59,12 +59,15 @@ class _GroupsListState extends State<GroupsList> {
               onReorderMove: (_, __) => true,
               onReorderStart: (_, __, ___) => true,
               onReorderComplete: (index, dropIndex, _) {
-                var list = _dispatcher.currentList;
+                final list = _dispatcher.currentList;
+                final id = list.elementAt(index).id;
+                final dropId = list.elementAt(dropIndex).id;
+
                 list.insert(dropIndex, list.removeAt(index));
 
                 context
                     .read<GroupsBloc>()
-                    .add(GroupsEvent.reorderComplete(index, dropIndex));
+                    .add(GroupsEvent.reorderComplete(id, dropId));
 
                 return true;
               },

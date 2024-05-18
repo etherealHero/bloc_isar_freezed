@@ -19,63 +19,57 @@ mixin _$TasksEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
-    required TResult Function(String title, String description, int? groupId)
-        add,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
-    required TResult Function(int? groupId) filterByGroup,
-    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function(int id, int dropId) reorderComplete,
+    required TResult Function(String title, String description, int? groupId)
+        add,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
-    TResult? Function(String title, String description, int? groupId)? add,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
-    TResult? Function(int? groupId)? filterByGroup,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function(int id, int dropId)? reorderComplete,
+    TResult? Function(String title, String description, int? groupId)? add,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
-    TResult Function(String title, String description, int? groupId)? add,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
-    TResult Function(int? groupId)? filterByGroup,
-    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function(int id, int dropId)? reorderComplete,
+    TResult Function(String title, String description, int? groupId)? add,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAll value) getAll,
-    required TResult Function(_Add value) add,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FilterByGroup value) filterByGroup,
     required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Add value) add,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAll value)? getAll,
-    TResult? Function(_Add value)? add,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FilterByGroup value)? filterByGroup,
     TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Add value)? add,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAll value)? getAll,
-    TResult Function(_Add value)? add,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FilterByGroup value)? filterByGroup,
     TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,12 +132,11 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
-    required TResult Function(String title, String description, int? groupId)
-        add,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
-    required TResult Function(int? groupId) filterByGroup,
-    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function(int id, int dropId) reorderComplete,
+    required TResult Function(String title, String description, int? groupId)
+        add,
   }) {
     return getAll();
   }
@@ -152,11 +145,10 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
-    TResult? Function(String title, String description, int? groupId)? add,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
-    TResult? Function(int? groupId)? filterByGroup,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function(int id, int dropId)? reorderComplete,
+    TResult? Function(String title, String description, int? groupId)? add,
   }) {
     return getAll?.call();
   }
@@ -165,11 +157,10 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
-    TResult Function(String title, String description, int? groupId)? add,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
-    TResult Function(int? groupId)? filterByGroup,
-    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function(int id, int dropId)? reorderComplete,
+    TResult Function(String title, String description, int? groupId)? add,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -182,11 +173,10 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAll value) getAll,
-    required TResult Function(_Add value) add,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FilterByGroup value) filterByGroup,
     required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Add value) add,
   }) {
     return getAll(this);
   }
@@ -195,11 +185,10 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAll value)? getAll,
-    TResult? Function(_Add value)? add,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FilterByGroup value)? filterByGroup,
     TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Add value)? add,
   }) {
     return getAll?.call(this);
   }
@@ -208,11 +197,10 @@ class _$GetAllImpl implements _GetAll {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAll value)? getAll,
-    TResult Function(_Add value)? add,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FilterByGroup value)? filterByGroup,
     TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -224,183 +212,6 @@ class _$GetAllImpl implements _GetAll {
 
 abstract class _GetAll implements TasksEvent {
   const factory _GetAll() = _$GetAllImpl;
-}
-
-/// @nodoc
-abstract class _$$AddImplCopyWith<$Res> {
-  factory _$$AddImplCopyWith(_$AddImpl value, $Res Function(_$AddImpl) then) =
-      __$$AddImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String title, String description, int? groupId});
-}
-
-/// @nodoc
-class __$$AddImplCopyWithImpl<$Res>
-    extends _$TasksEventCopyWithImpl<$Res, _$AddImpl>
-    implements _$$AddImplCopyWith<$Res> {
-  __$$AddImplCopyWithImpl(_$AddImpl _value, $Res Function(_$AddImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? title = null,
-    Object? description = null,
-    Object? groupId = freezed,
-  }) {
-    return _then(_$AddImpl(
-      null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      freezed == groupId
-          ? _value.groupId
-          : groupId // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AddImpl implements _Add {
-  const _$AddImpl(this.title, this.description, this.groupId);
-
-  @override
-  final String title;
-  @override
-  final String description;
-  @override
-  final int? groupId;
-
-  @override
-  String toString() {
-    return 'TasksEvent.add(title: $title, description: $description, groupId: $groupId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddImpl &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.groupId, groupId) || other.groupId == groupId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, title, description, groupId);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddImplCopyWith<_$AddImpl> get copyWith =>
-      __$$AddImplCopyWithImpl<_$AddImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() getAll,
-    required TResult Function(String title, String description, int? groupId)
-        add,
-    required TResult Function(Task task) update,
-    required TResult Function(int taskId) delete,
-    required TResult Function(int? groupId) filterByGroup,
-    required TResult Function(int index, int dropIndex) reorderComplete,
-  }) {
-    return add(title, description, groupId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAll,
-    TResult? Function(String title, String description, int? groupId)? add,
-    TResult? Function(Task task)? update,
-    TResult? Function(int taskId)? delete,
-    TResult? Function(int? groupId)? filterByGroup,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
-  }) {
-    return add?.call(title, description, groupId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getAll,
-    TResult Function(String title, String description, int? groupId)? add,
-    TResult Function(Task task)? update,
-    TResult Function(int taskId)? delete,
-    TResult Function(int? groupId)? filterByGroup,
-    TResult Function(int index, int dropIndex)? reorderComplete,
-    required TResult orElse(),
-  }) {
-    if (add != null) {
-      return add(title, description, groupId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetAll value) getAll,
-    required TResult Function(_Add value) add,
-    required TResult Function(_Update value) update,
-    required TResult Function(_Delete value) delete,
-    required TResult Function(_FilterByGroup value) filterByGroup,
-    required TResult Function(_ReorderComplete value) reorderComplete,
-  }) {
-    return add(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAll value)? getAll,
-    TResult? Function(_Add value)? add,
-    TResult? Function(_Update value)? update,
-    TResult? Function(_Delete value)? delete,
-    TResult? Function(_FilterByGroup value)? filterByGroup,
-    TResult? Function(_ReorderComplete value)? reorderComplete,
-  }) {
-    return add?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetAll value)? getAll,
-    TResult Function(_Add value)? add,
-    TResult Function(_Update value)? update,
-    TResult Function(_Delete value)? delete,
-    TResult Function(_FilterByGroup value)? filterByGroup,
-    TResult Function(_ReorderComplete value)? reorderComplete,
-    required TResult orElse(),
-  }) {
-    if (add != null) {
-      return add(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Add implements TasksEvent {
-  const factory _Add(
-          final String title, final String description, final int? groupId) =
-      _$AddImpl;
-
-  String get title;
-  String get description;
-  int? get groupId;
-  @JsonKey(ignore: true)
-  _$$AddImplCopyWith<_$AddImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -478,12 +289,11 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
-    required TResult Function(String title, String description, int? groupId)
-        add,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
-    required TResult Function(int? groupId) filterByGroup,
-    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function(int id, int dropId) reorderComplete,
+    required TResult Function(String title, String description, int? groupId)
+        add,
   }) {
     return update(task);
   }
@@ -492,11 +302,10 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
-    TResult? Function(String title, String description, int? groupId)? add,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
-    TResult? Function(int? groupId)? filterByGroup,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function(int id, int dropId)? reorderComplete,
+    TResult? Function(String title, String description, int? groupId)? add,
   }) {
     return update?.call(task);
   }
@@ -505,11 +314,10 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
-    TResult Function(String title, String description, int? groupId)? add,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
-    TResult Function(int? groupId)? filterByGroup,
-    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function(int id, int dropId)? reorderComplete,
+    TResult Function(String title, String description, int? groupId)? add,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -522,11 +330,10 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAll value) getAll,
-    required TResult Function(_Add value) add,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FilterByGroup value) filterByGroup,
     required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Add value) add,
   }) {
     return update(this);
   }
@@ -535,11 +342,10 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAll value)? getAll,
-    TResult? Function(_Add value)? add,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FilterByGroup value)? filterByGroup,
     TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Add value)? add,
   }) {
     return update?.call(this);
   }
@@ -548,11 +354,10 @@ class _$UpdateImpl implements _Update {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAll value)? getAll,
-    TResult Function(_Add value)? add,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FilterByGroup value)? filterByGroup,
     TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -636,12 +441,11 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
-    required TResult Function(String title, String description, int? groupId)
-        add,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
-    required TResult Function(int? groupId) filterByGroup,
-    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function(int id, int dropId) reorderComplete,
+    required TResult Function(String title, String description, int? groupId)
+        add,
   }) {
     return delete(taskId);
   }
@@ -650,11 +454,10 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
-    TResult? Function(String title, String description, int? groupId)? add,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
-    TResult? Function(int? groupId)? filterByGroup,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function(int id, int dropId)? reorderComplete,
+    TResult? Function(String title, String description, int? groupId)? add,
   }) {
     return delete?.call(taskId);
   }
@@ -663,11 +466,10 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
-    TResult Function(String title, String description, int? groupId)? add,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
-    TResult Function(int? groupId)? filterByGroup,
-    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function(int id, int dropId)? reorderComplete,
+    TResult Function(String title, String description, int? groupId)? add,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -680,11 +482,10 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAll value) getAll,
-    required TResult Function(_Add value) add,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FilterByGroup value) filterByGroup,
     required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Add value) add,
   }) {
     return delete(this);
   }
@@ -693,11 +494,10 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAll value)? getAll,
-    TResult? Function(_Add value)? add,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FilterByGroup value)? filterByGroup,
     TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Add value)? add,
   }) {
     return delete?.call(this);
   }
@@ -706,11 +506,10 @@ class _$DeleteImpl implements _Delete {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAll value)? getAll,
-    TResult Function(_Add value)? add,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FilterByGroup value)? filterByGroup,
     TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -730,170 +529,12 @@ abstract class _Delete implements TasksEvent {
 }
 
 /// @nodoc
-abstract class _$$FilterByGroupImplCopyWith<$Res> {
-  factory _$$FilterByGroupImplCopyWith(
-          _$FilterByGroupImpl value, $Res Function(_$FilterByGroupImpl) then) =
-      __$$FilterByGroupImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int? groupId});
-}
-
-/// @nodoc
-class __$$FilterByGroupImplCopyWithImpl<$Res>
-    extends _$TasksEventCopyWithImpl<$Res, _$FilterByGroupImpl>
-    implements _$$FilterByGroupImplCopyWith<$Res> {
-  __$$FilterByGroupImplCopyWithImpl(
-      _$FilterByGroupImpl _value, $Res Function(_$FilterByGroupImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? groupId = freezed,
-  }) {
-    return _then(_$FilterByGroupImpl(
-      freezed == groupId
-          ? _value.groupId
-          : groupId // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$FilterByGroupImpl implements _FilterByGroup {
-  const _$FilterByGroupImpl(this.groupId);
-
-  @override
-  final int? groupId;
-
-  @override
-  String toString() {
-    return 'TasksEvent.filterByGroup(groupId: $groupId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FilterByGroupImpl &&
-            (identical(other.groupId, groupId) || other.groupId == groupId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, groupId);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FilterByGroupImplCopyWith<_$FilterByGroupImpl> get copyWith =>
-      __$$FilterByGroupImplCopyWithImpl<_$FilterByGroupImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() getAll,
-    required TResult Function(String title, String description, int? groupId)
-        add,
-    required TResult Function(Task task) update,
-    required TResult Function(int taskId) delete,
-    required TResult Function(int? groupId) filterByGroup,
-    required TResult Function(int index, int dropIndex) reorderComplete,
-  }) {
-    return filterByGroup(groupId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAll,
-    TResult? Function(String title, String description, int? groupId)? add,
-    TResult? Function(Task task)? update,
-    TResult? Function(int taskId)? delete,
-    TResult? Function(int? groupId)? filterByGroup,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
-  }) {
-    return filterByGroup?.call(groupId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getAll,
-    TResult Function(String title, String description, int? groupId)? add,
-    TResult Function(Task task)? update,
-    TResult Function(int taskId)? delete,
-    TResult Function(int? groupId)? filterByGroup,
-    TResult Function(int index, int dropIndex)? reorderComplete,
-    required TResult orElse(),
-  }) {
-    if (filterByGroup != null) {
-      return filterByGroup(groupId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetAll value) getAll,
-    required TResult Function(_Add value) add,
-    required TResult Function(_Update value) update,
-    required TResult Function(_Delete value) delete,
-    required TResult Function(_FilterByGroup value) filterByGroup,
-    required TResult Function(_ReorderComplete value) reorderComplete,
-  }) {
-    return filterByGroup(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAll value)? getAll,
-    TResult? Function(_Add value)? add,
-    TResult? Function(_Update value)? update,
-    TResult? Function(_Delete value)? delete,
-    TResult? Function(_FilterByGroup value)? filterByGroup,
-    TResult? Function(_ReorderComplete value)? reorderComplete,
-  }) {
-    return filterByGroup?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetAll value)? getAll,
-    TResult Function(_Add value)? add,
-    TResult Function(_Update value)? update,
-    TResult Function(_Delete value)? delete,
-    TResult Function(_FilterByGroup value)? filterByGroup,
-    TResult Function(_ReorderComplete value)? reorderComplete,
-    required TResult orElse(),
-  }) {
-    if (filterByGroup != null) {
-      return filterByGroup(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FilterByGroup implements TasksEvent {
-  const factory _FilterByGroup(final int? groupId) = _$FilterByGroupImpl;
-
-  int? get groupId;
-  @JsonKey(ignore: true)
-  _$$FilterByGroupImplCopyWith<_$FilterByGroupImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 abstract class _$$ReorderCompleteImplCopyWith<$Res> {
   factory _$$ReorderCompleteImplCopyWith(_$ReorderCompleteImpl value,
           $Res Function(_$ReorderCompleteImpl) then) =
       __$$ReorderCompleteImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int index, int dropIndex});
+  $Res call({int id, int dropId});
 }
 
 /// @nodoc
@@ -907,17 +548,17 @@ class __$$ReorderCompleteImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? index = null,
-    Object? dropIndex = null,
+    Object? id = null,
+    Object? dropId = null,
   }) {
     return _then(_$ReorderCompleteImpl(
-      null == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int,
-      null == dropIndex
-          ? _value.dropIndex
-          : dropIndex // ignore: cast_nullable_to_non_nullable
+      null == dropId
+          ? _value.dropId
+          : dropId // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -926,16 +567,16 @@ class __$$ReorderCompleteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ReorderCompleteImpl implements _ReorderComplete {
-  const _$ReorderCompleteImpl(this.index, this.dropIndex);
+  const _$ReorderCompleteImpl(this.id, this.dropId);
 
   @override
-  final int index;
+  final int id;
   @override
-  final int dropIndex;
+  final int dropId;
 
   @override
   String toString() {
-    return 'TasksEvent.reorderComplete(index: $index, dropIndex: $dropIndex)';
+    return 'TasksEvent.reorderComplete(id: $id, dropId: $dropId)';
   }
 
   @override
@@ -943,13 +584,12 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ReorderCompleteImpl &&
-            (identical(other.index, index) || other.index == index) &&
-            (identical(other.dropIndex, dropIndex) ||
-                other.dropIndex == dropIndex));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.dropId, dropId) || other.dropId == dropId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, index, dropIndex);
+  int get hashCode => Object.hash(runtimeType, id, dropId);
 
   @JsonKey(ignore: true)
   @override
@@ -962,42 +602,39 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
-    required TResult Function(String title, String description, int? groupId)
-        add,
     required TResult Function(Task task) update,
     required TResult Function(int taskId) delete,
-    required TResult Function(int? groupId) filterByGroup,
-    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function(int id, int dropId) reorderComplete,
+    required TResult Function(String title, String description, int? groupId)
+        add,
   }) {
-    return reorderComplete(index, dropIndex);
+    return reorderComplete(id, dropId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
-    TResult? Function(String title, String description, int? groupId)? add,
     TResult? Function(Task task)? update,
     TResult? Function(int taskId)? delete,
-    TResult? Function(int? groupId)? filterByGroup,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function(int id, int dropId)? reorderComplete,
+    TResult? Function(String title, String description, int? groupId)? add,
   }) {
-    return reorderComplete?.call(index, dropIndex);
+    return reorderComplete?.call(id, dropId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
-    TResult Function(String title, String description, int? groupId)? add,
     TResult Function(Task task)? update,
     TResult Function(int taskId)? delete,
-    TResult Function(int? groupId)? filterByGroup,
-    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function(int id, int dropId)? reorderComplete,
+    TResult Function(String title, String description, int? groupId)? add,
     required TResult orElse(),
   }) {
     if (reorderComplete != null) {
-      return reorderComplete(index, dropIndex);
+      return reorderComplete(id, dropId);
     }
     return orElse();
   }
@@ -1006,11 +643,10 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAll value) getAll,
-    required TResult Function(_Add value) add,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FilterByGroup value) filterByGroup,
     required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Add value) add,
   }) {
     return reorderComplete(this);
   }
@@ -1019,11 +655,10 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAll value)? getAll,
-    TResult? Function(_Add value)? add,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FilterByGroup value)? filterByGroup,
     TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Add value)? add,
   }) {
     return reorderComplete?.call(this);
   }
@@ -1032,11 +667,10 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAll value)? getAll,
-    TResult Function(_Add value)? add,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FilterByGroup value)? filterByGroup,
     TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) {
     if (reorderComplete != null) {
@@ -1047,13 +681,184 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
 }
 
 abstract class _ReorderComplete implements TasksEvent {
-  const factory _ReorderComplete(final int index, final int dropIndex) =
+  const factory _ReorderComplete(final int id, final int dropId) =
       _$ReorderCompleteImpl;
 
-  int get index;
-  int get dropIndex;
+  int get id;
+  int get dropId;
   @JsonKey(ignore: true)
   _$$ReorderCompleteImplCopyWith<_$ReorderCompleteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AddImplCopyWith<$Res> {
+  factory _$$AddImplCopyWith(_$AddImpl value, $Res Function(_$AddImpl) then) =
+      __$$AddImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String title, String description, int? groupId});
+}
+
+/// @nodoc
+class __$$AddImplCopyWithImpl<$Res>
+    extends _$TasksEventCopyWithImpl<$Res, _$AddImpl>
+    implements _$$AddImplCopyWith<$Res> {
+  __$$AddImplCopyWithImpl(_$AddImpl _value, $Res Function(_$AddImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? description = null,
+    Object? groupId = freezed,
+  }) {
+    return _then(_$AddImpl(
+      null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      freezed == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AddImpl implements _Add {
+  const _$AddImpl(this.title, this.description, this.groupId);
+
+  @override
+  final String title;
+  @override
+  final String description;
+  @override
+  final int? groupId;
+
+  @override
+  String toString() {
+    return 'TasksEvent.add(title: $title, description: $description, groupId: $groupId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddImpl &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, title, description, groupId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddImplCopyWith<_$AddImpl> get copyWith =>
+      __$$AddImplCopyWithImpl<_$AddImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAll,
+    required TResult Function(Task task) update,
+    required TResult Function(int taskId) delete,
+    required TResult Function(int id, int dropId) reorderComplete,
+    required TResult Function(String title, String description, int? groupId)
+        add,
+  }) {
+    return add(title, description, groupId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAll,
+    TResult? Function(Task task)? update,
+    TResult? Function(int taskId)? delete,
+    TResult? Function(int id, int dropId)? reorderComplete,
+    TResult? Function(String title, String description, int? groupId)? add,
+  }) {
+    return add?.call(title, description, groupId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAll,
+    TResult Function(Task task)? update,
+    TResult Function(int taskId)? delete,
+    TResult Function(int id, int dropId)? reorderComplete,
+    TResult Function(String title, String description, int? groupId)? add,
+    required TResult orElse(),
+  }) {
+    if (add != null) {
+      return add(title, description, groupId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAll value) getAll,
+    required TResult Function(_Update value) update,
+    required TResult Function(_Delete value) delete,
+    required TResult Function(_ReorderComplete value) reorderComplete,
+    required TResult Function(_Add value) add,
+  }) {
+    return add(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAll value)? getAll,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_Delete value)? delete,
+    TResult? Function(_ReorderComplete value)? reorderComplete,
+    TResult? Function(_Add value)? add,
+  }) {
+    return add?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAll value)? getAll,
+    TResult Function(_Update value)? update,
+    TResult Function(_Delete value)? delete,
+    TResult Function(_ReorderComplete value)? reorderComplete,
+    TResult Function(_Add value)? add,
+    required TResult orElse(),
+  }) {
+    if (add != null) {
+      return add(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Add implements TasksEvent {
+  const factory _Add(
+          final String title, final String description, final int? groupId) =
+      _$AddImpl;
+
+  String get title;
+  String get description;
+  int? get groupId;
+  @JsonKey(ignore: true)
+  _$$AddImplCopyWith<_$AddImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

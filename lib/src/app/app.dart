@@ -1,23 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sandbox/src/models/task/task.dart';
 
+import '../bloc/groups/groups_bloc.dart';
+import '../bloc/tasks/tasks_bloc.dart';
+import '../models/group/group.dart';
 import '../pages/home_page.dart';
+
+part "observer.dart";
+part "controller.dart";
 
 class App extends StatefulWidget {
   const App({super.key});
 
-  static ValueNotifier<int?> selectedGroup(BuildContext context) {
-    return context.findAncestorStateOfType<_AppState>()!._selectedGroup;
-  }
-
   @override
-  State<App> createState() => _AppState();
+  State<App> createState() => AppState();
 }
 
-class _AppState extends State<App> {
-  final ValueNotifier<int?> _selectedGroup = ValueNotifier<int?>(null);
+class AppState extends State<App> {
+  final ValueNotifier<int?> _selectedGroupNotifier = ValueNotifier<int?>(null);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: 'Test App', home: HomePage());
+    return MaterialApp(
+        title: 'Test App',
+        home: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => TasksBloc()..add(const TasksEvent.getAll()),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  GroupsBloc()..add(const GroupsEvent.getAll()),
+            ),
+          ],
+          child: const SafeArea(child: HomePage()),
+        ));
   }
 }

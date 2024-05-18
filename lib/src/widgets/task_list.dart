@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:great_list_view/great_list_view.dart';
 
+import '../app/app.dart';
 import '../bloc/tasks/tasks_bloc.dart';
 import '../models/task/task.dart';
 import '../widgets/task_item.dart';
@@ -41,8 +42,14 @@ class _TaskListState extends State<TaskList> {
 
         WidgetsBinding.instance.addPostFrameCallback(
           (_) => setState(() {
-            _dispatcher.dispatchNewList(
-                [for (var task in state.tasks) task.copyWith()]);
+            var selectedGroup = AppController(context).selectedGroup;
+            var tasks = [for (var task in state.tasks) task.copyWith()];
+
+            if (selectedGroup != null) {
+              tasks = tasks.where((t) => t.groupId == selectedGroup).toList();
+            }
+
+            _dispatcher.dispatchNewList(tasks);
           }),
         );
 
@@ -59,12 +66,15 @@ class _TaskListState extends State<TaskList> {
               onReorderMove: (_, __) => true,
               onReorderStart: (_, __, ___) => true,
               onReorderComplete: (index, dropIndex, _) {
-                var list = _dispatcher.currentList;
+                final list = _dispatcher.currentList;
+                final id = list.elementAt(index).id;
+                final dropId = list.elementAt(dropIndex).id;
+
                 list.insert(dropIndex, list.removeAt(index));
 
                 context
                     .read<TasksBloc>()
-                    .add(TasksEvent.reorderComplete(index, dropIndex));
+                    .add(TasksEvent.reorderComplete(id, dropId));
 
                 return true;
               },

@@ -17,7 +17,6 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     on<_Update>(_onUpdate);
     on<_Delete>(_onDelete);
     on<_ReorderComplete>(_onReorderComplete);
-    on<_FilterByGroup>(_onFilterByGroup);
   }
 
   final repository = Repository<TaskDTO>();
@@ -118,10 +117,13 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     final newTasks = [...state.tasks];
     final orders = state.tasks.map((e) => e.order).toList();
 
-    final from = min(event.dropIndex, event.index);
-    final to = max(event.dropIndex, event.index) + 1;
+    final index = state.tasks.indexWhere((t) => t.id == event.id);
+    final dropIndex = state.tasks.indexWhere((t) => t.id == event.dropId);
 
-    newTasks.insert(event.dropIndex, newTasks.removeAt(event.index));
+    final from = min(dropIndex, index);
+    final to = max(dropIndex, index) + 1;
+
+    newTasks.insert(dropIndex, newTasks.removeAt(index));
 
     for (var i = from; i < to; i++) {
       newTasks[i] = newTasks[i]
@@ -130,27 +132,5 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     }
 
     emit(TasksState.loaded(newTasks));
-  }
-
-  void _onFilterByGroup(
-    _FilterByGroup event,
-    Emitter<TasksState> emit,
-  ) async {
-    var tasks = (await repository.getAll()).map((e) => e.toEntity()).toList();
-
-    tasks.sort((a, b) => b.order.compareTo(a.order));
-
-    if (tasks.isNotEmpty) {
-      maxOrder = tasks
-          .reduce((curr, next) => curr.order > next.order ? curr : next)
-          .order;
-    }
-
-    if (event.groupId != null) {
-      var newTasks = tasks.where((e) => e.groupId == event.groupId).toList();
-      emit(TasksState.loaded(newTasks));
-    } else {
-      emit(TasksState.loaded(tasks));
-    }
   }
 }

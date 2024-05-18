@@ -73,6 +73,8 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
 
     await repository.update(updatedGroup.toDTO());
 
+    updatedGroup = (await repository.get(updatedGroup.id))!.toEntity();
+
     newGroups[index] = updatedGroup;
 
     emit(GroupsState.loaded(newGroups));
@@ -113,10 +115,13 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     final newGroups = [...state.groups];
     final orders = state.groups.map((e) => e.order).toList();
 
-    final from = min(event.dropIndex, event.index);
-    final to = max(event.dropIndex, event.index) + 1;
+    final index = state.groups.indexWhere((g) => g.id == event.id);
+    final dropIndex = state.groups.indexWhere((g) => g.id == event.dropId);
 
-    newGroups.insert(event.dropIndex, newGroups.removeAt(event.index));
+    final from = min(dropIndex, index);
+    final to = max(dropIndex, index) + 1;
+
+    newGroups.insert(dropIndex, newGroups.removeAt(index));
 
     for (var i = from; i < to; i++) {
       newGroups[i] = newGroups[i]

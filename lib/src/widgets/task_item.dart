@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sandbox/src/app/app.dart';
 
-import '../bloc/tasks/tasks_bloc.dart';
 import '../models/task/task.dart';
 
 // TODO: add swipeable feature
@@ -26,20 +25,16 @@ class TaskItem extends StatelessWidget {
               Row(children: [
                 task.isDone
                     ? IconButton.filled(
-                        onPressed: () => context.read<TasksBloc>().add(
-                            TasksEvent.update(
-                                task.copyWith(isDone: !task.isDone))),
+                        onPressed: () =>
+                            AppController(context).toggleTaskIsDone(task),
                         icon: const Icon(Icons.done))
                     : IconButton.outlined(
-                        onPressed: () => context.read<TasksBloc>().add(
-                            TasksEvent.update(
-                                task.copyWith(isDone: !task.isDone))),
+                        onPressed: () =>
+                            AppController(context).toggleTaskIsDone(task),
                         icon: const Icon(Icons.done)),
                 const SizedBox(width: 5),
                 IconButton.outlined(
-                    onPressed: () => context
-                        .read<TasksBloc>()
-                        .add(TasksEvent.delete(task.id)),
+                    onPressed: () => AppController(context).removeTask(task),
                     icon: const Icon(Icons.close))
               ]),
             ],

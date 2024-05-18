@@ -22,7 +22,7 @@ mixin _$GroupsEvent {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function(int id, int dropId) reorderComplete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +31,7 @@ mixin _$GroupsEvent {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function(int id, int dropId)? reorderComplete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +40,7 @@ mixin _$GroupsEvent {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,7 +134,7 @@ class _$GetAllImpl implements _GetAll {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function(int id, int dropId) reorderComplete,
   }) {
     return getAll();
   }
@@ -146,7 +146,7 @@ class _$GetAllImpl implements _GetAll {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function(int id, int dropId)? reorderComplete,
   }) {
     return getAll?.call();
   }
@@ -158,7 +158,7 @@ class _$GetAllImpl implements _GetAll {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -278,7 +278,7 @@ class _$AddImpl implements _Add {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function(int id, int dropId) reorderComplete,
   }) {
     return add(title);
   }
@@ -290,7 +290,7 @@ class _$AddImpl implements _Add {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function(int id, int dropId)? reorderComplete,
   }) {
     return add?.call(title);
   }
@@ -302,7 +302,7 @@ class _$AddImpl implements _Add {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -439,7 +439,7 @@ class _$UpdateImpl implements _Update {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function(int id, int dropId) reorderComplete,
   }) {
     return update(group);
   }
@@ -451,7 +451,7 @@ class _$UpdateImpl implements _Update {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function(int id, int dropId)? reorderComplete,
   }) {
     return update?.call(group);
   }
@@ -463,7 +463,7 @@ class _$UpdateImpl implements _Update {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -590,7 +590,7 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function(int id, int dropId) reorderComplete,
   }) {
     return delete(groupId);
   }
@@ -602,7 +602,7 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function(int id, int dropId)? reorderComplete,
   }) {
     return delete?.call(groupId);
   }
@@ -614,7 +614,7 @@ class _$DeleteImpl implements _Delete {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -679,7 +679,7 @@ abstract class _$$ReorderCompleteImplCopyWith<$Res> {
           $Res Function(_$ReorderCompleteImpl) then) =
       __$$ReorderCompleteImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int index, int dropIndex});
+  $Res call({int id, int dropId});
 }
 
 /// @nodoc
@@ -693,17 +693,17 @@ class __$$ReorderCompleteImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? index = null,
-    Object? dropIndex = null,
+    Object? id = null,
+    Object? dropId = null,
   }) {
     return _then(_$ReorderCompleteImpl(
-      null == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int,
-      null == dropIndex
-          ? _value.dropIndex
-          : dropIndex // ignore: cast_nullable_to_non_nullable
+      null == dropId
+          ? _value.dropId
+          : dropId // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -712,16 +712,16 @@ class __$$ReorderCompleteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ReorderCompleteImpl implements _ReorderComplete {
-  const _$ReorderCompleteImpl(this.index, this.dropIndex);
+  const _$ReorderCompleteImpl(this.id, this.dropId);
 
   @override
-  final int index;
+  final int id;
   @override
-  final int dropIndex;
+  final int dropId;
 
   @override
   String toString() {
-    return 'GroupsEvent.reorderComplete(index: $index, dropIndex: $dropIndex)';
+    return 'GroupsEvent.reorderComplete(id: $id, dropId: $dropId)';
   }
 
   @override
@@ -729,13 +729,12 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ReorderCompleteImpl &&
-            (identical(other.index, index) || other.index == index) &&
-            (identical(other.dropIndex, dropIndex) ||
-                other.dropIndex == dropIndex));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.dropId, dropId) || other.dropId == dropId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, index, dropIndex);
+  int get hashCode => Object.hash(runtimeType, id, dropId);
 
   @JsonKey(ignore: true)
   @override
@@ -751,9 +750,9 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     required TResult Function(String title) add,
     required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
-    required TResult Function(int index, int dropIndex) reorderComplete,
+    required TResult Function(int id, int dropId) reorderComplete,
   }) {
-    return reorderComplete(index, dropIndex);
+    return reorderComplete(id, dropId);
   }
 
   @override
@@ -763,9 +762,9 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult? Function(String title)? add,
     TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
-    TResult? Function(int index, int dropIndex)? reorderComplete,
+    TResult? Function(int id, int dropId)? reorderComplete,
   }) {
-    return reorderComplete?.call(index, dropIndex);
+    return reorderComplete?.call(id, dropId);
   }
 
   @override
@@ -775,11 +774,11 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
     TResult Function(String title)? add,
     TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
-    TResult Function(int index, int dropIndex)? reorderComplete,
+    TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
   }) {
     if (reorderComplete != null) {
-      return reorderComplete(index, dropIndex);
+      return reorderComplete(id, dropId);
     }
     return orElse();
   }
@@ -826,11 +825,11 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
 }
 
 abstract class _ReorderComplete implements GroupsEvent {
-  const factory _ReorderComplete(final int index, final int dropIndex) =
+  const factory _ReorderComplete(final int id, final int dropId) =
       _$ReorderCompleteImpl;
 
-  int get index;
-  int get dropIndex;
+  int get id;
+  int get dropId;
   @JsonKey(ignore: true)
   _$$ReorderCompleteImplCopyWith<_$ReorderCompleteImpl> get copyWith =>
       throw _privateConstructorUsedError;

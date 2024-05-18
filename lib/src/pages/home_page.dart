@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../app/app.dart';
 import '../bloc/groups/groups_bloc.dart';
-import '../bloc/tasks/tasks_bloc.dart';
 import '../widgets/group_list.dart';
 import '../widgets/task_list.dart';
 
@@ -12,30 +11,20 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: MultiBlocProvider(
-            providers: [
-          BlocProvider(
-            create: (context) => TasksBloc()..add(const TasksEvent.getAll()),
+    return Scaffold(
+      body: Row(
+        children: [
+          Container(
+            width: 280,
+            decoration: const BoxDecoration(
+                border: Border(right: BorderSide(width: 1))),
+            child: const GroupsList(),
           ),
-          BlocProvider(
-            create: (context) => GroupsBloc()..add(const GroupsEvent.getAll()),
-          ),
+          const Expanded(child: TaskList()),
         ],
-            child: Scaffold(
-              body: Row(
-                children: [
-                  Container(
-                    width: 250,
-                    decoration: const BoxDecoration(
-                        border: Border(right: BorderSide(width: 1))),
-                    child: const GroupsList(),
-                  ),
-                  const Expanded(child: TaskList()),
-                ],
-              ),
-              floatingActionButton: const HomePageFloatingActionButton(),
-            )));
+      ),
+      floatingActionButton: const HomePageFloatingActionButton(),
+    );
   }
 }
 
@@ -52,8 +41,8 @@ class HomePageFloatingActionButton extends StatelessWidget {
           child: const Text('Add group')),
       const SizedBox(width: 10),
       ElevatedButton(
-          onPressed: () => context.read<TasksBloc>().add(TasksEvent.add(
-              "title", "description", App.selectedGroup(context).value)),
+          onPressed: () =>
+              AppController(context).addTask("title", "description"),
           child: const Text('Add task')),
     ]);
   }
