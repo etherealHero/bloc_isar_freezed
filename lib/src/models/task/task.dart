@@ -19,7 +19,7 @@ class Task with _$Task {
     required DateTime dateCreateUtc,
     required DateTime dateModifyUtc,
     required int order,
-    required Group? group,
+    required int? groupId,
   }) = _Task;
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
@@ -38,6 +38,7 @@ extension TaskExtension on Task {
         dateCreateUtc: dateCreateUtc,
         dateModifyUtc: dateModifyUtc,
         order: order,
+        groupId: groupId,
       );
 }
 
@@ -52,6 +53,7 @@ class TaskDTO {
   DateTime dateCreateUtc;
   DateTime dateModifyUtc;
   int order;
+  int? groupId;
 
   TaskDTO({
     this.id,
@@ -63,6 +65,7 @@ class TaskDTO {
     required this.dateCreateUtc,
     required this.dateModifyUtc,
     required this.order,
+    required this.groupId,
   });
 
   final group = IsarLink<GroupDTO>();
@@ -70,8 +73,6 @@ class TaskDTO {
 
 extension TaskDTOExtension on TaskDTO {
   Task toEntity() {
-    group.loadSync();
-
     return Task(
       id: id!,
       isDone: isDone,
@@ -82,7 +83,7 @@ extension TaskDTOExtension on TaskDTO {
       dateCreateUtc: dateCreateUtc,
       dateModifyUtc: dateModifyUtc,
       order: order,
-      group: group.value?.toEntityWithoutLinks(),
+      groupId: groupId,
     );
   }
 }

@@ -29,7 +29,7 @@ mixin _$Task {
   DateTime get dateCreateUtc => throw _privateConstructorUsedError;
   DateTime get dateModifyUtc => throw _privateConstructorUsedError;
   int get order => throw _privateConstructorUsedError;
-  Group? get group => throw _privateConstructorUsedError;
+  int? get groupId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,9 +51,7 @@ abstract class $TaskCopyWith<$Res> {
       DateTime dateCreateUtc,
       DateTime dateModifyUtc,
       int order,
-      Group? group});
-
-  $GroupCopyWith<$Res>? get group;
+      int? groupId});
 }
 
 /// @nodoc
@@ -78,7 +76,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
     Object? order = null,
-    Object? group = freezed,
+    Object? groupId = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -117,23 +115,11 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
-      group: freezed == group
-          ? _value.group
-          : group // ignore: cast_nullable_to_non_nullable
-              as Group?,
+      groupId: freezed == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $GroupCopyWith<$Res>? get group {
-    if (_value.group == null) {
-      return null;
-    }
-
-    return $GroupCopyWith<$Res>(_value.group!, (value) {
-      return _then(_value.copyWith(group: value) as $Val);
-    });
   }
 }
 
@@ -154,10 +140,7 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       DateTime dateCreateUtc,
       DateTime dateModifyUtc,
       int order,
-      Group? group});
-
-  @override
-  $GroupCopyWith<$Res>? get group;
+      int? groupId});
 }
 
 /// @nodoc
@@ -179,7 +162,7 @@ class __$$TaskImplCopyWithImpl<$Res>
     Object? dateCreateUtc = null,
     Object? dateModifyUtc = null,
     Object? order = null,
-    Object? group = freezed,
+    Object? groupId = freezed,
   }) {
     return _then(_$TaskImpl(
       id: null == id
@@ -218,10 +201,10 @@ class __$$TaskImplCopyWithImpl<$Res>
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
-      group: freezed == group
-          ? _value.group
-          : group // ignore: cast_nullable_to_non_nullable
-              as Group?,
+      groupId: freezed == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -240,7 +223,7 @@ class _$TaskImpl extends _Task {
       required this.dateCreateUtc,
       required this.dateModifyUtc,
       required this.order,
-      required this.group})
+      required this.groupId})
       : super._();
 
   factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
@@ -265,11 +248,11 @@ class _$TaskImpl extends _Task {
   @override
   final int order;
   @override
-  final Group? group;
+  final int? groupId;
 
   @override
   String toString() {
-    return 'Task(id: $id, isDone: $isDone, isArchived: $isArchived, isTrash: $isTrash, title: $title, description: $description, dateCreateUtc: $dateCreateUtc, dateModifyUtc: $dateModifyUtc, order: $order, group: $group)';
+    return 'Task(id: $id, isDone: $isDone, isArchived: $isArchived, isTrash: $isTrash, title: $title, description: $description, dateCreateUtc: $dateCreateUtc, dateModifyUtc: $dateModifyUtc, order: $order, groupId: $groupId)';
   }
 
   @override
@@ -290,13 +273,13 @@ class _$TaskImpl extends _Task {
             (identical(other.dateModifyUtc, dateModifyUtc) ||
                 other.dateModifyUtc == dateModifyUtc) &&
             (identical(other.order, order) || other.order == order) &&
-            (identical(other.group, group) || other.group == group));
+            (identical(other.groupId, groupId) || other.groupId == groupId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, isDone, isArchived, isTrash,
-      title, description, dateCreateUtc, dateModifyUtc, order, group);
+      title, description, dateCreateUtc, dateModifyUtc, order, groupId);
 
   @JsonKey(ignore: true)
   @override
@@ -323,7 +306,7 @@ abstract class _Task extends Task {
       required final DateTime dateCreateUtc,
       required final DateTime dateModifyUtc,
       required final int order,
-      required final Group? group}) = _$TaskImpl;
+      required final int? groupId}) = _$TaskImpl;
   _Task._() : super._();
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
@@ -347,7 +330,7 @@ abstract class _Task extends Task {
   @override
   int get order;
   @override
-  Group? get group;
+  int? get groupId;
   @override
   @JsonKey(ignore: true)
   _$$TaskImplCopyWith<_$TaskImpl> get copyWith =>

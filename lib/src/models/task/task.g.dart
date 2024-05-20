@@ -32,28 +32,33 @@ const TaskDTOSchema = CollectionSchema(
       name: r'description',
       type: IsarType.string,
     ),
-    r'isArchived': PropertySchema(
+    r'groupId': PropertySchema(
       id: 3,
+      name: r'groupId',
+      type: IsarType.long,
+    ),
+    r'isArchived': PropertySchema(
+      id: 4,
       name: r'isArchived',
       type: IsarType.bool,
     ),
     r'isDone': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'isDone',
       type: IsarType.bool,
     ),
     r'isTrash': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'isTrash',
       type: IsarType.bool,
     ),
     r'order': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'order',
       type: IsarType.long,
     ),
     r'title': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'title',
       type: IsarType.string,
     )
@@ -99,11 +104,12 @@ void _taskDTOSerialize(
   writer.writeDateTime(offsets[0], object.dateCreateUtc);
   writer.writeDateTime(offsets[1], object.dateModifyUtc);
   writer.writeString(offsets[2], object.description);
-  writer.writeBool(offsets[3], object.isArchived);
-  writer.writeBool(offsets[4], object.isDone);
-  writer.writeBool(offsets[5], object.isTrash);
-  writer.writeLong(offsets[6], object.order);
-  writer.writeString(offsets[7], object.title);
+  writer.writeLong(offsets[3], object.groupId);
+  writer.writeBool(offsets[4], object.isArchived);
+  writer.writeBool(offsets[5], object.isDone);
+  writer.writeBool(offsets[6], object.isTrash);
+  writer.writeLong(offsets[7], object.order);
+  writer.writeString(offsets[8], object.title);
 }
 
 TaskDTO _taskDTODeserialize(
@@ -116,12 +122,13 @@ TaskDTO _taskDTODeserialize(
     dateCreateUtc: reader.readDateTime(offsets[0]),
     dateModifyUtc: reader.readDateTime(offsets[1]),
     description: reader.readString(offsets[2]),
+    groupId: reader.readLongOrNull(offsets[3]),
     id: id,
-    isArchived: reader.readBool(offsets[3]),
-    isDone: reader.readBool(offsets[4]),
-    isTrash: reader.readBool(offsets[5]),
-    order: reader.readLong(offsets[6]),
-    title: reader.readString(offsets[7]),
+    isArchived: reader.readBool(offsets[4]),
+    isDone: reader.readBool(offsets[5]),
+    isTrash: reader.readBool(offsets[6]),
+    order: reader.readLong(offsets[7]),
+    title: reader.readString(offsets[8]),
   );
   return object;
 }
@@ -140,14 +147,16 @@ P _taskDTODeserializeProp<P>(
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readBool(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 4:
       return (reader.readBool(offset)) as P;
     case 5:
       return (reader.readBool(offset)) as P;
     case 6:
-      return (reader.readLong(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 7:
+      return (reader.readLong(offset)) as P;
+    case 8:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -479,6 +488,75 @@ extension TaskDTOQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'description',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TaskDTO, TaskDTO, QAfterFilterCondition> groupIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'groupId',
+      ));
+    });
+  }
+
+  QueryBuilder<TaskDTO, TaskDTO, QAfterFilterCondition> groupIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'groupId',
+      ));
+    });
+  }
+
+  QueryBuilder<TaskDTO, TaskDTO, QAfterFilterCondition> groupIdEqualTo(
+      int? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'groupId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TaskDTO, TaskDTO, QAfterFilterCondition> groupIdGreaterThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'groupId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TaskDTO, TaskDTO, QAfterFilterCondition> groupIdLessThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'groupId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TaskDTO, TaskDTO, QAfterFilterCondition> groupIdBetween(
+    int? lower,
+    int? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'groupId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
       ));
     });
   }
@@ -821,6 +899,18 @@ extension TaskDTOQuerySortBy on QueryBuilder<TaskDTO, TaskDTO, QSortBy> {
     });
   }
 
+  QueryBuilder<TaskDTO, TaskDTO, QAfterSortBy> sortByGroupId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'groupId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TaskDTO, TaskDTO, QAfterSortBy> sortByGroupIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'groupId', Sort.desc);
+    });
+  }
+
   QueryBuilder<TaskDTO, TaskDTO, QAfterSortBy> sortByIsArchived() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isArchived', Sort.asc);
@@ -920,6 +1010,18 @@ extension TaskDTOQuerySortThenBy
     });
   }
 
+  QueryBuilder<TaskDTO, TaskDTO, QAfterSortBy> thenByGroupId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'groupId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TaskDTO, TaskDTO, QAfterSortBy> thenByGroupIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'groupId', Sort.desc);
+    });
+  }
+
   QueryBuilder<TaskDTO, TaskDTO, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -1014,6 +1116,12 @@ extension TaskDTOQueryWhereDistinct
     });
   }
 
+  QueryBuilder<TaskDTO, TaskDTO, QDistinct> distinctByGroupId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'groupId');
+    });
+  }
+
   QueryBuilder<TaskDTO, TaskDTO, QDistinct> distinctByIsArchived() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isArchived');
@@ -1072,6 +1180,12 @@ extension TaskDTOQueryProperty
     });
   }
 
+  QueryBuilder<TaskDTO, int?, QQueryOperations> groupIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'groupId');
+    });
+  }
+
   QueryBuilder<TaskDTO, bool, QQueryOperations> isArchivedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isArchived');
@@ -1117,9 +1231,7 @@ _$TaskImpl _$$TaskImplFromJson(Map<String, dynamic> json) => _$TaskImpl(
       dateCreateUtc: DateTime.parse(json['dateCreateUtc'] as String),
       dateModifyUtc: DateTime.parse(json['dateModifyUtc'] as String),
       order: (json['order'] as num).toInt(),
-      group: json['group'] == null
-          ? null
-          : Group.fromJson(json['group'] as Map<String, dynamic>),
+      groupId: (json['groupId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$TaskImplToJson(_$TaskImpl instance) =>
@@ -1133,5 +1245,5 @@ Map<String, dynamic> _$$TaskImplToJson(_$TaskImpl instance) =>
       'dateCreateUtc': instance.dateCreateUtc.toIso8601String(),
       'dateModifyUtc': instance.dateModifyUtc.toIso8601String(),
       'order': instance.order,
-      'group': instance.group,
+      'groupId': instance.groupId,
     };

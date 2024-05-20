@@ -20,7 +20,7 @@ mixin _$GroupsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
     required TResult Function(String title, int color) add,
-    required TResult Function(Group group, void Function()? cb) update,
+    required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) =>
@@ -29,7 +29,7 @@ mixin _$GroupsEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
     TResult? Function(String title, int color)? add,
-    TResult? Function(Group group, void Function()? cb)? update,
+    TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) =>
@@ -38,7 +38,7 @@ mixin _$GroupsEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
     TResult Function(String title, int color)? add,
-    TResult Function(Group group, void Function()? cb)? update,
+    TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
@@ -132,7 +132,7 @@ class _$GetAllImpl implements _GetAll {
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
     required TResult Function(String title, int color) add,
-    required TResult Function(Group group, void Function()? cb) update,
+    required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) {
@@ -144,7 +144,7 @@ class _$GetAllImpl implements _GetAll {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
     TResult? Function(String title, int color)? add,
-    TResult? Function(Group group, void Function()? cb)? update,
+    TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) {
@@ -156,7 +156,7 @@ class _$GetAllImpl implements _GetAll {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
     TResult Function(String title, int color)? add,
-    TResult Function(Group group, void Function()? cb)? update,
+    TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
@@ -284,7 +284,7 @@ class _$AddImpl implements _Add {
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
     required TResult Function(String title, int color) add,
-    required TResult Function(Group group, void Function()? cb) update,
+    required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) {
@@ -296,7 +296,7 @@ class _$AddImpl implements _Add {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
     TResult? Function(String title, int color)? add,
-    TResult? Function(Group group, void Function()? cb)? update,
+    TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) {
@@ -308,7 +308,7 @@ class _$AddImpl implements _Add {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
     TResult Function(String title, int color)? add,
-    TResult Function(Group group, void Function()? cb)? update,
+    TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
@@ -376,7 +376,7 @@ abstract class _$$UpdateImplCopyWith<$Res> {
           _$UpdateImpl value, $Res Function(_$UpdateImpl) then) =
       __$$UpdateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Group group, void Function()? cb});
+  $Res call({Group group});
 
   $GroupCopyWith<$Res> get group;
 }
@@ -393,17 +393,12 @@ class __$$UpdateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? group = null,
-    Object? cb = freezed,
   }) {
     return _then(_$UpdateImpl(
       null == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
               as Group,
-      freezed == cb
-          ? _value.cb
-          : cb // ignore: cast_nullable_to_non_nullable
-              as void Function()?,
     ));
   }
 
@@ -419,16 +414,14 @@ class __$$UpdateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UpdateImpl implements _Update {
-  const _$UpdateImpl(this.group, this.cb);
+  const _$UpdateImpl(this.group);
 
   @override
   final Group group;
-  @override
-  final void Function()? cb;
 
   @override
   String toString() {
-    return 'GroupsEvent.update(group: $group, cb: $cb)';
+    return 'GroupsEvent.update(group: $group)';
   }
 
   @override
@@ -436,12 +429,11 @@ class _$UpdateImpl implements _Update {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdateImpl &&
-            (identical(other.group, group) || other.group == group) &&
-            (identical(other.cb, cb) || other.cb == cb));
+            (identical(other.group, group) || other.group == group));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, group, cb);
+  int get hashCode => Object.hash(runtimeType, group);
 
   @JsonKey(ignore: true)
   @override
@@ -454,11 +446,11 @@ class _$UpdateImpl implements _Update {
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
     required TResult Function(String title, int color) add,
-    required TResult Function(Group group, void Function()? cb) update,
+    required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) {
-    return update(group, cb);
+    return update(group);
   }
 
   @override
@@ -466,11 +458,11 @@ class _$UpdateImpl implements _Update {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
     TResult? Function(String title, int color)? add,
-    TResult? Function(Group group, void Function()? cb)? update,
+    TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) {
-    return update?.call(group, cb);
+    return update?.call(group);
   }
 
   @override
@@ -478,13 +470,13 @@ class _$UpdateImpl implements _Update {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
     TResult Function(String title, int color)? add,
-    TResult Function(Group group, void Function()? cb)? update,
+    TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
   }) {
     if (update != null) {
-      return update(group, cb);
+      return update(group);
     }
     return orElse();
   }
@@ -531,11 +523,9 @@ class _$UpdateImpl implements _Update {
 }
 
 abstract class _Update implements GroupsEvent {
-  const factory _Update(final Group group, final void Function()? cb) =
-      _$UpdateImpl;
+  const factory _Update(final Group group) = _$UpdateImpl;
 
   Group get group;
-  void Function()? get cb;
   @JsonKey(ignore: true)
   _$$UpdateImplCopyWith<_$UpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -607,7 +597,7 @@ class _$DeleteImpl implements _Delete {
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
     required TResult Function(String title, int color) add,
-    required TResult Function(Group group, void Function()? cb) update,
+    required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) {
@@ -619,7 +609,7 @@ class _$DeleteImpl implements _Delete {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
     TResult? Function(String title, int color)? add,
-    TResult? Function(Group group, void Function()? cb)? update,
+    TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) {
@@ -631,7 +621,7 @@ class _$DeleteImpl implements _Delete {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
     TResult Function(String title, int color)? add,
-    TResult Function(Group group, void Function()? cb)? update,
+    TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),
@@ -767,7 +757,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
     required TResult Function(String title, int color) add,
-    required TResult Function(Group group, void Function()? cb) update,
+    required TResult Function(Group group) update,
     required TResult Function(int groupId) delete,
     required TResult Function(int id, int dropId) reorderComplete,
   }) {
@@ -779,7 +769,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
     TResult? Function(String title, int color)? add,
-    TResult? Function(Group group, void Function()? cb)? update,
+    TResult? Function(Group group)? update,
     TResult? Function(int groupId)? delete,
     TResult? Function(int id, int dropId)? reorderComplete,
   }) {
@@ -791,7 +781,7 @@ class _$ReorderCompleteImpl implements _ReorderComplete {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
     TResult Function(String title, int color)? add,
-    TResult Function(Group group, void Function()? cb)? update,
+    TResult Function(Group group)? update,
     TResult Function(int groupId)? delete,
     TResult Function(int id, int dropId)? reorderComplete,
     required TResult orElse(),

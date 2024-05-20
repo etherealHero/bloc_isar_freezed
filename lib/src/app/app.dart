@@ -3,22 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/groups/groups_bloc.dart';
 import '../bloc/tasks/tasks_bloc.dart';
-import '../models/task/task.dart';
-import '../models/group/group.dart';
 import '../pages/home_page.dart';
 
 part "observer.dart";
-part "controller.dart";
 
 class App extends StatefulWidget {
   const App({super.key});
+
+  static AppState of(BuildContext context) {
+    return context.findAncestorStateOfType<AppState>()!;
+  }
 
   @override
   State<App> createState() => AppState();
 }
 
 class AppState extends State<App> {
-  final ValueNotifier<int?> _selectedGroupNotifier = ValueNotifier<int?>(null);
+  final ValueNotifier<int?> selectedGroupNotifier = ValueNotifier<int?>(null);
 
   @override
   Widget build(BuildContext context) {

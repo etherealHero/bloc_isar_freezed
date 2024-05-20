@@ -42,11 +42,11 @@ class _TaskListState extends State<TaskList> {
 
         WidgetsBinding.instance.addPostFrameCallback(
           (_) => setState(() {
-            var selectedGroup = AppController(context).selectedGroup;
+            var selectedGroup = App.of(context).selectedGroupNotifier.value;
             var tasks = [for (var task in state.tasks) task.copyWith()];
 
             if (selectedGroup != null) {
-              tasks = tasks.where((t) => t.group?.id == selectedGroup).toList();
+              tasks = tasks.where((t) => t.groupId == selectedGroup).toList();
             }
 
             _dispatcher.dispatchNewList(tasks);

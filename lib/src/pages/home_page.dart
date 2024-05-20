@@ -1,8 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../app/app.dart';
+import '../bloc/groups/groups_bloc.dart';
+import '../bloc/tasks/tasks_bloc.dart';
 import '../widgets/group_list.dart';
 import '../widgets/task_list.dart';
 import '../shared/colors.dart';
@@ -39,13 +42,18 @@ class HomePageFloatingActionButton extends StatelessWidget {
       ElevatedButton(
           onPressed: () {
             final color = colorPallete[Random().nextInt(colorPallete.length)];
-            AppController(context).addGroup("title", color.value);
+            context
+                .read<GroupsBloc>()
+                .add(GroupsEvent.add("title", color.value));
           },
           child: const Text('Add group')),
       const SizedBox(width: 10),
       ElevatedButton(
-          onPressed: () =>
-              AppController(context).addTask("title", "description"),
+          onPressed: () => context.read<TasksBloc>().add(TasksEvent.add(
+                "title",
+                "description",
+                App.of(context).selectedGroupNotifier.value,
+              )),
           child: const Text('Add task')),
     ]);
   }

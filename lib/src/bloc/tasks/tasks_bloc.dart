@@ -5,7 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../repository/repository.dart';
 import '../../models/task/task.dart';
-import '../../models/group/group.dart';
 
 part 'tasks_event.dart';
 part 'tasks_state.dart';
@@ -68,12 +67,11 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       isTrash: false,
       title: event.title,
       description: event.description,
+      groupId: event.groupId,
       dateCreateUtc: DateTime.now().toUtc(),
       dateModifyUtc: DateTime.now().toUtc(),
       order: maxOrder,
     );
-
-    taskDTO.group.value = event.group?.toDTO();
 
     await repository.create(taskDTO);
 
@@ -98,27 +96,15 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
 
     var taskDTO = updatedTask.toDTO();
 
-    // TODO: не могу сбросить группу
-    // taskDTO.group.value = null; // updatedTask.group?.toDTO()
-
-    taskDTO.group.value = updatedTask.group?.toDTO();
-    print("---AAA ${taskDTO.group.value?.id}");
-
     await repository.update(taskDTO);
-    print("AAA ${taskDTO.group.value?.id}");
 
     taskDTO = (await repository.get(updatedTask.id))!;
-    print("BBB ${taskDTO.group.value?.id}");
 
     updatedTask = taskDTO.toEntity();
-    print("CCC ${updatedTask.group?.id}");
 
     newTasks[index] = updatedTask;
 
     emit(TasksState.loaded(newTasks));
-    print("task emitted ${taskDTO.group.value} || ${updatedTask.group?.id}");
-
-    event.cb?.call();
   }
 
   void _onDelete(_Delete event, Emitter<TasksState> emit) async {

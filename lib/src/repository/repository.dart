@@ -7,6 +7,7 @@ import '../models/task/task.dart';
 const List<CollectionSchema<Object>> schemas = [TaskDTOSchema, GroupDTOSchema];
 const String name = "todo_list";
 
+// TODO: вынести в отдельный блок/репозиторий ?
 class Repository<C> {
   late Future<Isar> db;
 
@@ -43,30 +44,12 @@ class Repository<C> {
   Future<C?> get(id) async {
     var isar = await db;
     var instance = isar.collection<C>().getSync(id);
-
-    if (instance != null) {
-      final links = isar.collection<C>().schema.getLinks(instance);
-      links.map((l) => l.resetSync());
-    }
-
     return instance;
   }
 
   Future<Id> _save(C instance) async {
     var isar = await db;
-    return isar.writeTxnSync(() {
-      final id = isar.collection<C>().putSync(instance);
-      final links = isar.collection<C>().schema.getLinks(instance);
-
-      links.map((l) {
-        l.saveSync();
-        print(l.toString());
-      });
-
-      print("Repository.Save ${isar.collection<C>().schema.name}}");
-
-      return id;
-    });
+    return isar.writeTxnSync(() => isar.collection<C>().putSync(instance));
   }
 
   Future<void> cleanDb() async {
