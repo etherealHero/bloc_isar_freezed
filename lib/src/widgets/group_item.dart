@@ -20,10 +20,13 @@ class GroupItem extends StatelessWidget {
     final tasksInGroup = tasks.where((t) => t.groupId == group.id);
     final int doneTasksCount = tasksInGroup.where((t) => t.isDone).length;
     final int tasksCount = tasksInGroup.length;
+    final color = int.tryParse('0X${group.color.toRadixString(16)}');
 
     return Card.filled(
         margin: const EdgeInsets.all(5),
-        color: Color(int.parse('0X${group.color.toRadixString(16)}')),
+        color: color == null
+            ? null
+            : Color(int.parse('0X${color.toRadixString(16)}')),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(

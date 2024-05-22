@@ -25,7 +25,7 @@ class TaskItem extends StatelessWidget {
       group = null;
     }
 
-    var color = int.tryParse('0X${group?.color.toRadixString(16)}');
+    final color = int.tryParse('0X${group?.color.toRadixString(16)}');
 
     return Card.filled(
         margin: const EdgeInsets.all(5),

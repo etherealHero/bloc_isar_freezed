@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../app/app.dart';
 import '../bloc/groups/groups_bloc.dart';
 import '../bloc/tasks/tasks_bloc.dart';
+import '../widgets/choice_theme.dart';
 import '../widgets/group_list.dart';
 import '../widgets/task_list.dart';
 import '../shared/colors.dart';
@@ -38,6 +39,8 @@ class HomePageFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
+      const SizedBox(width: 40),
+      const ChoiceTheme(),
       const Spacer(),
       ElevatedButton(
           onPressed: () {
