@@ -32,7 +32,8 @@ class App extends StatefulWidget {
 class AppState extends State<App> {
   final ValueNotifier<int?> selectedGroupNotifier = ValueNotifier<int?>(null);
   int _currentPageIndex = 0;
-  var _appBarScrollController = ScrollController();
+  final _appBarScrollController = ScrollController();
+  final SearchController _searchController = SearchController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +63,7 @@ class AppState extends State<App> {
                 ),
               ],
               child: Scaffold(
+                // TODO: Fix не работает на мобиле, возможно контроллер прокинуть в animatedList
                 body: NestedScrollView(
                   floatHeaderSlivers: true,
                   controller: _appBarScrollController,
@@ -69,30 +71,98 @@ class AppState extends State<App> {
                     SliverAppBar(
                       floating: true,
                       snap: true,
-                      title: [
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('Tasks'),
-                              Row(
-                                children: [
-                                  IconButton(
-                                      onPressed: () {},
-                                      // TODO: подсветка при поиске как в chrome + филтрация по поиску +
-                                      // или по material3 ?
-                                      icon: const Icon(Icons.search)),
-                                  IconButton(
-                                      onPressed: () {},
-                                      // TODO: меню на 1) переместить завершенные в архив/удалить 2) сортировка 3) фильтровать по группе 4) + (не-)выполнено
-                                      // https://api.flutter.dev/flutter/material/MenuBar-class.html
-                                      icon: const Icon(Icons.more_vert)),
-                                ],
-                              )
-                            ]),
-                        const Text('Groups'),
-                        const Text('Analytics'),
-                        const Text('Profile'),
-                      ][_currentPageIndex],
+                      title: const Text('Tasks'),
+                      centerTitle: true,
+                      // TODO: подсветка при поиске как в chrome + филтрация по поиску +
+                      // или по material3 ?
+                      leading: SearchAnchor(
+                          searchController: _searchController,
+                          viewOnSubmitted: (value) {
+                            setState(() {
+                              _searchController.closeView(value);
+                            });
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('You searched: $value'),
+                                action: SnackBarAction(
+                                    label: 'OK', onPressed: () {}),
+                              ),
+                            );
+                          },
+                          builder: (BuildContext context,
+                              SearchController controller) {
+                            return IconButton(
+                              icon: const Icon(Icons.search),
+                              onPressed: () {
+                                controller.openView();
+                              },
+                            );
+                          },
+                          isFullScreen: true,
+                          suggestionsBuilder: (BuildContext context,
+                              SearchController controller) {
+                            return List<ListTile>.generate(5, (int index) {
+                              final String item = 'item $index';
+                              return ListTile(
+                                title: Text(item),
+                                onTap: () {
+                                  setState(() {
+                                    controller.closeView(item);
+                                  });
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('You searched: $item'),
+                                      action: SnackBarAction(
+                                          label: 'OK', onPressed: () {}),
+                                    ),
+                                  );
+                                },
+                              );
+                            });
+                          }),
+                      actions: [
+                        IconButton(
+                            // TODO: меню на 1) переместить завершенные в архив/удалить 2) сортировка 3) фильтровать по группе 4) + (не-)выполнено
+                            // https://api.flutter.dev/flutter/material/MenuBar-class.html
+                            onPressed: () {
+                              ////// Alert dialog.
+                              // The function showDialog<T> returns Future<T>.
+                              // Use Navigator.pop() to return value (of type T).
+                              showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Dialog title'),
+                                  content: const Text(
+                                    'Sample alert',
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'Cancel'),
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              ).then((returnVal) {
+                                if (returnVal != null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('You clicked: $returnVal'),
+                                      action: SnackBarAction(
+                                          label: 'OK', onPressed: () {}),
+                                    ),
+                                  );
+                                }
+                              });
+                            },
+                            icon: const Icon(Icons.more_vert)),
+                      ],
                     )
                   ],
                   body: SafeArea(

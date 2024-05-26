@@ -1,4 +1,4 @@
-package com.example.sandbox
+package com.example.bloc_isar_freezed
 
 import io.flutter.embedding.android.FlutterActivity
 
