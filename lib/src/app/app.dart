@@ -32,6 +32,7 @@ class App extends StatefulWidget {
 class AppState extends State<App> {
   final ValueNotifier<int?> selectedGroupNotifier = ValueNotifier<int?>(null);
   int _currentPageIndex = 0;
+  var _appBarScrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,7 @@ class AppState extends State<App> {
     return ThemeProvider(
       controller: widget._themeController,
       builder: (context, _) => MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Test App',
           theme: ThemeData(colorSchemeSeed: seedColor),
           darkTheme: ThemeData(
@@ -60,13 +62,47 @@ class AppState extends State<App> {
                 ),
               ],
               child: Scaffold(
-                body: SafeArea(
-                    child: [
-                  const TasksPage(),
-                  const GroupsPage(),
-                  const AnalyticsPage(),
-                  const ProfilePage(),
-                ][_currentPageIndex]),
+                body: NestedScrollView(
+                  floatHeaderSlivers: true,
+                  controller: _appBarScrollController,
+                  headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                    SliverAppBar(
+                      floating: true,
+                      snap: true,
+                      title: [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Tasks'),
+                              Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {},
+                                      // TODO: подсветка при поиске как в chrome + филтрация по поиску +
+                                      // или по material3 ?
+                                      icon: const Icon(Icons.search)),
+                                  IconButton(
+                                      onPressed: () {},
+                                      // TODO: меню на 1) переместить завершенные в архив/удалить 2) сортировка 3) фильтровать по группе 4) + (не-)выполнено
+                                      // https://api.flutter.dev/flutter/material/MenuBar-class.html
+                                      icon: const Icon(Icons.more_vert)),
+                                ],
+                              )
+                            ]),
+                        const Text('Groups'),
+                        const Text('Analytics'),
+                        const Text('Profile'),
+                      ][_currentPageIndex],
+                    )
+                  ],
+                  body: SafeArea(
+                      child: [
+                    const TasksPage(),
+                    const GroupsPage(),
+                    const AnalyticsPage(),
+                    const ProfilePage(),
+                  ][_currentPageIndex]),
+                ),
                 floatingActionButton: [
                   Builder(builder: (context) {
                     return FloatingActionButton(
@@ -98,6 +134,7 @@ class AppState extends State<App> {
                 bottomNavigationBar: NavigationBar(
                   onDestinationSelected: (int index) => setState(() {
                     _currentPageIndex = index;
+                    _appBarScrollController.jumpTo(0.0);
                   }),
                   selectedIndex: _currentPageIndex,
                   destinations: const <Widget>[
